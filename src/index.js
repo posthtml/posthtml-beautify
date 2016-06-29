@@ -1,6 +1,5 @@
 const clean = tree => tree
 	.filter(node => {
-		console.log(node);
 		return typeof node === 'object' || (typeof node === 'string' && (node.trim().length !== 0 || /doctype/gi.test(node)))
 	})
 	.map(node => {
@@ -10,47 +9,133 @@ const clean = tree => tree
 		return typeof node === 'string' ? node.trim() : node;
 	});
 
-function indent(tree) {
-	return tree;
-}
+const getIndent = level => `\n${new Array(level).join('    ')}`;
 
-const lineBreak = tree => tree.reduce((previousValue, node) => {
-	if (!Object.prototype.hasOwnProperty.call(node, 'content') && !Object.prototype.hasOwnProperty.call(node, 'tag')) {
-		return previousValue.concat([node]);
+const indent = (tree, level = 0) => tree.reduce((previousValue, currentValue, index) => {
+
+
+	if (typeof currentValue === 'object' && Object.prototype.hasOwnProperty.call(currentValue, 'content')) {
+	 currentValue.content = indent(currentValue.content, level++);
 	}
 
-	if (Object.prototype.hasOwnProperty.call(node, 'content') && Object.prototype.hasOwnProperty.call(node, 'tag')) {
-		node.content = [`\n`, ...lineBreak(node.content), `\n`];
-		return previousValue.concat(node);
+	// console.log(tree);
+
+	if (typeof currentValue === 'object' && !Object.prototype.hasOwnProperty.call(currentValue, 'content')) {
+		currentValue['content'] = getIndent(level);
 	}
 
-	// if (typeof node === 'string') {
-	//	return level ? node.replace(/\n(?!\n)\s*/g, `\n${new Array(5 * (level++)).join(' ')}`) : '';
-	// }
+	if (level !== 0) {
+		return [...previousValue, getIndent(level), currentValue, getIndent(level)];
+	}
 
-	// return node; /* typeof node === 'object' || (typeof node === 'string' && /doctype/gi.test(node)); */
+	/*if (level !== 0 && index !== 0 ) {
+		return [...previousValue, currentValue, getIndent(level)];
+	}*/
 
-	return previousValue.concat([`\n`, node, `\n`]);
+	if (level === 0 && (tree.length - 1) !== index) {
+		return [...previousValue, currentValue, getIndent(level)];
+	}
+
+	/* if (level !==0 && index === 0) {
+		return previousValue.concat([getIndent(level), currentValue, getIndent(level)]);
+	}
+
+	if (level !== 0 && (tree.length - 1) === index) {
+	   return previousValue.concat([currentValue, getIndent(--level)]);
+	}
+
+	if (level !==0) {
+		return previousValue.concat([currentValue, getIndent(level)]);
+	} */
+
+	/*if (level !== 0) {
+		return previousValue.concat([currentValue, getIndent(level)]);
+	}
+
+	if (level === 0 && (tree.length - 1) !== index) {
+		return previousValue.concat([currentValue, getIndent(level)]);
+	}*/
+
+	return previousValue.concat([currentValue]);
 }, []);
 
 function beautify(tree) {
 	return new Promise(resolve => resolve(tree))
-		.then(tree => {
-			// console.log(tree[1].content[5].content);
+		/*.then(tree => {
+			// console.log(tree);
 			return clean(tree);
 		})
 		.then(tree => {
-			return lineBreak(tree);
-		})
-		.then(tree => {
+			// console.log(tree);
 			return indent(tree);
-		})
+		})*/
 		.then(tree => {
-			/* console.log('---------|end|-----------');
+			// console.log('---------|end|-----------');
 			console.log(tree);
-			console.log('---------|content|-----------');
-			console.log(tree[0].content); */
-			return tree;
+			// console.log('---------|content|-----------');
+			return tree;/*[
+	'<!DOCTYPE html>',
+	'\n',
+	{
+		tag: 'div',
+		content: [
+			'\n    ',
+			{
+				tag: 'div',
+				attrs: {
+					class: 'first'
+				},
+				content: [
+					'\n        ',
+					'first',
+					'\n    '
+				]
+			},
+			'\n\n    ',
+			{
+				tag: 'div',
+				attrs: {
+					class: 'middle'
+				},
+				content: ['\n    ']
+			},
+			'\n\n    ',
+			{
+				tag: 'div',
+				attrs: {
+					class: 'last'
+				},
+				content: [
+					'\n        ',
+					'last',
+					'\n        ',
+					{
+						tag: 'b',
+						content: [
+							'\n            ',
+							'line',
+							'\n        '
+						]
+					},
+					'\n\n        ',
+					{
+						tag: 'a',
+						attrs: {
+							href: '#'
+						},
+						content: [
+							'\n            ',
+							'test',
+							'\n        '
+						]
+					},
+					'\n    '
+				]
+			},
+			'\n'
+		]
+	}
+];*/
 		});
 }
 
@@ -69,117 +154,114 @@ export default () => tree => new Promise((resolve, reject) => {
 
 /*
 [
-  '<!DOCTYPE html>',
-  '\n'
-  {
-    tag: 'div',
-    content: [
-      '\n    ',
-      {
-        tag: 'div',
-        attrs: {
-          class:
-        },
-        content: [
-          '\n        ',
-          'first',
-          '\n    '
-        ]
-      },
-      '\n\n    ',
-      {
-        tag: 'div',
-        attrs: {
-          class: 'middle'
-        }
-      },
-      '\n\n    ',
-      {
-        tag: 'div',
-        attrs: {
-          class: 'last'
-        },
-        content: [
-          '\n        ' ,
-          'last',
-          {
-            tag: 'b',
-            content: [
-              '\n            ',
-              'line',
-              '\n        '
-            ]
-          },
-          '\n    '
-        ]
-      },
-      '\n'
-    ]
-  },
-  options: {},
-  walk: [Function],
-  match: [Function]
+	'<!DOCTYPE html>',
+	'\n'
+	{
+		tag: 'div',
+		content: [
+			'\n    ',
+			{
+				tag: 'div',
+				attrs: {
+					class:
+				},
+				content: [
+					'\n        ',
+					'first',
+					'\n    '
+				]
+			},
+			'\n\n    ',
+			{
+				tag: 'div',
+				attrs: {
+					class: 'middle'
+				}
+			},
+			'\n\n    ',
+			{
+				tag: 'div',
+				attrs: {
+					class: 'last'
+				},
+				content: [
+					'\n        ' ,
+					'last',
+					{
+						tag: 'b',
+						content: [
+							'\n            ',
+							'line',
+							'\n        '
+						]
+					},
+					'\n    '
+				]
+			},
+			'\n'
+		]
+	}
 ]
 */
 
 
 /*
 var tree = [
-  '<!DOCTYPE html>'
-  {
-    tag: 'div',
-    content: [
-      {
-        tag: 'div',
-        attrs: {
-          class:
-        },
-        content: [
-          'first'
-        ]
-      },
-      {
-        tag: 'div',
-        attrs: {
-          class: 'middle'
-        }
-      },
-      {
-        tag: 'div',
-        attrs: {
-          class: 'last'
-        },
-        content: [
-          'last',
-          {
-            tag: 'b',
-            content: [
-              'line'
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  options: {},
-  walk: [Function],
-  match: [Function]
+	'<!DOCTYPE html>'
+	{
+		tag: 'div',
+		content: [
+			{
+				tag: 'div',
+				attrs: {
+					class:
+				},
+				content: [
+					'first'
+				]
+			},
+			{
+				tag: 'div',
+				attrs: {
+					class: 'middle'
+				}
+			},
+			{
+				tag: 'div',
+				attrs: {
+					class: 'last'
+				},
+				content: [
+					'last',
+					{
+						tag: 'b',
+						content: [
+							'line'
+						]
+					}
+				]
+			}
+		]
+	},
+	options: {},
+	walk: [Function],
+	match: [Function]
 ]
 
 function getIndent(level) {
-    return `\nnew Array(4 * level).join(' ');
+		return `\nnew Array(4 * level).join(' ');
 }
 
 var a = function indent(tree, level = 0){
-    return tree.reduce((init, curr, index, arr) => {
-       if (typeof curr === 'object' && curr.content) {
+		return tree.reduce((init, curr, index, arr) => {
+			 if (typeof curr === 'object' && curr.content) {
 
-       }
+			 }
 
-       if (level === 0 && arr.length !== index) {
-           return [curr, getIndent(level)];
-       }
-    });
+			 if (level === 0 && arr.length !== index) {
+					 return [curr, getIndent(level)];
+			 }
+		});
 }(tree);
 
 */
