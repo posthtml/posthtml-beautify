@@ -13,28 +13,27 @@ const getIndent = level => `\n${new Array(level).join('    ')}`;
 
 const indent = (tree, level = 0) => tree.reduce((previousValue, currentValue, index) => {
 
-
 	if (typeof currentValue === 'object' && Object.prototype.hasOwnProperty.call(currentValue, 'content')) {
-	 currentValue.content = indent(currentValue.content, level++);
+	 currentValue.content = indent(currentValue.content, ++level);
 	}
 
 	// console.log(tree);
 
-	if (typeof currentValue === 'object' && !Object.prototype.hasOwnProperty.call(currentValue, 'content')) {
+	/*if (typeof currentValue === 'object' && !Object.prototype.hasOwnProperty.call(currentValue, 'content')) {
 		currentValue['content'] = getIndent(level);
 	}
 
 	if (level !== 0) {
 		return [...previousValue, getIndent(level), currentValue, getIndent(level)];
-	}
+	}*/
 
 	/*if (level !== 0 && index !== 0 ) {
 		return [...previousValue, currentValue, getIndent(level)];
 	}*/
 
-	if (level === 0 && (tree.length - 1) !== index) {
+	/*if (level === 0 && (tree.length - 1) !== index) {
 		return [...previousValue, currentValue, getIndent(level)];
-	}
+	}*/
 
 	/* if (level !==0 && index === 0) {
 		return previousValue.concat([getIndent(level), currentValue, getIndent(level)]);
@@ -56,19 +55,29 @@ const indent = (tree, level = 0) => tree.reduce((previousValue, currentValue, in
 		return previousValue.concat([currentValue, getIndent(level)]);
 	}*/
 
-	return previousValue.concat([currentValue]);
+	if (tree.length === 1) {
+		return [...previousValue, getIndent(++level), currentValue, getIndent(--level)];
+	}
+
+	if ((tree.length - 1) === index && tree.length !== 1) {
+		return [...previousValue, getIndent(--level), currentValue];
+	}
+
+
+
+	return [...previousValue, getIndent(level), currentValue];
 }, []);
 
 function beautify(tree) {
 	return new Promise(resolve => resolve(tree))
-		/*.then(tree => {
+		.then(tree => {
 			// console.log(tree);
 			return clean(tree);
 		})
 		.then(tree => {
 			// console.log(tree);
 			return indent(tree);
-		})*/
+		})
 		.then(tree => {
 			// console.log('---------|end|-----------');
 			console.log(tree);
@@ -264,4 +273,44 @@ var a = function indent(tree, level = 0){
 		});
 }(tree);
 
+*/
+
+/*
+<!DOCTYPE html>\n
+<div>\n
+    <div class="first">\n
+        first\n
+    </div>\n\n
+    <div class="middle">\n
+    </div>\n\n
+    <div class="last">\n
+        last\n
+        <b>\n
+            line\n
+        </b>\n
+    </div>\n
+</div>
+
+...
+'\n'
+...
+    '\n    '
+    ...
+        '\n        '
+        ...
+        '\n    '
+    '\n\n    '
+    ...
+        '\n    '
+    '\n\n    '
+    ...
+        '\n        '
+        ...
+        '\n        '
+        ...
+            '\n            '
+            ...
+            '\n        '
+        '\n    '
+    '\n'
 */
