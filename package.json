@@ -28,8 +28,7 @@
     "beautifier",
     "code-quality"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "ava": "^0.15.2",
     "ava-codemods": "^0.2.1",
@@ -41,6 +40,7 @@
     "coveralls": "^2.11.9",
     "is-promise": "^2.1.0",
     "nyc": "^6.4.4",
+    "posthtml": "^0.8.7",
     "updtr": "^0.2.1",
     "xo": "^0.16.0"
   },
