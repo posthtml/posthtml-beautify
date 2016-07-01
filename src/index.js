@@ -28,7 +28,6 @@ const indent = (tree, {indent: {type, size}}) => {
 		}
 
 		if (tree.length === 1 && typeof tree[index] === 'string') {
-			console.log(tree);
 			return [...previousValue, currentValue];
 		}
 
