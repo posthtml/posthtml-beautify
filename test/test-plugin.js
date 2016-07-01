@@ -1,8 +1,5 @@
-// import path from 'path';
 import {readFile} from 'fs';
 import test from 'ava';
-// import pathExists from 'path-exists';
-// import tempfile from 'tempfile';
 import posthtml from 'posthtml';
 import isPromise from 'is-promise';
 import beautify from '../src/index.js';
