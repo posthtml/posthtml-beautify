@@ -46,8 +46,7 @@
   },
   "ava": {
     "require": [
-      "babel-register",
-      "min"
+      "babel-register"
     ]
   },
   "babel": {
