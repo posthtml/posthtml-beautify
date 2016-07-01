@@ -1,0 +1,16 @@
+node_modules/
+.nyc_output/
+npm-debug.log
+lib/
+_gh-pages/
+.publish/
+*.sublime*
+node_modules/
+lib/
+coverage/
+npm-debug.log
+.nyc_output/
+_gh-pages/
+.publish/
+*.sublime*
+tmp/
