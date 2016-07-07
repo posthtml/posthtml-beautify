@@ -8,13 +8,13 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[{package.json,*.yml,*.jade,*.pss,*.css}]
+[*.{json,yml,jade,pss,css,html}]
 indent_size = 2
 
-[{*.js,*.jsx}]
+[*.{js,jsx,*sublime-*}]
 indent_style = tab
 
-[*.html]
+[{lib/*.*,test/**/*.css,*.jpg,*.html,tmp/*.html}]
 insert_final_newline = false
 
 [*.md]
