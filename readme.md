@@ -38,13 +38,13 @@ import {readFileSync, writeFileSync} from 'fs';
 import posthtml from 'posthtml';
 import beautify from 'posthtml-beautify';
 
-const html = fs.readFileSync('input.html', 'utf8');
+const html = readFileSync('input.html', 'utf8');
 
 posthtml()
     .use(beautify(/* options */))
     .process(html)
     .then(result => {
-        fs.writeFileSync('output.html', result.html);
+        writeFileSync('output.html', result.html);
     });
 
 ```
