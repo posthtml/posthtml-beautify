@@ -1,9 +1,13 @@
 ## [0.0.1] - 07-07-2016
 ### Added
 - Added #12, clinton
+- Added support boolean attributes
+- Added attributes list
 
 ### Change
-- Added #13, change xo to eslint
+- Change #13, change xo to eslint
+- Change #11, the rules should be as property
+- Update tests
 
 ### Fixed
 - Fixed linter report error
