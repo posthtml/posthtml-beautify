@@ -1,8 +1,9 @@
+import rules from './rules.js';
+import attrs from './attrs.js';
+
 const optionsDefault = {
-	indent: {
-		type: 'space',
-		size: 2
-	}
+	rules: rules,
+	attrs: attrs
 };
 
 const clean = tree => tree
@@ -16,10 +17,10 @@ const clean = tree => tree
 		return typeof node === 'string' ? node.trim() : node;
 	});
 
-const indent = (tree, {indent: {type, size}}) => {
-	const indentString = type === 'space' ? ' '.repeat(size) : '\t';
+const indent = (tree, {rules: {indent, eol}}) => {
+	const indentString = typeof indent === 'number' ? ' '.repeat(indent) : '\t';
 
-	const getIndent = level => `\n${indentString.repeat(level)}`;
+	const getIndent = level => `${eol}${indentString.repeat(level)}`;
 
 	const setIndent = (tree, level = 0) => tree.reduce((previousValue, currentValue, index) => {
 		if (typeof currentValue === 'object' && Object.prototype.hasOwnProperty.call(currentValue, 'content')) {
@@ -49,10 +50,30 @@ const indent = (tree, {indent: {type, size}}) => {
 	return setIndent(tree);
 };
 
+const attrsBoolean = (tree, {attrs: {boolean}}) => {
+	const removeAttrValue = tree => tree.map(node => {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+			node.content = removeAttrValue(node.content);
+		}
+
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')) {
+			Object.keys(node.attrs).forEach(key => {
+				node.attrs[key] = boolean.includes(key) ? true : node.attrs[key];
+			});
+		}
+
+		return node;
+	});
+
+	return removeAttrValue(tree);
+};
+
 function beautify(tree, options) {
 	return new Promise(resolve => resolve(tree))
 		.then(tree => clean(tree))
 		.then(tree => indent(tree, options))
+		.then(tree => attrsBoolean(tree, options))
+		.then(tree => attrsBoolean(tree, options))
 		.then(tree => tree);
 }
 

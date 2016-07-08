@@ -9,19 +9,20 @@
 ## Why?
 Format your html and inline css markup according to the [HTML5 syntax Style Guide](http://www.w3schools.com/html/html5_syntax.asp), [Code Guide](http://codeguide.co/#html). Full list of supported options:
 - [ ] Transform lower case element names
-- [ ] Transform lower case attribute names
-- [ ] Only double quotes
+- [x] Transform lower case attribute names
+- [x] Only double quotes
 - [x] Close all html elements 
-- [ ] Removing trailing slash in self-closing 
-- [ ] Removes spaces at the equal sign
+- [x] Removing trailing slash in self-closing 
+- [x] Removes spaces at the equal sign
 - [x] Add blank lines to separate large or logical code blocks
 - [x] Add 2 spaces of indentation. *Do not use TAB*.
 - [ ] Add language attribute
 - [ ] Add character encoding
 - [ ] Attribute order
-- [ ] Boolean attributes :interrobang:
+- [x] Boolean attributes
 - [ ] Creates file from the inline styles
 - [ ] Create scoped class name (*use css-modules*) instead inline styles
+- [ ] validate elements and attributes name
 
 ## Install
 
@@ -38,13 +39,13 @@ import {readFileSync, writeFileSync} from 'fs';
 import posthtml from 'posthtml';
 import beautify from 'posthtml-beautify';
 
-const html = fs.readFileSync('input.html', 'utf8');
+const html = readFileSync('input.html', 'utf8');
 
 posthtml()
-    .use(beautify(/* options */))
+    .use(beautify({rules: {indent: 4}}))
     .process(html)
     .then(result => {
-        fs.writeFileSync('output.html', result.html);
+        writeFileSync('output.html', result.html);
     });
 
 ```
@@ -117,6 +118,6 @@ posthtml()
 
 ## Options
 
-#### `indent`
+#### `rules`
 Type: `Object`  
-Default: `{ type: 'space', size: 2 }`
+Default: `{indent: 2, eol: '\n'}`
