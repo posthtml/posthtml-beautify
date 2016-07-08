@@ -38,6 +38,30 @@ test('should return equal html', async t => {
 	t.deepEqual(fixture, (await processing(fixture)).html);
 });
 
+test('should removing trailing slash in self-closing', async t => {
+	const fixture = '<img src="image.jpg" />';
+	const expected = '<img src="image.jpg">';
+	t.deepEqual(expected, (await processing(fixture)).html);
+});
+
+test('should removes spaces at the equal sign', async t => {
+	const fixture = '<span class    =   "image"  rel=   "images"></span>';
+	const expected = '<span class="image" rel="images"></span>';
+	t.deepEqual(expected, (await processing(fixture)).html);
+});
+
+test('should return boolean attribute', async t => {
+	const fixture = '<input type="email" required>';
+	const expected = '<input type="email" required>';
+	t.deepEqual(expected, (await processing(fixture)).html);
+});
+
+test('should transform lower case attribute names', async t => {
+	const fixture = '<div CLASS="UPPERCLASS"></div>';
+	const expected = '<div class="UPPERCLASS"></div>';
+	t.deepEqual(expected, (await processing(fixture)).html);
+});
+
 test('should return with indent', async t => {
 	t.deepEqual(
 		(await read('expected/output-indent.html')),
