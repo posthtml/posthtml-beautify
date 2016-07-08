@@ -1,6 +1,6 @@
 {
   "name": "posthtml-beautify",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A posthtml plugin to beautify you html files",
   "main": "lib/index.js",
   "engines": {
@@ -72,8 +72,8 @@
       "add-module-exports"
     ],
     "comments": false,
-    "compact": false,
-    "minified": false
+    "compact": true,
+    "minified": true
   },
   "eslintConfig": {
     "format": "node_modules/eslint-formatter-pretty",
