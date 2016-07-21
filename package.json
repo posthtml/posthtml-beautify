@@ -12,6 +12,9 @@
     "pretest": "clinton && npm run lintjs && npm run lintmd",
     "commitmsg": "conventional-changelog-lint -e",
     "postpublish": "conventional-changelog -i CHANGELOG.md -s -r 0 && git commit -am \"chore(changelog): Update changelog\"",
+    "patch": "np patch",
+    "minor": "np minor",
+    "major": "np major",
     "test": "nyc ava",
     "clean": "rm -rf lib && mkdir lib",
     "build": "npm run clean && babel src/ -d lib/",
@@ -59,6 +62,7 @@
     "eslint-plugin-xo": "^0.5.1",
     "husky": "^0.11.5",
     "is-promise": "^2.1.0",
+    "np": "^2.6.0",
     "nyc": "^7.0.0-alpha.5",
     "posthtml": "^0.9.0",
     "updtr": "^0.2.1"
