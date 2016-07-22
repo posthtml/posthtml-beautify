@@ -46,7 +46,10 @@
     "beautifier",
     "code-quality"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "posthtml-parser": "0.2.0",
+    "posthtml-render": "1.0.6"
+  },
   "devDependencies": {
     "ava": "*",
     "ava-codemods": "^0.2.1",
