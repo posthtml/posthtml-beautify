@@ -1,7 +1,21 @@
 {
   "name": "posthtml-beautify",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A posthtml plugin to beautify you html files",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GitScrum/posthtml-beautify.git"
+  },
+  "homepage": "https://github.com/GitScrum/posthtml-beautify#readme",
+  "bugs": {
+    "url": "https://github.com/GitScrum/posthtml-beautify/issues"
+  },
+  "author": {
+    "name": "Ivan Demidov",
+    "email": "Scrum@list.ru",
+    "url": "https://twitter.com/Scrum_"
+  },
   "main": "lib/index.js",
   "engines": {
     "node": ">=4"
@@ -10,6 +24,11 @@
     "lintjs": "eslint ./src/*.js ./test/*.js",
     "lintmd": "eslint --ext md --rule indent: [error, 4] .",
     "pretest": "clinton && npm run lintjs && npm run lintmd",
+    "commitmsg": "conventional-changelog-lint -e",
+    "postpublish": "conventional-changelog -i CHANGELOG.md -s -r 0 && git commit -am \"chore(changelog): Update changelog\"",
+    "patch": "np patch --any-branch",
+    "minor": "np minor --any-branch",
+    "major": "np major --any-branch",
     "test": "nyc ava",
     "clean": "rm -rf lib && mkdir lib",
     "build": "npm run clean && babel src/ -d lib/",
@@ -19,11 +38,6 @@
   "files": [
     "lib/"
   ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GitScrum/posthtml-beautify.git"
-  },
   "keywords": [
     "html",
     "posthtml",
@@ -36,26 +50,32 @@
   "devDependencies": {
     "ava": "*",
     "ava-codemods": "^0.2.1",
-    "babel-cli": "^6.10.1",
-    "babel-eslint": "^6.1.0",
+    "babel-cli": "^6.11.4",
+    "babel-eslint": "^6.1.2",
     "babel-plugin-add-module-exports": "^0.2.0",
     "babel-plugin-array-includes": "^2.0.3",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-min": "^0.1.15",
     "babel-register": "^6.7.2",
-    "clinton": "^0.5.0",
-    "coveralls": "^2.11.9",
-    "eslint": "^3.0.1",
-    "eslint-config-xo": "^0.15.2",
+    "clinton": "^0.6.0",
+    "conventional-changelog-cli": "^1.2.0",
+    "conventional-changelog-lint": "^1.0.0",
+    "coveralls": "^2.11.11",
+    "eslint": "^3.1.1",
+    "eslint-config-xo": "^0.15.3",
     "eslint-formatter-pretty": "^0.2.2",
     "eslint-plugin-ava": "^2.5.0",
     "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-markdown": "^1.0.0-beta.2",
     "eslint-plugin-require-path-exists": "^1.1.5",
     "eslint-plugin-xo": "^0.5.1",
+    "husky": "^0.11.5",
     "is-promise": "^2.1.0",
-    "nyc": "^7.0.0-alpha.5",
+    "np": "^2.6.0",
+    "nyc": "^7.1.0-candidate2",
     "posthtml": "^0.9.0",
+    "posthtml-include": "^1.1.0",
+    "posthtml-modules": "^0.4.0",
     "updtr": "^0.2.1"
   },
   "ava": {
@@ -92,23 +112,19 @@
     ]
   },
   "clinton": {
+    "ignores": [
+      "test/**",
+      "tmp/**",
+      "lib/**",
+      "*.{html,jpg}"
+    ],
     "rules": {
       "pkg-main": [
         "off"
       ],
       "xo": [
         "off"
-      ],
-      "editorconfig": "off"
+      ]
     }
-  },
-  "homepage": "https://github.com/GitScrum/posthtml-beautify#readme",
-  "bugs": {
-    "url": "https://github.com/GitScrum/posthtml-beautify/issues"
-  },
-  "author": {
-    "name": "Ivan Demidov",
-    "email": "Scrum@list.ru",
-    "url": "https://twitter.com/Scrum_"
   }
 }
