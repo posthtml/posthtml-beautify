@@ -1,3 +1,5 @@
+import parser from 'posthtml-parser';
+import render from 'posthtml-render';
 import rules from './rules.js';
 import attrs from './attrs.js';
 
@@ -6,7 +8,7 @@ const optionsDefault = {
 	attrs: attrs
 };
 
-const clean = tree => tree
+const clean = tree => parser(render(tree))
 	.filter(node => {
 		return typeof node === 'object' || (typeof node === 'string' && (node.trim().length !== 0 || /doctype/gi.test(node)));
 	})
@@ -14,6 +16,7 @@ const clean = tree => tree
 		if (Object.prototype.hasOwnProperty.call(node, 'content')) {
 			node.content = clean(node.content);
 		}
+
 		return typeof node === 'string' ? node.trim() : node;
 	});
 
@@ -69,7 +72,7 @@ const attrsBoolean = (tree, {attrs: {boolean}}) => {
 };
 
 function beautify(tree, options) {
-	return new Promise(resolve => resolve(tree))
+	return Promise.resolve(tree)
 		.then(tree => clean(tree))
 		.then(tree => indent(tree, options))
 		.then(tree => attrsBoolean(tree, options))
