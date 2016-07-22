@@ -65,6 +65,8 @@
     "np": "^2.6.0",
     "nyc": "^7.0.0-alpha.5",
     "posthtml": "^0.9.0",
+    "posthtml-include": "^1.1.0",
+    "posthtml-modules": "^0.4.0",
     "updtr": "^0.2.1"
   },
   "ava": {

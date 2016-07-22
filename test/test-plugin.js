@@ -4,8 +4,8 @@ import posthtml from 'posthtml';
 import isPromise from 'is-promise';
 import beautify from '../src/index.js';
 
-function processing(html) {
-	return posthtml()
+function processing(html, plugins = []) {
+	return posthtml(plugins)
 		.use(beautify())
 		.process(html);
 }
@@ -67,4 +67,17 @@ test('should return with indent', async t => {
 		(await read('expected/output-indent.html')),
 		(await processing(await read('fixtures/input-indent.html'))).html
 	);
+});
+
+test('should return equal html using plugin posthtml-modules', async t => {
+	t.deepEqual(
+		(await read('expected/output-posthtml-modules.html')),
+		(await processing(await read('fixtures/input-posthtml-modules.html'), [require('posthtml-modules')()])).html
+	);
+});
+
+test('should return equal html using plugin posthtml-include', async t => {
+	const expected = await read('expected/output-posthtml-include.html');
+	const fixtures = (await processing(await read('fixtures/input-posthtml-include.html'), [require('posthtml-include')()])).html;
+	t.deepEqual(expected, fixtures);
 });
