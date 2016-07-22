@@ -76,7 +76,6 @@ function beautify(tree, options) {
 		.then(tree => clean(tree))
 		.then(tree => indent(tree, options))
 		.then(tree => attrsBoolean(tree, options))
-		.then(tree => attrsBoolean(tree, options))
 		.then(tree => tree);
 }
 
