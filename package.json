@@ -1,6 +1,6 @@
 {
   "name": "posthtml-beautify",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A posthtml plugin to beautify you html files",
   "license": "MIT",
   "repository": {
@@ -46,7 +46,10 @@
     "beautifier",
     "code-quality"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "posthtml-parser": "0.2.0",
+    "posthtml-render": "1.0.6"
+  },
   "devDependencies": {
     "ava": "*",
     "ava-codemods": "^0.2.1",

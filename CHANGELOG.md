@@ -1,3 +1,12 @@
+<a name="0.0.3"></a>
+## 0.0.3 (2016-07-22)
+
+* 0.0.3 ([e80f9af](https://github.com/GitScrum/posthtml-beautify/commit/e80f9af))
+* fix(package): lose dependencies pkg ([ed033da](https://github.com/GitScrum/posthtml-beautify/commit/ed033da))
+* chore(changelog): Update changelog ([3ef2d80](https://github.com/GitScrum/posthtml-beautify/commit/3ef2d80))
+
+
+
 <a name="0.0.2"></a>
 ## 0.0.2 (2016-07-22)
 
