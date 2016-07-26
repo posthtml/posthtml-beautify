@@ -33,7 +33,8 @@
     "clean": "rm -rf lib && mkdir lib",
     "build": "npm run clean && babel src/ -d lib/",
     "prepublish": "npm run build",
-    "update": "updtr && ava-codemods --force"
+    "update": "updtr && ava-codemods --force",
+    "testen": "testen -n -- ava"
   },
   "files": [
     "lib/"
@@ -79,6 +80,7 @@
     "posthtml": "^0.9.0",
     "posthtml-include": "^1.1.0",
     "posthtml-modules": "^0.4.0",
+    "testen": "^1.8.2",
     "updtr": "^0.2.1"
   },
   "ava": {
@@ -129,5 +131,12 @@
         "off"
       ]
     }
+  },
+  "testen": {
+    "node": [
+      "4",
+      "5",
+      "6"
+    ]
   }
 }
