@@ -20,6 +20,25 @@ const clean = tree => parser(render(tree))
 		return typeof node === 'string' ? node.trim() : node;
 	});
 
+const parseConditional = tree => {
+	return tree.map(node => {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+			node.content = parseConditional(node.content);
+		}
+
+		if (typeof node === 'string' && /<![--|\[].*?\]\>/.test(node)) {
+			console.log(node);
+			const conditional = /^(<!(?:--)?\[[\s\S]*?\]>(?:<!)?(?:-->)?)([\s\S]*?)(<!(?:--<!)?\[[\s\S]*?\](?:--)?>)$/.exec(node);
+			return {
+				tag: 'conditional',
+				content: conditional
+			};
+		}
+
+		return node;
+	});
+};
+
 const indent = (tree, {rules: {indent, eol}}) => {
 	const indentString = typeof indent === 'number' ? ' '.repeat(indent) : '\t';
 
@@ -74,6 +93,7 @@ const attrsBoolean = (tree, {attrs: {boolean}}) => {
 function beautify(tree, options) {
 	return Promise.resolve(tree)
 		.then(tree => clean(tree))
+		.then(tree => parseConditional(tree, options))
 		.then(tree => indent(tree, options))
 		.then(tree => attrsBoolean(tree, options))
 		.then(tree => tree);
