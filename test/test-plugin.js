@@ -4,9 +4,9 @@ import posthtml from 'posthtml';
 import isPromise from 'is-promise';
 import beautify from '../src/index.js';
 
-function processing(html, plugins = []) {
+function processing(html, settings = {}, plugins = []) {
 	return posthtml(plugins)
-		.use(beautify())
+		.use(beautify(settings))
 		.process(html);
 }
 
@@ -35,31 +35,31 @@ test('should return promise', t => {
 
 test('should return equal html', async t => {
 	const fixture = '<html></html>';
-	t.deepEqual(fixture, (await processing(fixture)).html);
+	t.deepEqual(fixture, (await processing(fixture, {rules: {eof: false}})).html);
 });
 
 test('should removing trailing slash in self-closing', async t => {
 	const fixture = '<img src="image.jpg" />';
 	const expected = '<img src="image.jpg">';
-	t.deepEqual(expected, (await processing(fixture)).html);
+	t.deepEqual(expected, (await processing(fixture, {rules: {eof: false}})).html);
 });
 
 test('should removes spaces at the equal sign', async t => {
 	const fixture = '<span class    =   "image"  rel=   "images"></span>';
 	const expected = '<span class="image" rel="images"></span>';
-	t.deepEqual(expected, (await processing(fixture)).html);
+	t.deepEqual(expected, (await processing(fixture, {rules: {eof: false}})).html);
 });
 
 test('should return boolean attribute', async t => {
 	const fixture = '<input type="email" required>';
 	const expected = '<input type="email" required>';
-	t.deepEqual(expected, (await processing(fixture)).html);
+	t.deepEqual(expected, (await processing(fixture, {rules: {eof: false}})).html);
 });
 
 test('should transform lower case attribute names', async t => {
 	const fixture = '<div CLASS="UPPERCLASS"></div>';
 	const expected = '<div class="UPPERCLASS"></div>';
-	t.deepEqual(expected, (await processing(fixture)).html);
+	t.deepEqual(expected, (await processing(fixture, {rules: {eof: false}})).html);
 });
 
 test('should return with indent', async t => {
@@ -72,12 +72,12 @@ test('should return with indent', async t => {
 test('should return equal html using plugin posthtml-modules', async t => {
 	t.deepEqual(
 		(await read('expected/output-posthtml-modules.html')),
-		(await processing(await read('fixtures/input-posthtml-modules.html'), [require('posthtml-modules')()])).html
+		(await processing(await read('fixtures/input-posthtml-modules.html'), null, [require('posthtml-modules')()])).html
 	);
 });
 
 test('should return equal html using plugin posthtml-include', async t => {
 	const expected = await read('expected/output-posthtml-include.html');
-	const fixtures = (await processing(await read('fixtures/input-posthtml-include.html'), [require('posthtml-include')()])).html;
+	const fixtures = (await processing(await read('fixtures/input-posthtml-include.html'), null, [require('posthtml-include')()])).html;
 	t.deepEqual(expected, fixtures);
 });

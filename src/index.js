@@ -71,11 +71,20 @@ const attrsBoolean = (tree, {attrs: {boolean}}) => {
 	return removeAttrValue(tree);
 };
 
+const eof = (tree, {rules: {eof}}) => {
+	if (eof && tree[tree.length - 1] !== eof) {
+		tree.push(eof);
+	}
+
+	return tree;
+};
+
 function beautify(tree, options) {
 	return Promise.resolve(tree)
 		.then(tree => clean(tree))
 		.then(tree => indent(tree, options))
 		.then(tree => attrsBoolean(tree, options))
+		.then(tree => eof(tree, options))
 		.then(tree => tree);
 }
 
