@@ -49,6 +49,7 @@ posthtml()
     });
 
 ```
+*Returns html-formatted according to rules based on the use [HTML5 syntax Style Guide](http://www.w3schools.com/html/html5_syntax.asp), [Code Guide](http://codeguide.co/#html) with custom settings `indent: 4`*
 
 ## Example
 
@@ -120,4 +121,19 @@ posthtml()
 
 #### `rules`
 Type: `Object`  
-Default: `{indent: 2, eol: '\n'}`
+Default:
+
+  - **Indent**  
+  Type: `Number|String(only tab)`  
+  Default: 2  
+  Description: *A numeric value indicates specifies the number of spaces. The string value only `tab`*
+
+  - **eol** (*end of line*)  
+  Type: `String`  
+  Default: '\n'  
+  Description: *As value is a string symbol which is added to the end of the row*
+
+  - **eof** (*end of file*)  
+  Type: `String|boolean`  
+  Default: '\n'  
+  Description: *As value is a string symbol which is added to the end of the file and will not adds if you specify a boolean value of `false`*
