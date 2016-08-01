@@ -1,3 +1,16 @@
+<a name="0.0.4"></a>
+## 0.0.4 (2016-08-01)
+
+* 0.0.4 ([0c9f3e0](https://github.com/GitScrum/posthtml-beautify/commit/0c9f3e0))
+* docs(readme): add description for new feature eof ([54457fa](https://github.com/GitScrum/posthtml-beautify/commit/54457fa))
+* feat(eof): add EOF feature #29 ([cff9c3a](https://github.com/GitScrum/posthtml-beautify/commit/cff9c3a))
+* chore(changelog): Update changelog ([69939c3](https://github.com/GitScrum/posthtml-beautify/commit/69939c3))
+* chore(package): update babel-register to version 6.11.6 ([a66b160](https://github.com/GitScrum/posthtml-beautify/commit/a66b160))
+* chore(package): update coveralls to version 2.11.12 ([29b1d6b](https://github.com/GitScrum/posthtml-beautify/commit/29b1d6b))
+* chore(package): update nyc to version 7.1.0 ([c1bcd7f](https://github.com/GitScrum/posthtml-beautify/commit/c1bcd7f))
+
+
+
 <a name="0.0.3"></a>
 ## 0.0.3 (2016-07-22)
 
