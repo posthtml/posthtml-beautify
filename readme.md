@@ -23,6 +23,7 @@ Format your html and inline css markup according to the [HTML5 syntax Style Guid
 - [ ] Creates file from the inline styles
 - [ ] Create scoped class name (*use css-modules*) instead inline styles
 - [ ] validate elements and attributes name
+- [x] parses Internet Explorer Conditional Comments (*not support Downlevel-revealed and valid version, [htmlparse2 invalid parses](https://github.com/GitScrum/posthtml-beautify/issues/36)*)
 
 ## Install
 
@@ -56,7 +57,8 @@ posthtml()
 #### input.html
 ```html
 <!DOCTYPE html>
-
+<head><link href="main.css" rel="stylesheet" type="text/css">
+  <!--[if IE 7]><link href="ie7.css" rel="stylesheet" type="text/css"><![endif]--><!--[if IE 6]><link href="ie6.css" rel="stylesheet" type="text/css"><![endif]--><!--[if IE 5]><link href="ie5.css" rel="stylesheet" type="text/css"><![endif]--></head>
  <table>
   <tr>
     <th>Name</th>
@@ -72,17 +74,34 @@ posthtml()
   </tr>
 </table>
     <div>
-<div class="first">
+<DIV class="first">
                 first</div>   <div class="middle"></div>
-<div class="last">last <b>line  </b> <a href="#">            test</a></div>
+<div CLASS="last">last <b>line  </b> <a href="#">            test</a></div>
 
 </div>
-<img src="img.png" alt=""><input type="text">
+<img src="img.png" alt=""><input type="text" required>
 ```
 
 #### output.html
 ```html
 <!DOCTYPE html>
+
+<head>
+  <link href="main.css" rel="stylesheet" type="text/css">
+
+  <!--[if IE 7]>
+    <link href="ie7.css" rel="stylesheet" type="text/css">
+  <![endif]-->
+
+  <!--[if IE 6]>
+    <link href="ie6.css" rel="stylesheet" type="text/css">
+  <![endif]-->
+
+  <!--[if IE 5]>
+    <link href="ie5.css" rel="stylesheet" type="text/css">
+  <![endif]-->
+</head>
+
 <table>
   <tr>
     <th>Name</th>
@@ -102,10 +121,13 @@ posthtml()
     <td>Description of B</td>
   </tr>
 </table>
+
 <div>
-  <div class="first">first</div>
+  <DIV class="first">first</DIV>
 </div>
+
 <div class="middle"></div>
+
 <div class="last">
   last
 
@@ -113,8 +135,9 @@ posthtml()
 
   <a href="#">test</a>
 </div>
+
 <img src="img.png" alt="">
-<input type="text">
+<input type="text" required>
 ```
 
 ## Options
