@@ -1,10 +1,24 @@
+<a name="0.0.5"></a>
+## 0.0.5 (2016-08-04)
+
+* 0.0.5 ([b306412](https://github.com/GitScrum/posthtml-beautify/commit/b306412))
+* fix(*): fix according to clinton recommendations ([b791b71](https://github.com/GitScrum/posthtml-beautify/commit/b791b71))
+* fix(*): incorrect write value ([2ba2a13](https://github.com/GitScrum/posthtml-beautify/commit/2ba2a13))
+* chore(changelog): Update changelog ([d7ac7fe](https://github.com/GitScrum/posthtml-beautify/commit/d7ac7fe))
+* chore(package): update devDep ([a3401bf](https://github.com/GitScrum/posthtml-beautify/commit/a3401bf))
+* refactor(*): adds a parser ie conditional comments, fixed #8 ([a5b6ffc](https://github.com/GitScrum/posthtml-beautify/commit/a5b6ffc)), closes [#8](https://github.com/GitScrum/posthtml-beautify/issues/8)
+
+
+
 <a name="0.0.4"></a>
 ## 0.0.4 (2016-08-01)
 
 * 0.0.4 ([0c9f3e0](https://github.com/GitScrum/posthtml-beautify/commit/0c9f3e0))
 * docs(readme): add description for new feature eof ([54457fa](https://github.com/GitScrum/posthtml-beautify/commit/54457fa))
 * feat(eof): add EOF feature #29 ([cff9c3a](https://github.com/GitScrum/posthtml-beautify/commit/cff9c3a))
+* refactor(index.js): add tmp conditional internet explorer comment ([4f58d27](https://github.com/GitScrum/posthtml-beautify/commit/4f58d27))
 * chore(changelog): Update changelog ([69939c3](https://github.com/GitScrum/posthtml-beautify/commit/69939c3))
+* chore(package): add testen, fixed #23 ([69a5bad](https://github.com/GitScrum/posthtml-beautify/commit/69a5bad)), closes [#23](https://github.com/GitScrum/posthtml-beautify/issues/23)
 * chore(package): update babel-register to version 6.11.6 ([a66b160](https://github.com/GitScrum/posthtml-beautify/commit/a66b160))
 * chore(package): update coveralls to version 2.11.12 ([29b1d6b](https://github.com/GitScrum/posthtml-beautify/commit/29b1d6b))
 * chore(package): update nyc to version 7.1.0 ([c1bcd7f](https://github.com/GitScrum/posthtml-beautify/commit/c1bcd7f))
