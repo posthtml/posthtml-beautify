@@ -81,3 +81,9 @@ test('should return equal html using plugin posthtml-include', async t => {
 	const fixtures = (await processing(await read('fixtures/input-posthtml-include.html'), null, [require('posthtml-include')()])).html;
 	t.deepEqual(expected, fixtures);
 });
+
+test('should return equal html which IE conditional comment', async t => {
+	const expected = await read('expected/output-conditional-comment.html');
+	const fixtures = (await processing(await read('fixtures/input-conditional-comment.html'), null, [require('posthtml-include')()])).html;
+	t.deepEqual(expected, fixtures);
+});
