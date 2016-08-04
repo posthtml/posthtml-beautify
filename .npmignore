@@ -1,9 +1,9 @@
-node_modules/
-src/
+node_modules
+src
 .gitignore
 .travis.yml
-coverage/
-.nyc_output/
+coverage
+.nyc_output
 npm-debug.log
 *.sublime*
-tmp/
+tmp
