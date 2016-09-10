@@ -52,7 +52,7 @@
     "posthtml-render": "1.0.6"
   },
   "devDependencies": {
-    "ava": "*",
+    "ava": "0.16.0",
     "ava-codemods": "^0.2.1",
     "babel-cli": "^6.11.4",
     "babel-eslint": "^6.1.2",
