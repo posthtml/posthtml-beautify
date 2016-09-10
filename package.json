@@ -61,7 +61,7 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-min": "^0.1.15",
     "babel-register": "^6.11.6",
-    "clinton": "^0.7.1",
+    "clinton": "^0.8.0",
     "conventional-changelog-cli": "^1.2.0",
     "conventional-changelog-lint": "^1.0.0",
     "coveralls": "^2.11.12",
