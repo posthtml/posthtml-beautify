@@ -3,14 +3,9 @@
   "version": "0.0.5",
   "description": "A posthtml plugin to beautify you html files",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GitScrum/posthtml-beautify.git"
-  },
-  "homepage": "https://github.com/GitScrum/posthtml-beautify#readme",
-  "bugs": {
-    "url": "https://github.com/GitScrum/posthtml-beautify/issues"
-  },
+  "repository": "gitscrum/posthtml-beautify",
+  "homepage": "gitscrum/posthtml-beautify#readme",
+  "bugs": "gitscrum/posthtml-beautify/issues",
   "author": {
     "name": "Ivan Demidov",
     "email": "Scrum@list.ru",
@@ -52,7 +47,7 @@
     "posthtml-render": "1.0.6"
   },
   "devDependencies": {
-    "ava": "0.16.0",
+    "ava": "*",
     "ava-codemods": "^0.2.1",
     "babel-cli": "^6.11.4",
     "babel-eslint": "^6.1.2",
