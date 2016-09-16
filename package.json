@@ -72,7 +72,7 @@
     "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-markdown": "^1.0.0-beta.2",
     "eslint-plugin-require-path-exists": "^1.1.5",
-    "eslint-plugin-xo": "^0.5.1",
+    "eslint-plugin-xo": "^1.0.0",
     "husky": "^0.11.7",
     "is-promise": "^2.1.0",
     "np": "^2.8.0",
