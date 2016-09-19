@@ -2,6 +2,7 @@ import parser from 'posthtml-parser';
 import render from 'posthtml-render';
 import rules from './rules.js';
 import attrs from './attrs.js';
+import assign from 'assign-deep';
 
 const optionsDefault = {
 	rules: rules,
@@ -151,6 +152,6 @@ export default (options = {}) => {
 			resolve(tree);
 		}
 
-		resolve(beautify(tree, Object.assign({}, optionsDefault, options)));
+		resolve(beautify(tree, assign({}, optionsDefault, options)));
 	});
 };
