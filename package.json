@@ -18,7 +18,8 @@
   "scripts": {
     "lintjs": "eslint ./src/*.js ./test/*.js",
     "lintmd": "eslint --ext md --rule indent: [error, 4] .",
-    "pretest": "clinton && npm run lintjs && npm run lintmd",
+    "linthtml": "eslint **/*.html",
+    "pretest": "clinton && npm run lintjs && npm run lintmd && npm run linthtml",
     "commitmsg": "conventional-changelog-lint -e",
     "postpublish": "conventional-changelog -i CHANGELOG.md -s -r 0 && git commit -am \"chore(changelog): Update changelog\"",
     "patch": "np patch --any-branch",
@@ -66,6 +67,7 @@
     "eslint-formatter-pretty": "^0.3.1",
     "eslint-plugin-ava": "^3.0.0",
     "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-html": "^1.5.2",
     "eslint-plugin-markdown": "^1.0.0-beta.2",
     "eslint-plugin-require-path-exists": "^1.1.5",
     "eslint-plugin-xo": "^0.5.1",
@@ -98,6 +100,7 @@
     "format": "node_modules/eslint-formatter-pretty",
     "parser": "babel-eslint",
     "plugins": [
+      "html",
       "ava",
       "xo",
       "babel",
