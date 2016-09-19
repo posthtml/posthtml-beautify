@@ -1,16 +1,11 @@
 {
   "name": "posthtml-beautify",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A posthtml plugin to beautify you html files",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GitScrum/posthtml-beautify.git"
-  },
-  "homepage": "https://github.com/GitScrum/posthtml-beautify#readme",
-  "bugs": {
-    "url": "https://github.com/GitScrum/posthtml-beautify/issues"
-  },
+  "repository": "gitscrum/posthtml-beautify",
+  "homepage": "gitscrum/posthtml-beautify#readme",
+  "bugs": "gitscrum/posthtml-beautify/issues",
   "author": {
     "name": "Ivan Demidov",
     "email": "Scrum@list.ru",
@@ -23,7 +18,8 @@
   "scripts": {
     "lintjs": "eslint ./src/*.js ./test/*.js",
     "lintmd": "eslint --ext md --rule indent: [error, 4] .",
-    "pretest": "clinton && npm run lintjs && npm run lintmd",
+    "linthtml": "eslint **/*.html",
+    "pretest": "clinton && npm run lintjs && npm run lintmd && npm run linthtml",
     "commitmsg": "conventional-changelog-lint -e",
     "postpublish": "conventional-changelog -i CHANGELOG.md -s -r 0 && git commit -am \"chore(changelog): Update changelog\"",
     "patch": "np patch --any-branch",
@@ -48,35 +44,37 @@
     "code-quality"
   ],
   "dependencies": {
+    "assign-deep": "^0.4.5",
     "posthtml-parser": "0.2.0",
     "posthtml-render": "1.0.6"
   },
   "devDependencies": {
-    "ava": "0.16.0",
+    "ava": "*",
     "ava-codemods": "^0.2.1",
     "babel-cli": "^6.11.4",
     "babel-eslint": "^6.1.2",
     "babel-plugin-add-module-exports": "^0.2.0",
     "babel-plugin-array-includes": "^2.0.3",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-min": "^0.1.15",
+    "babel-preset-babili": "0.0.2",
+    "babel-preset-es2015": "^6.14.0",
     "babel-register": "^6.11.6",
-    "clinton": "^0.7.1",
+    "clinton": "^0.8.0",
     "conventional-changelog-cli": "^1.2.0",
     "conventional-changelog-lint": "^1.0.0",
-    "coveralls": "^2.11.12",
-    "eslint": "^3.1.1",
+    "eslint": "^3.4.0",
+    "coveralls": "^2.11.13",
     "eslint-config-xo": "^0.15.3",
-    "eslint-formatter-pretty": "^0.3.1",
-    "eslint-plugin-ava": "^2.5.0",
+    "eslint-plugin-ava": "^3.0.0",
+    "eslint-formatter-pretty": "^1.0.0",
     "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-html": "^1.5.2",
     "eslint-plugin-markdown": "^1.0.0-beta.2",
     "eslint-plugin-require-path-exists": "^1.1.5",
-    "eslint-plugin-xo": "^0.5.1",
+    "eslint-plugin-xo": "^1.0.0",
     "husky": "^0.11.7",
     "is-promise": "^2.1.0",
     "np": "^2.8.0",
-    "nyc": "^8.1.0",
+    "nyc": "^8.3.0",
     "posthtml": "^0.9.0",
     "posthtml-include": "^1.1.0",
     "posthtml-modules": "^0.4.2",
@@ -90,20 +88,19 @@
   },
   "babel": {
     "presets": [
-      "es2015"
+      "es2015",
+      "babili"
     ],
     "plugins": [
       "array-includes",
       "add-module-exports"
-    ],
-    "comments": false,
-    "compact": true,
-    "minified": true
+    ]
   },
   "eslintConfig": {
     "format": "node_modules/eslint-formatter-pretty",
     "parser": "babel-eslint",
     "plugins": [
+      "html",
       "ava",
       "xo",
       "babel",

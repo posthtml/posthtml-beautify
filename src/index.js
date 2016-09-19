@@ -2,6 +2,7 @@ import parser from 'posthtml-parser';
 import render from 'posthtml-render';
 import rules from './rules.js';
 import attrs from './attrs.js';
+import assign from 'assign-deep';
 
 const optionsDefault = {
 	rules: rules,
@@ -76,7 +77,11 @@ const indent = (tree, {rules: {indent, eol}}) => {
 			return [...previousValue, node];
 		}
 
-		if (level === 0 && (tree.length - 1) === index) {
+		if (level === 0 && (tree.length - 1) === index && tree.length > 1) {
+			return [...previousValue, getIndent(level), node];
+		}
+
+		if (level === 0 && (tree.length - 1) === index && tree.length === 1) {
 			return [...previousValue, node];
 		}
 
@@ -151,6 +156,6 @@ export default (options = {}) => {
 			resolve(tree);
 		}
 
-		resolve(beautify(tree, Object.assign({}, optionsDefault, options)));
+		resolve(beautify(tree, assign({}, optionsDefault, options)));
 	});
 };

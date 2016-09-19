@@ -34,7 +34,7 @@ test('should return promise', t => {
 });
 
 test('should return equal html', async t => {
-	const fixture = '<html></html>';
+	const fixture = '<div></div>\n\n<div></div>';
 	t.deepEqual(fixture, (await processing(fixture, {rules: {eof: false}})).html);
 });
 

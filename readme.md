@@ -137,6 +137,7 @@ posthtml()
 </div>
 
 <img src="img.png" alt="">
+
 <input type="text" required>
 ```
 
