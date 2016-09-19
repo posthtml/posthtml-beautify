@@ -77,7 +77,11 @@ const indent = (tree, {rules: {indent, eol}}) => {
 			return [...previousValue, node];
 		}
 
-		if (level === 0 && (tree.length - 1) === index) {
+		if (level === 0 && (tree.length - 1) === index && tree.length > 1) {
+			return [...previousValue, getIndent(level), node];
+		}
+
+		if (level === 0 && (tree.length - 1) === index && tree.length === 1) {
 			return [...previousValue, node];
 		}
 
