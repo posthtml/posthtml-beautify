@@ -143,6 +143,11 @@ posthtml()
 
 ## Options
 
+#### `sync`
+Type: `Boolean`  
+Default: false
+Description: *Used to switch between modes both synchronous and asynchronous*
+
 #### `rules`
 Type: `Object`  
 Default:
@@ -158,7 +163,7 @@ Default:
   Description: *As value is a string symbol which is added to the end of the row*
 
   - **eof** (*end of file*)  
-  Type: `String|boolean`  
+  Type: `String|Boolean`  
   Default: '\n'  
   Description: *As value is a string symbol which is added to the end of the file and will not adds if you specify a boolean value of `false`*
 
