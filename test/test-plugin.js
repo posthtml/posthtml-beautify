@@ -24,12 +24,33 @@ test('processing should return promise', t => {
 	t.true(isPromise(processing('')));
 });
 
+test('processing not should return promise with use option sync', t => {
+	t.false(isPromise(processing('<div></div>', [], {sync: true})));
+});
+
+test('processing should return object with use option sync', t => {
+	t.deepEqual(typeof processing('<div></div>', [], {sync: true}), 'object');
+});
+
 test('plugin beautify must be function', t => {
 	t.true(typeof beautify === 'function');
 });
 
-test('plugin beautify should return reject', async t => {
-	t.throws(beautify()());
+test('plugin beautify not should return promise with use option sync', t => {
+	t.false(isPromise(beautify({sync: true})()));
+});
+
+test('plugin beautify should return Error with use option sync', t => {
+	t.true(beautify({sync: true})().name === 'Error');
+});
+
+test('plugin beautify should return the passed value with use option sync', t => {
+	t.deepEqual([], beautify({sync: true})([]));
+});
+
+test('processing with plugin beautify should return equal html with use option sync', async t => {
+	const fixture = '<div></div>\n\n<div></div>';
+	t.deepEqual(fixture, (await processing(fixture, [beautify({sync: true, rules: {eof: false}})], {sync: true}).html));
 });
 
 test('processing with plugin beautify should return equal html', async t => {
