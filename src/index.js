@@ -6,7 +6,8 @@ import assign from 'assign-deep';
 
 const optionsDefault = {
 	rules: rules,
-	attrs: attrs
+	attrs: attrs,
+	sync: false
 };
 
 const clean = tree => parser(render(tree))
@@ -135,27 +136,33 @@ const attrsBoolean = (tree, {attrs: {boolean}}) => {
 
 const eof = (tree, {rules: {eof}}) => eof ? [...tree, eof] : tree;
 
-function beautify(tree, options) {
-	return Promise.resolve(tree)
-		.then(tree => clean(tree))
-		.then(tree => parseConditional(tree, options))
-		.then(tree => renderConditional(tree, options))
-		.then(tree => indent(tree, options))
-		.then(tree => attrsBoolean(tree, options))
-		.then(tree => eof(tree, options))
-		.then(tree => tree);
-}
+const beautify = (tree, options) => [
+	clean,
+	parseConditional,
+	renderConditional,
+	indent,
+	attrsBoolean,
+	eof
+].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);
 
 export default (options = {}) => {
-	return tree => new Promise((resolve, reject) => {
+	return tree => {
 		if (!Array.isArray(tree)) {
-			reject(new Error(`tree is not Array`));
+			return new Error(`tree is not Array`);
 		}
 
 		if (tree.length === 0) {
-			resolve(tree);
+			return tree;
 		}
 
-		resolve(beautify(tree, assign({}, optionsDefault, options)));
-	});
+		if (
+			(Object.prototype.hasOwnProperty.call(tree, 'options') &&
+			Object.prototype.hasOwnProperty.call(tree.options, 'sync') &&
+			tree.options.sync) || options.sync
+		) {
+			return beautify(tree, assign({}, optionsDefault, options));
+		}
+
+		return Promise.resolve(beautify(tree, assign({}, optionsDefault, options)));
+	};
 };
