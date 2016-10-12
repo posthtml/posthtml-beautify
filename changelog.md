@@ -1,3 +1,26 @@
+<a name="0.1.0"></a>
+# 0.1.0 (2016-10-12)
+
+* 0.1.0 ([74183a3](https://github.com/gitscrum/posthtml-beautify/commit/74183a3))
+* docs(readme): add description for options sync ([dcf6b06](https://github.com/gitscrum/posthtml-beautify/commit/dcf6b06))
+* docs(readme): add license ([1fb27b7](https://github.com/gitscrum/posthtml-beautify/commit/1fb27b7))
+* test(test-plugin): add tests for sync mode ([8b90dd1](https://github.com/gitscrum/posthtml-beautify/commit/8b90dd1))
+* test(test-plugin): improving processing ([98da81c](https://github.com/gitscrum/posthtml-beautify/commit/98da81c))
+* feat(index): add options sync mode, fixed #70 ([912291e](https://github.com/gitscrum/posthtml-beautify/commit/912291e)), closes [#70](https://github.com/gitscrum/posthtml-beautify/issues/70)
+* chore(changelog): Update changelog ([be989a3](https://github.com/gitscrum/posthtml-beautify/commit/be989a3))
+* chore(package): update ava-codemods to version 0.3.0 ([5f1148b](https://github.com/gitscrum/posthtml-beautify/commit/5f1148b))
+* chore(package): update babel-eslint to version 7.0.0 ([a590ee0](https://github.com/gitscrum/posthtml-beautify/commit/a590ee0))
+* chore(package): update babel-preset-babili to version 0.0.5 ([7db66ca](https://github.com/gitscrum/posthtml-beautify/commit/7db66ca))
+* chore(package): update coveralls to version 2.11.14 ([df69bbb](https://github.com/gitscrum/posthtml-beautify/commit/df69bbb))
+* chore(package): update devDependencies and dependencies ([e2e8b7f](https://github.com/gitscrum/posthtml-beautify/commit/e2e8b7f))
+* chore(package): update eslint to version 3.7.0 ([872aa33](https://github.com/gitscrum/posthtml-beautify/commit/872aa33))
+* chore(package): update eslint-config-xo to version 0.17.0 ([a1af04f](https://github.com/gitscrum/posthtml-beautify/commit/a1af04f))
+* chore(package): update eslint-formatter-pretty to version 1.0.1 ([3497d0e](https://github.com/gitscrum/posthtml-beautify/commit/3497d0e))
+* chore(package): update eslint-plugin-html to version 1.5.3 ([b6ec642](https://github.com/gitscrum/posthtml-beautify/commit/b6ec642))
+* chore(package): update husky to version 0.11.9 ([d7ec27f](https://github.com/gitscrum/posthtml-beautify/commit/d7ec27f))
+
+
+
 <a name="0.0.6"></a>
 ## 0.0.6 (2016-09-19)
 
