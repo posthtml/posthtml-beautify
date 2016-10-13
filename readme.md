@@ -145,8 +145,8 @@ posthtml()
 
 #### `sync`
 Type: `Boolean`  
-Default: false
-Description: *Used to switch between modes both synchronous and asynchronous*
+Default: false  
+Description: *Used to switch between modes both synchronous and asynchronous. Will automatically be run synchronously if `posthtml` has option `sync: true`*
 
 #### `rules`
 Type: `Object`  
