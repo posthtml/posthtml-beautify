@@ -74,7 +74,7 @@
     "husky": "^0.11.9",
     "is-promise": "^2.1.0",
     "np": "^2.8.0",
-    "nyc": "^8.3.1",
+    "nyc": "^8.3.2",
     "posthtml": "^0.9.1",
     "posthtml-include": "^1.1.0",
     "posthtml-modules": "^0.4.2",
