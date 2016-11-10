@@ -79,7 +79,7 @@
     "posthtml-include": "^1.1.0",
     "posthtml-modules": "^0.4.2",
     "testen": "^1.8.2",
-    "updtr": "^0.2.1"
+    "updtr": "^0.2.3"
   },
   "ava": {
     "require": [
