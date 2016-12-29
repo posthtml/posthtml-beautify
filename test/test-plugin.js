@@ -82,6 +82,12 @@ test('processing with plugin beautify should transform lower case attribute name
 	t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false}})])).html);
 });
 
+test('processing with plugin beautify should transform lower case tag name', async t => {
+	const fixture = '<DIV></DIV>';
+	const expected = '<div></div>';
+	t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false}})])).html);
+});
+
 test('processing with plugin beautify should return with indent', async t => {
 	t.deepEqual(
 		(await read('test/expected/output-indent.html')),

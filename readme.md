@@ -8,7 +8,7 @@
 
 ## Why?
 Format your html and inline css markup according to the [HTML5 syntax Style Guide](http://www.w3schools.com/html/html5_syntax.asp), [Code Guide](http://codeguide.co/#html). Full list of supported options:
-- [ ] Transform lower case element names
+- [x] Transform lower case element names
 - [x] Transform lower case attribute names
 - [x] Only double quotes
 - [x] Close all html elements 
@@ -123,7 +123,7 @@ posthtml()
 </table>
 
 <div>
-  <DIV class="first">first</DIV>
+  <div class="first">first</div>
 </div>
 
 <div class="middle"></div>

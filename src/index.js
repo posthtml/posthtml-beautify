@@ -2,11 +2,13 @@ import parser from 'posthtml-parser';
 import render from 'posthtml-render';
 import rules from './rules.js';
 import attrs from './attrs.js';
+import tags from './tags.js';
 import assign from 'assign-deep';
 
 const optionsDefault = {
 	rules: rules,
 	attrs: attrs,
+	tags: tags,
 	sync: false
 };
 
@@ -134,6 +136,28 @@ const attrsBoolean = (tree, {attrs: {boolean}}) => {
 	return removeAttrValue(tree);
 };
 
+const lowerElementName = (tree, {tags}) => {
+	tags = tags.map(({name}) => name);
+
+	const bypass = tree => tree.map(node => {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+			node.content = bypass(node.content);
+		}
+
+		if (
+			typeof node === 'object' &&
+			Object.prototype.hasOwnProperty.call(node, 'tag') &&
+			tags.includes(node.tag.toLowerCase())
+		) {
+			node.tag = node.tag.toLowerCase();
+		}
+
+		return node;
+	});
+
+	return bypass(tree);
+};
+
 const eof = (tree, {rules: {eof}}) => eof ? [...tree, eof] : tree;
 
 const beautify = (tree, options) => [
@@ -141,6 +165,7 @@ const beautify = (tree, options) => [
 	parseConditional,
 	renderConditional,
 	indent,
+	lowerElementName,
 	attrsBoolean,
 	eof
 ].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);
