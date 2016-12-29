@@ -3,7 +3,7 @@ import render from 'posthtml-render';
 import rules from './rules.js';
 import attrs from './attrs.js';
 import tags from './tags.js';
-import assign from 'assign-deep';
+import deepmerge from 'deepmerge';
 
 const optionsDefault = {
 	rules: rules,
@@ -185,9 +185,9 @@ export default (options = {}) => {
 			Object.prototype.hasOwnProperty.call(tree.options, 'sync') &&
 			tree.options.sync) || options.sync
 		) {
-			return beautify(tree, assign({}, optionsDefault, options));
+			return beautify(tree, deepmerge(optionsDefault, options));
 		}
 
-		return Promise.resolve(beautify(tree, assign({}, optionsDefault, options)));
+		return Promise.resolve(beautify(tree, deepmerge(optionsDefault, options)));
 	};
 };
