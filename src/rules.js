@@ -1,5 +1,7 @@
+import os from 'os';
+
 export default {
 	indent: 2,
 	eof: '\n',
-	eol: '\n'
+	eol: os.EOL
 };
