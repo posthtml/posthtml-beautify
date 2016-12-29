@@ -49,7 +49,7 @@
     "posthtml-render": "1.0.6"
   },
   "devDependencies": {
-    "ava": "0.17.0",
+    "ava": "*",
     "ava-codemods": "^0.3.0",
     "babel-cli": "^6.16.0",
     "babel-eslint": "^7.0.0",
