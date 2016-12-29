@@ -28,8 +28,8 @@ const parseConditional = tree => {
 			node.content = parseConditional(node.content);
 		}
 
-		if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?\]>/.test(node)) {
-			const conditional = /^((?:<[^>]+>)?<!(?:--)?\[[\s\S]*?\]>(?:<!)?(?:-->)?)([\s\S]*?)(<!(?:--<!)?\[[\s\S]*?\](?:--)?>)$/
+		if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
+			const conditional = /^((?:<[^>]+>)?<!(?:--)?\[[\s\S]*?]>(?:<!)?(?:-->)?)([\s\S]*?)(<!(?:--<!)?\[[\s\S]*?](?:--)?>)$/
 				.exec(node)
 				.slice(1)
 				.map((node, index) => index === 1 ? {tag: 'conditional-content', content: clean(parser(node))} : node);
@@ -98,11 +98,11 @@ const indent = (tree, {rules: {indent, eol}}) => {
 			return [...previousValue, getIndent(level), node, getIndent(--level)];
 		}
 
-		if (typeof node === 'string' && /<!(?:--)?\[endif]*?\]>/.test(node)) {
+		if (typeof node === 'string' && /<!(?:--)?\[endif]*?]>/.test(node)) {
 			return [...previousValue, getIndent(level), node, getIndent(0)];
 		}
 
-		if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?\]>/.test(node)) {
+		if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
 			return [...previousValue, getIndent(level), node];
 		}
 
