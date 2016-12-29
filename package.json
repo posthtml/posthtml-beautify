@@ -21,7 +21,7 @@
     "linthtml": "eslint **/*.html",
     "pretest": "clinton && npm run lintjs && npm run lintmd && npm run linthtml",
     "commitmsg": "conventional-changelog-lint -e",
-    "postpublish": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"chore(changelog): Update changelog\"",
+    "postpublish": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"chore(changelog): Update changelog v`npm view post-sequence version`\"",
     "patch": "np patch --any-branch",
     "minor": "np minor --any-branch",
     "major": "np major --any-branch",
