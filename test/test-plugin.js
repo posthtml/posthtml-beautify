@@ -82,28 +82,34 @@ test('processing with plugin beautify should transform lower case attribute name
 	t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false}})])).html);
 });
 
+test('processing with plugin beautify should transform lower case tag name', async t => {
+	const fixture = '<DIV></DIV>';
+	const expected = '<div></div>';
+	t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false}})])).html);
+});
+
 test('processing with plugin beautify should return with indent', async t => {
 	t.deepEqual(
-		(await read('expected/output-indent.html')),
-		(await processing(await read('fixtures/input-indent.html'), [beautify()])).html
+		(await read('test/expected/output-indent.html')),
+		(await processing(await read('test/fixtures/input-indent.html'), [beautify()])).html
 	);
 });
 
 test('processing with plugin beautify and modules should return equal html using plugin posthtml-modules', async t => {
 	t.deepEqual(
-		(await read('expected/output-posthtml-modules.html')),
-		(await processing(await read('fixtures/input-posthtml-modules.html'), [require('posthtml-modules')(), beautify()])).html
+		(await read('test/expected/output-posthtml-modules.html')),
+		(await processing(await read('test/fixtures/input-posthtml-modules.html'), [require('posthtml-modules')(), beautify()])).html
 	);
 });
 
 test('processing with plugin beautify and include should return equal html using plugin posthtml-include', async t => {
-	const expected = await read('expected/output-posthtml-include.html');
-	const fixtures = (await processing(await read('fixtures/input-posthtml-include.html'), [require('posthtml-include')(), beautify()])).html;
+	const expected = await read('test/expected/output-posthtml-include.html');
+	const fixtures = (await processing(await read('test/fixtures/input-posthtml-include.html'), [require('posthtml-include')(), beautify()])).html;
 	t.deepEqual(expected, fixtures);
 });
 
 test('processing with plugin beautify and include should return equal html which IE conditional comment', async t => {
-	const expected = await read('expected/output-conditional-comment.html');
-	const fixtures = (await processing(await read('fixtures/input-conditional-comment.html'), [require('posthtml-include')(), beautify()])).html;
+	const expected = await read('test/expected/output-conditional-comment.html');
+	const fixtures = (await processing(await read('test/fixtures/input-conditional-comment.html'), [require('posthtml-include')(), beautify()])).html;
 	t.deepEqual(expected, fixtures);
 });

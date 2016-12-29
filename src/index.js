@@ -2,11 +2,13 @@ import parser from 'posthtml-parser';
 import render from 'posthtml-render';
 import rules from './rules.js';
 import attrs from './attrs.js';
-import assign from 'assign-deep';
+import tags from './tags.js';
+import deepmerge from 'deepmerge';
 
 const optionsDefault = {
 	rules: rules,
 	attrs: attrs,
+	tags: tags,
 	sync: false
 };
 
@@ -28,8 +30,8 @@ const parseConditional = tree => {
 			node.content = parseConditional(node.content);
 		}
 
-		if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?\]>/.test(node)) {
-			const conditional = /^((?:<[^>]+>)?<!(?:--)?\[[\s\S]*?\]>(?:<!)?(?:-->)?)([\s\S]*?)(<!(?:--<!)?\[[\s\S]*?\](?:--)?>)$/
+		if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
+			const conditional = /^((?:<[^>]+>)?<!(?:--)?\[[\s\S]*?]>(?:<!)?(?:-->)?)([\s\S]*?)(<!(?:--<!)?\[[\s\S]*?](?:--)?>)$/
 				.exec(node)
 				.slice(1)
 				.map((node, index) => index === 1 ? {tag: 'conditional-content', content: clean(parser(node))} : node);
@@ -98,11 +100,11 @@ const indent = (tree, {rules: {indent, eol}}) => {
 			return [...previousValue, getIndent(level), node, getIndent(--level)];
 		}
 
-		if (typeof node === 'string' && /<!(?:--)?\[endif]*?\]>/.test(node)) {
+		if (typeof node === 'string' && /<!(?:--)?\[endif]*?]>/.test(node)) {
 			return [...previousValue, getIndent(level), node, getIndent(0)];
 		}
 
-		if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?\]>/.test(node)) {
+		if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
 			return [...previousValue, getIndent(level), node];
 		}
 
@@ -134,6 +136,28 @@ const attrsBoolean = (tree, {attrs: {boolean}}) => {
 	return removeAttrValue(tree);
 };
 
+const lowerElementName = (tree, {tags}) => {
+	tags = tags.map(({name}) => name);
+
+	const bypass = tree => tree.map(node => {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+			node.content = bypass(node.content);
+		}
+
+		if (
+			typeof node === 'object' &&
+			Object.prototype.hasOwnProperty.call(node, 'tag') &&
+			tags.includes(node.tag.toLowerCase())
+		) {
+			node.tag = node.tag.toLowerCase();
+		}
+
+		return node;
+	});
+
+	return bypass(tree);
+};
+
 const eof = (tree, {rules: {eof}}) => eof ? [...tree, eof] : tree;
 
 const beautify = (tree, options) => [
@@ -141,6 +165,7 @@ const beautify = (tree, options) => [
 	parseConditional,
 	renderConditional,
 	indent,
+	lowerElementName,
 	attrsBoolean,
 	eof
 ].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);
@@ -160,9 +185,9 @@ export default (options = {}) => {
 			Object.prototype.hasOwnProperty.call(tree.options, 'sync') &&
 			tree.options.sync) || options.sync
 		) {
-			return beautify(tree, assign({}, optionsDefault, options));
+			return beautify(tree, deepmerge(optionsDefault, options));
 		}
 
-		return Promise.resolve(beautify(tree, assign({}, optionsDefault, options)));
+		return Promise.resolve(beautify(tree, deepmerge(optionsDefault, options)));
 	};
 };
