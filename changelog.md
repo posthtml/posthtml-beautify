@@ -1,3 +1,14 @@
+<a name="0.1.2"></a>
+## 0.1.2 (2016-12-30)
+
+* 0.1.2 ([571279e](https://github.com/gitscrum/posthtml-beautify/commit/571279e))
+* fix(package): change pkg name in postpublish ([d0cb61b](https://github.com/gitscrum/posthtml-beautify/commit/d0cb61b))
+* fix(rules): return to unix notation, close #112 ([0f51218](https://github.com/gitscrum/posthtml-beautify/commit/0f51218)), closes [#112](https://github.com/gitscrum/posthtml-beautify/issues/112)
+* chore(changelog): Update changelog v0.1.10 ([193db71](https://github.com/gitscrum/posthtml-beautify/commit/193db71))
+* chore(package): update clinton to version 0.10.0 ([96b0794](https://github.com/gitscrum/posthtml-beautify/commit/96b0794))
+
+
+
 <a name="0.1.1"></a>
 ## 0.1.1 (2016-12-29)
 
