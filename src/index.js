@@ -18,7 +18,7 @@ const clean = tree => parser(render(tree))
 		return typeof node === 'object' || (typeof node === 'string' && (node.trim().length !== 0 || /doctype/gi.test(node)));
 	})
 	.map(node => {
-		if (Reflect.has(node, 'content')) {
+		if (Object.prototype.hasOwnProperty.call(node, 'content')) {
 			node.content = clean(node.content);
 		}
 
@@ -27,7 +27,7 @@ const clean = tree => parser(render(tree))
 
 const parseConditional = tree => {
 	return tree.map(node => {
-		if (typeof node === 'object' && Reflect.has(node, 'content')) {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
 			node.content = parseConditional(node.content);
 		}
 
@@ -49,7 +49,7 @@ const parseConditional = tree => {
 
 const renderConditional = tree => {
 	return tree.reduce((previousValue, node) => {
-		if (typeof node === 'object' && Reflect.has(node, 'content')) {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
 			node.content = renderConditional(node.content);
 		}
 
@@ -72,7 +72,7 @@ const indent = (tree, {rules: {indent, eol}}) => {
 	const getIndent = level => `${eol}${indentString.repeat(level)}`;
 
 	const setIndent = (tree, level = 0) => tree.reduce((previousValue, node, index) => {
-		if (typeof node === 'object' && Reflect.has(node, 'content')) {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
 			node.content = setIndent(node.content, ++level);
 			--level;
 		}
@@ -121,11 +121,11 @@ const indent = (tree, {rules: {indent, eol}}) => {
 
 const attrsBoolean = (tree, {attrs: {boolean}}) => {
 	const removeAttrValue = tree => tree.map(node => {
-		if (typeof node === 'object' && Reflect.has(node, 'content')) {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
 			node.content = removeAttrValue(node.content);
 		}
 
-		if (typeof node === 'object' && Reflect.has(node, 'attrs')) {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')) {
 			Object.keys(node.attrs).forEach(key => {
 				node.attrs[key] = boolean.includes(key) ? true : node.attrs[key];
 			});
@@ -141,13 +141,13 @@ const lowerElementName = (tree, {tags}) => {
 	tags = tags.map(({name}) => name);
 
 	const bypass = tree => tree.map(node => {
-		if (typeof node === 'object' && Reflect.has(node, 'content')) {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
 			node.content = bypass(node.content);
 		}
 
 		if (
 			typeof node === 'object' &&
-			Reflect.has(node, 'tag') &&
+			Object.prototype.hasOwnProperty.call(node, 'tag') &&
 			tags.includes(node.tag.toLowerCase())
 		) {
 			node.tag = node.tag.toLowerCase();
@@ -182,7 +182,11 @@ export default (options = {}) => {
 		}
 
 		if (
-			(Reflect.has(tree, 'options') && Reflect.has(tree.options, 'sync') && tree.options.sync) ||
+			(
+				Object.prototype.hasOwnProperty.call(tree, 'options') &&
+				Object.prototype.hasOwnProperty.call(tree.options, 'sync') &&
+				tree.options.sync
+			) ||
 			options.sync
 		) {
 			return beautify(tree, deepmerge(optionsDefault, options));
