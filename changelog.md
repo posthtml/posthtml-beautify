@@ -1,3 +1,33 @@
+<a name="0.1.3"></a>
+## 0.1.3 (2017-02-07)
+
+* 0.1.3 ([cf8ab76](https://github.com/gitscrum/posthtml-beautify/commit/cf8ab76))
+* revert(index): revert reflect because throw error ([cc563cf](https://github.com/gitscrum/posthtml-beautify/commit/cc563cf))
+* style(*): add eol ([2b56d2c](https://github.com/gitscrum/posthtml-beautify/commit/2b56d2c))
+* test(package): update reg extension ([124f0d6](https://github.com/gitscrum/posthtml-beautify/commit/124f0d6))
+* chore(changelog): Update changelog v0.1.2 ([6c3ae30](https://github.com/gitscrum/posthtml-beautify/commit/6c3ae30))
+* chore(package): add babel-polyfill ([2bddb87](https://github.com/gitscrum/posthtml-beautify/commit/2bddb87))
+* chore(package): update ava to version 0.18.1 ([9272230](https://github.com/gitscrum/posthtml-beautify/commit/9272230))
+* chore(package): update ava-codemods to version 0.3.1 ([c7a4433](https://github.com/gitscrum/posthtml-beautify/commit/c7a4433))
+* chore(package): update babel-cli to version 6.22.2 ([84ad419](https://github.com/gitscrum/posthtml-beautify/commit/84ad419))
+* chore(package): update babel-preset-babili to version 0.0.10 ([fd97cf9](https://github.com/gitscrum/posthtml-beautify/commit/fd97cf9))
+* chore(package): update babel-preset-env to version 1.1.8 ([f84450d](https://github.com/gitscrum/posthtml-beautify/commit/f84450d))
+* chore(package): update babel-register to version 6.22.0 ([4a3b2a9](https://github.com/gitscrum/posthtml-beautify/commit/4a3b2a9))
+* chore(package): update clinton to version 0.11.0 ([32bf0cb](https://github.com/gitscrum/posthtml-beautify/commit/32bf0cb))
+* chore(package): update coveralls to version 2.11.16 ([0bbadc8](https://github.com/gitscrum/posthtml-beautify/commit/0bbadc8))
+* chore(package): update deepmerge to version 1.3.2 ([eec707b](https://github.com/gitscrum/posthtml-beautify/commit/eec707b))
+* chore(package): update eslint to version 3.15.0 ([e543e51](https://github.com/gitscrum/posthtml-beautify/commit/e543e51))
+* chore(package): update eslint-plugin-ava to version 4.0.1 ([2590cc2](https://github.com/gitscrum/posthtml-beautify/commit/2590cc2))
+* chore(package): update eslint-plugin-babel to version 4.0.1 ([bc474a7](https://github.com/gitscrum/posthtml-beautify/commit/bc474a7))
+* chore(package): update eslint-plugin-html to version 2.0.0 ([cfb1bbe](https://github.com/gitscrum/posthtml-beautify/commit/cfb1bbe))
+* chore(package): update husky to version 0.13.1 ([943bcc2](https://github.com/gitscrum/posthtml-beautify/commit/943bcc2))
+* chore(package): update nyc to version 10.1.2 ([63dca2c](https://github.com/gitscrum/posthtml-beautify/commit/63dca2c))
+* chore(package): update posthtml to version 0.9.2 ([779f276](https://github.com/gitscrum/posthtml-beautify/commit/779f276))
+* perf(index): use reflect, close #130 ([139e819](https://github.com/gitscrum/posthtml-beautify/commit/139e819)), closes [#130](https://github.com/gitscrum/posthtml-beautify/issues/130)
+* fix(package): change node version type ([be08330](https://github.com/gitscrum/posthtml-beautify/commit/be08330))
+
+
+
 <a name="0.1.2"></a>
 ## 0.1.2 (2016-12-30)
 

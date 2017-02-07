@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import parser from 'posthtml-parser';
 import render from 'posthtml-render';
 import rules from './rules.js';
@@ -181,9 +182,12 @@ export default (options = {}) => {
 		}
 
 		if (
-			(Object.prototype.hasOwnProperty.call(tree, 'options') &&
-			Object.prototype.hasOwnProperty.call(tree.options, 'sync') &&
-			tree.options.sync) || options.sync
+			(
+				Object.prototype.hasOwnProperty.call(tree, 'options') &&
+				Object.prototype.hasOwnProperty.call(tree.options, 'sync') &&
+				tree.options.sync
+			) ||
+			options.sync
 		) {
 			return beautify(tree, deepmerge(optionsDefault, options));
 		}
