@@ -55,7 +55,7 @@
     "babel-eslint": "^7.1.1",
     "babel-plugin-add-module-exports": "^0.2.0",
     "babel-plugin-array-includes": "^2.0.3",
-    "babel-preset-babili": "0.0.9",
+    "babel-preset-babili": "0.0.10",
     "babel-preset-env": "^1.1.8",
     "babel-register": "^6.16.3",
     "clinton": "^0.10.0",
