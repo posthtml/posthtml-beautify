@@ -18,7 +18,7 @@
   "scripts": {
     "lintjs": "eslint ./src/*.js ./test/*.js",
     "lintmd": "eslint --ext md --rule indent: [error, 4] .",
-    "linthtml": "eslint **/*.html",
+    "linthtml": "eslint **/*.{html,htm}",
     "pretest": "clinton && npm run lintjs && npm run lintmd && npm run linthtml",
     "commitmsg": "conventional-changelog-lint -e",
     "postpublish": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"chore(changelog): Update changelog v`npm view posthtml-beautify version`\"",
