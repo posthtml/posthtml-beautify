@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import parser from 'posthtml-parser';
 import render from 'posthtml-render';
 import rules from './rules.js';

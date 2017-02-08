@@ -1,3 +1,13 @@
+<a name="0.1.4"></a>
+## 0.1.4 (2017-02-08)
+
+* 0.1.4 ([bf56175](https://github.com/gitscrum/posthtml-beautify/commit/bf56175))
+* fix(*): cannot find module es6.map, close #153 ([7848934](https://github.com/gitscrum/posthtml-beautify/commit/7848934)), closes [#153](https://github.com/gitscrum/posthtml-beautify/issues/153)
+* chore(changelog): Update changelog v0.1.3 ([ad995e1](https://github.com/gitscrum/posthtml-beautify/commit/ad995e1))
+* chore(package): update eslint-plugin-ava to version 4.1.0 ([443be04](https://github.com/gitscrum/posthtml-beautify/commit/443be04))
+
+
+
 <a name="0.1.3"></a>
 ## 0.1.3 (2017-02-07)
 
