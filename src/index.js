@@ -4,6 +4,7 @@ import rules from './rules.js';
 import attrs from './attrs.js';
 import tags from './tags.js';
 import deepmerge from 'deepmerge';
+import postcss from 'postcss';
 
 const optionsDefault = {
 	rules: rules,
@@ -118,7 +119,12 @@ const indent = (tree, {rules: {indent, eol}}) => {
 	return setIndent(tree);
 };
 
-const attrsBoolean = (tree, {attrs: {boolean}}) => {
+// Uses postcss to parse style attributes, stringify back into one line.
+const cleanStyle = style => {
+	return postcss.parse(style).nodes.map(node => `${node.prop.trim()}: ${node.value.trim()};`).join(' ');
+};
+
+const cleanAttrs = (tree, {attrs: {boolean}}) => {
 	const removeAttrValue = tree => tree.map(node => {
 		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
 			node.content = removeAttrValue(node.content);
@@ -126,7 +132,19 @@ const attrsBoolean = (tree, {attrs: {boolean}}) => {
 
 		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')) {
 			Object.keys(node.attrs).forEach(key => {
-				node.attrs[key] = boolean.includes(key) ? true : node.attrs[key];
+				node.attrs[key] = boolean.includes(key) ? 'true' : node.attrs[key];
+				node.attrs[key] = node.attrs[key].trim();
+				// remove empty attributes (safe to do because we made booleans have an ="true" earlier)
+				if (node.attrs[key] === '') {
+					delete node.attrs[key];
+				} else if (key === 'style') {
+					// format style attributes
+					try {
+						node.attrs[key] = cleanStyle(node.attrs[key]);
+					} catch (err) {
+						// couldn't parse the style attribute
+					}
+				}
 			});
 		}
 
@@ -166,7 +184,7 @@ const beautify = (tree, options) => [
 	renderConditional,
 	indent,
 	lowerElementName,
-	attrsBoolean,
+	cleanAttrs,
 	eof
 ].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);
 
