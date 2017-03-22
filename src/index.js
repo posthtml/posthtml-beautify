@@ -158,6 +158,25 @@ const lowerElementName = (tree, {tags}) => {
 	return bypass(tree);
 };
 
+const lowerAttributeName = tree => {
+	const bypass = tree => tree.map(node => {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+			node.content = bypass(node.content);
+		}
+
+		if (
+			typeof node === 'object' &&
+			Object.prototype.hasOwnProperty.call(node, 'attrs')
+		) {
+			node.attrs = Object.keys(node.attrs).reduce((previousValue, key) => Object.assign(previousValue, {[key.toLowerCase()]: node.attrs[key]}), {});
+		}
+
+		return node;
+	});
+
+	return bypass(tree);
+};
+
 const eof = (tree, {rules: {eof}}) => eof ? [...tree, eof] : tree;
 
 const beautify = (tree, options) => [
@@ -166,6 +185,7 @@ const beautify = (tree, options) => [
 	renderConditional,
 	indent,
 	lowerElementName,
+	lowerAttributeName,
 	attrsBoolean,
 	eof
 ].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);
