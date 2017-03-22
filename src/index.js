@@ -118,7 +118,7 @@ const indent = (tree, {rules: {indent, eol}}) => {
 	return setIndent(tree);
 };
 
-const attrsBoolean = (tree, {attrs: {boolean}}) => {
+const cleanAttrs = (tree, {attrs: {boolean}}) => {
 	const removeAttrValue = tree => tree.map(node => {
 		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
 			node.content = removeAttrValue(node.content);
@@ -126,7 +126,8 @@ const attrsBoolean = (tree, {attrs: {boolean}}) => {
 
 		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')) {
 			Object.keys(node.attrs).forEach(key => {
-				node.attrs[key] = boolean.includes(key) ? true : node.attrs[key];
+				node.attrs[key] = boolean.includes(key) ? 'true' : node.attrs[key];
+				node.attrs[key] = node.attrs[key].trim();
 			});
 		}
 
@@ -166,7 +167,7 @@ const beautify = (tree, options) => [
 	renderConditional,
 	indent,
 	lowerElementName,
-	attrsBoolean,
+	cleanAttrs,
 	eof
 ].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);
 
