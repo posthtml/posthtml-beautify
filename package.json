@@ -45,6 +45,7 @@
   ],
   "dependencies": {
     "deepmerge": "^1.3.2",
+    "postcss": "^5.2.16",
     "posthtml-parser": "0.2.0",
     "posthtml-render": "1.0.6"
   },
