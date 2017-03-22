@@ -1,7 +1,5 @@
 # <a href="https://github.com/posthtml/posthtml"><img valign="text-bottom" height="49" title="PostHTML logo" src="http://posthtml.github.io/posthtml/logo.svg"></a> beautify
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/GitScrum/posthtml-beautify.svg)](https://greenkeeper.io/)
-
 > A [posthtml](https://github.com/posthtml) plugin to beautify you html files
 
 [![Travis Build Status](https://img.shields.io/travis/GitScrum/posthtml-beautify.svg?style=flat-square&label=unix)](https://travis-ci.org/GitScrum/posthtml-beautify)[![AppVeyor Build Status](https://img.shields.io/appveyor/ci/GitScrum/posthtml-beautify.svg?style=flat-square&label=windows)](https://ci.appveyor.com/project/GitScrum/posthtml-beautify)[![node](https://img.shields.io/node/v/post-sequence.svg?maxAge=2592000&style=flat-square)]()[![npm version](https://img.shields.io/npm/v/posthtml-beautify.svg?style=flat-square)](https://www.npmjs.com/package/posthtml-beautify)[![Dependency Status](https://david-dm.org/gitscrum/posthtml-beautify.svg?style=flat-square)](https://david-dm.org/gitscrum/posthtml-beautify)[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg?style=flat-square)](https://github.com/sindresorhus/xo)[![Coveralls status](https://img.shields.io/coveralls/GitScrum/posthtml-beautify.svg?style=flat-square)](https://coveralls.io/r/GitScrum/posthtml-beautify)
