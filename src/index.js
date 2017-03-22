@@ -128,6 +128,10 @@ const cleanAttrs = (tree, {attrs: {boolean}}) => {
 			Object.keys(node.attrs).forEach(key => {
 				node.attrs[key] = boolean.includes(key) ? 'true' : node.attrs[key];
 				node.attrs[key] = node.attrs[key].trim();
+				// remove empty attributes (safe to do because we made booleans have an ="true" earlier)
+				if (node.attrs[key] === '') {
+					delete node.attrs[key];
+				}
 			});
 		}
 
