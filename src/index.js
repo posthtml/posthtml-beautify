@@ -9,7 +9,10 @@ const optionsDefault = {
 	rules: rules,
 	attrs: attrs,
 	tags: tags,
-	sync: false
+	sync: false,
+	mini: {
+		removeAttribute: false
+	}
 };
 
 const clean = tree => parser(render(tree))
@@ -179,6 +182,35 @@ const lowerAttributeName = tree => {
 
 const eof = (tree, {rules: {eof}}) => eof ? [...tree, eof] : tree;
 
+const mini = (tree, {mini}) => {
+	const bypass = tree => tree.map(node => {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+			node.content = bypass(node.content);
+		}
+
+		if (
+			typeof node === 'object' &&
+			Object.prototype.hasOwnProperty.call(node, 'attrs')
+		) {
+			node.attrs = Object.keys(node.attrs).reduce((previousValue, key) => {
+				if (
+						mini.removeAttribute &&
+						mini.removeAttribute === 'empty' &&
+						node.attrs[key].length === 0
+					) {
+					return previousValue;
+				}
+
+				return Object.assign(previousValue, {[key.toLowerCase()]: node.attrs[key]});
+			}, {});
+		}
+
+		return node;
+	});
+
+	return bypass(tree);
+};
+
 const beautify = (tree, options) => [
 	clean,
 	parseConditional,
@@ -187,7 +219,8 @@ const beautify = (tree, options) => [
 	lowerElementName,
 	lowerAttributeName,
 	attrsBoolean,
-	eof
+	eof,
+	mini
 ].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);
 
 export default (options = {}) => {
