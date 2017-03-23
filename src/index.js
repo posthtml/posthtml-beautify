@@ -126,7 +126,7 @@ const attrsBoolean = (tree, {attrs: {boolean}}) => {
 
 		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')) {
 			Object.keys(node.attrs).forEach(key => {
-				node.attrs[key] = boolean.includes(key) ? true : node.attrs[key];
+				node.attrs[key] = boolean.includes(key) ? true : node.attrs[key].trim();
 			});
 		}
 
