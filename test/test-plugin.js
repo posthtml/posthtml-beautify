@@ -76,6 +76,12 @@ test('processing with plugin beautify should return boolean attribute', async t 
 	t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false}})])).html);
 });
 
+test('processing with plugin beautify should return trim attribute', async t => {
+	const fixture = '<span class=" image  "  rel="  images "></span>';
+	const expected = '<span class="image" rel="images"></span>';
+	t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false}})])).html);
+});
+
 test('processing with plugin beautify should transform lower case attribute names', async t => {
 	const fixture = '<div CLASS="UPPERCLASS"></div>';
 	const expected = '<div class="UPPERCLASS"></div>';
