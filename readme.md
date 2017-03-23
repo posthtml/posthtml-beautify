@@ -143,12 +143,12 @@ output.html
 
 ## Options
 
-#### `sync`
+### `sync`
 Type: `Boolean`  
 Default: false  
-Description: *Used to switch between modes both synchronous and asynchronous. Will automatically be run synchronously if [posthtml](https://github.com/posthtml/posthtml#api) has option `sync: true`*
+Description: *Used to switch between modes both synchronous and asynchronous. Will automatically be run synchronously if [posthtml](https://github.com/posthtml/posthtml#api) has option `sync: true`*  
 
-#### `rules`
+### `rules`
 Type: `Object`  
 Default:
 
@@ -166,6 +166,15 @@ Default:
   Type: `String|Boolean`  
   Default: '\n'  
   Description: *As value is a string symbol which is added to the end of the file and will not adds if you specify a boolean value of `false`*
+
+### `mini`
+Type: `Object`  
+Default:
+
+  - **removeAttribute**  
+  Type: `String|Boolean`  
+  Default: false  
+  Description: *Removes attributes that do not matter. The string value only `empty`*
 
 ## LICENSE
 

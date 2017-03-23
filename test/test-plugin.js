@@ -64,6 +64,12 @@ test('processing with plugin beautify should removing trailing slash in self-clo
 	t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false}})])).html);
 });
 
+test('processing with plugin beautify should removing empty attribute', async t => {
+	const fixture = '<img src="image.jpg" alt="">';
+	const expected = '<img src="image.jpg">';
+	t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false}, mini: {removeAttribute: 'empty'}})])).html);
+});
+
 test('processing with plugin beautify should removes spaces at the equal sign', async t => {
 	const fixture = '<span class    =   "image"  rel=   "images"></span>';
 	const expected = '<span class="image" rel="images"></span>';
@@ -73,6 +79,12 @@ test('processing with plugin beautify should removes spaces at the equal sign', 
 test('processing with plugin beautify should return boolean attribute', async t => {
 	const fixture = '<input type="email" required>';
 	const expected = '<input type="email" required>';
+	t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false}})])).html);
+});
+
+test('processing with plugin beautify should return trim attribute', async t => {
+	const fixture = '<span class=" image  "  rel="  images "></span>';
+	const expected = '<span class="image" rel="images"></span>';
 	t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false}})])).html);
 });
 

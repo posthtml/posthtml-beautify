@@ -9,7 +9,10 @@ const optionsDefault = {
 	rules: rules,
 	attrs: attrs,
 	tags: tags,
-	sync: false
+	sync: false,
+	mini: {
+		removeAttribute: false
+	}
 };
 
 const clean = tree => parser(render(tree))
@@ -126,7 +129,7 @@ const attrsBoolean = (tree, {attrs: {boolean}}) => {
 
 		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')) {
 			Object.keys(node.attrs).forEach(key => {
-				node.attrs[key] = boolean.includes(key) ? true : node.attrs[key];
+				node.attrs[key] = boolean.includes(key) ? true : node.attrs[key].trim();
 			});
 		}
 
@@ -158,7 +161,55 @@ const lowerElementName = (tree, {tags}) => {
 	return bypass(tree);
 };
 
+const lowerAttributeName = tree => {
+	const bypass = tree => tree.map(node => {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+			node.content = bypass(node.content);
+		}
+
+		if (
+			typeof node === 'object' &&
+			Object.prototype.hasOwnProperty.call(node, 'attrs')
+		) {
+			node.attrs = Object.keys(node.attrs).reduce((previousValue, key) => Object.assign(previousValue, {[key.toLowerCase()]: node.attrs[key]}), {});
+		}
+
+		return node;
+	});
+
+	return bypass(tree);
+};
+
 const eof = (tree, {rules: {eof}}) => eof ? [...tree, eof] : tree;
+
+const mini = (tree, {mini}) => {
+	const bypass = tree => tree.map(node => {
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+			node.content = bypass(node.content);
+		}
+
+		if (
+			typeof node === 'object' &&
+			Object.prototype.hasOwnProperty.call(node, 'attrs')
+		) {
+			node.attrs = Object.keys(node.attrs).reduce((previousValue, key) => {
+				if (
+						mini.removeAttribute &&
+						mini.removeAttribute === 'empty' &&
+						node.attrs[key].length === 0
+					) {
+					return previousValue;
+				}
+
+				return Object.assign(previousValue, {[key.toLowerCase()]: node.attrs[key]});
+			}, {});
+		}
+
+		return node;
+	});
+
+	return bypass(tree);
+};
 
 const beautify = (tree, options) => [
 	clean,
@@ -166,8 +217,10 @@ const beautify = (tree, options) => [
 	renderConditional,
 	indent,
 	lowerElementName,
+	lowerAttributeName,
 	attrsBoolean,
-	eof
+	eof,
+	mini
 ].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);
 
 export default (options = {}) => {
