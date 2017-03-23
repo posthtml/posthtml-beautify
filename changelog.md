@@ -1,3 +1,22 @@
+<a name="0.1.5"></a>
+## 0.1.5 (2017-03-23)
+
+* 0.1.5 ([8cc6cc2](https://github.com/gitscrum/posthtml-beautify/commit/8cc6cc2))
+* docs(readme): add description for option mini ([b86bb89](https://github.com/gitscrum/posthtml-beautify/commit/b86bb89))
+* docs(readme): add Greenkeeper badge  ([fc7c34c](https://github.com/gitscrum/posthtml-beautify/commit/fc7c34c))
+* docs(readme): remove greenkeaper badge ([e665a9a](https://github.com/gitscrum/posthtml-beautify/commit/e665a9a))
+* test(test-plugin): test options mini remove empty attributes ([f22fc3f](https://github.com/gitscrum/posthtml-beautify/commit/f22fc3f))
+* test(test-plugin): trim attributes property ([069a828](https://github.com/gitscrum/posthtml-beautify/commit/069a828))
+* feat(index): add options mini remove empty attributes ([a7834fb](https://github.com/gitscrum/posthtml-beautify/commit/a7834fb))
+* perf(index): trim attributes property, close #166 ([f5334c3](https://github.com/gitscrum/posthtml-beautify/commit/f5334c3)), closes [#166](https://github.com/gitscrum/posthtml-beautify/issues/166)
+* fix(index): transform to lower attribute name ([a88f1de](https://github.com/gitscrum/posthtml-beautify/commit/a88f1de))
+* chore(changelog): Update changelog v0.1.4 ([b4d7fde](https://github.com/gitscrum/posthtml-beautify/commit/b4d7fde))
+* chore(package): update babel-preset-babili to version 0.0.11 ([b5e09b2](https://github.com/gitscrum/posthtml-beautify/commit/b5e09b2))
+* chore(package): update dependencies ([d1e27bb](https://github.com/gitscrum/posthtml-beautify/commit/d1e27bb))
+* chore(package): update posthtml-parser to version 0.2.1 ([fe2fcbe](https://github.com/gitscrum/posthtml-beautify/commit/fe2fcbe))
+
+
+
 <a name="0.1.4"></a>
 ## 0.1.4 (2017-02-08)
 
