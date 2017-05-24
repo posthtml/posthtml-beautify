@@ -6,9 +6,9 @@ import tags from './tags.js';
 import deepmerge from 'deepmerge';
 
 const optionsDefault = {
-	rules: rules,
-	attrs: attrs,
-	tags: tags,
+	rules,
+	attrs,
+	tags,
 	sync: false,
 	mini: {
 		removeAttribute: false
