@@ -1,3 +1,43 @@
+<a name="0.1.6"></a>
+## 0.1.6 (2017-05-25)
+
+* 0.1.6 ([07a4def](https://github.com/gitscrum/posthtml-beautify/commit/07a4def))
+* docs: add online service, close #57 ([c498d81](https://github.com/gitscrum/posthtml-beautify/commit/c498d81)), closes [#57](https://github.com/gitscrum/posthtml-beautify/issues/57)
+* docs: change ci badges to master, close #161 ([52575eb](https://github.com/gitscrum/posthtml-beautify/commit/52575eb)), closes [#161](https://github.com/gitscrum/posthtml-beautify/issues/161)
+* docs: fix lint ([2f4a98e](https://github.com/gitscrum/posthtml-beautify/commit/2f4a98e))
+* docs: prebuild ([3e7b3a7](https://github.com/gitscrum/posthtml-beautify/commit/3e7b3a7))
+* docs: update ([2971d81](https://github.com/gitscrum/posthtml-beautify/commit/2971d81))
+* chore: add commit at prepush ([8b5cc0e](https://github.com/gitscrum/posthtml-beautify/commit/8b5cc0e))
+* chore: add yarn ([63cacab](https://github.com/gitscrum/posthtml-beautify/commit/63cacab))
+* chore: change to folder ([6ef496f](https://github.com/gitscrum/posthtml-beautify/commit/6ef496f))
+* chore: no-yarn on publish ([b776df7](https://github.com/gitscrum/posthtml-beautify/commit/b776df7))
+* chore: remove docs build, webpack freezed ([e57006d](https://github.com/gitscrum/posthtml-beautify/commit/e57006d))
+* chore: remove not use pkd ([97b498a](https://github.com/gitscrum/posthtml-beautify/commit/97b498a))
+* chore: update ([40eeaee](https://github.com/gitscrum/posthtml-beautify/commit/40eeaee))
+* chore(changelog): Update changelog v`npm view posthtml-beautify version` ([dbb9d4e](https://github.com/gitscrum/posthtml-beautify/commit/dbb9d4e))
+* chore(package): update babel-cli to version 6.24.1 ([11c84e1](https://github.com/gitscrum/posthtml-beautify/commit/11c84e1))
+* chore(package): update babel-eslint to version 7.2.2 ([82b6c7e](https://github.com/gitscrum/posthtml-beautify/commit/82b6c7e))
+* chore(package): update babel-eslint to version 7.2.3 ([fbefced](https://github.com/gitscrum/posthtml-beautify/commit/fbefced))
+* chore(package): update babel-preset-babili to version 0.1.2 ([c4ad7a9](https://github.com/gitscrum/posthtml-beautify/commit/c4ad7a9))
+* chore(package): update babel-preset-env to version 1.4.0 ([d18f8cf](https://github.com/gitscrum/posthtml-beautify/commit/d18f8cf))
+* chore(package): update babel-register to version 6.24.1 ([8cb25c3](https://github.com/gitscrum/posthtml-beautify/commit/8cb25c3))
+* chore(package): update clinton to version 0.12.0 ([458c86c](https://github.com/gitscrum/posthtml-beautify/commit/458c86c))
+* chore(package): update conventional-changelog-lint to version 1.1.8 ([d243971](https://github.com/gitscrum/posthtml-beautify/commit/d243971))
+* chore(package): update conventional-changelog-lint to version 1.1.9 ([38ab556](https://github.com/gitscrum/posthtml-beautify/commit/38ab556))
+* chore(package): update coveralls to version 2.13.1 ([9ec4444](https://github.com/gitscrum/posthtml-beautify/commit/9ec4444))
+* chore(package): update eslint to version 3.19.0 ([86c3dc4](https://github.com/gitscrum/posthtml-beautify/commit/86c3dc4))
+* chore(package): update eslint-config-xo to version 0.18.2 ([975cbb7](https://github.com/gitscrum/posthtml-beautify/commit/975cbb7))
+* chore(package): update eslint-plugin-html to version 2.0.2 ([6dc7148](https://github.com/gitscrum/posthtml-beautify/commit/6dc7148))
+* chore(package): update eslint-plugin-html to version 2.0.3 ([d0f5a7a](https://github.com/gitscrum/posthtml-beautify/commit/d0f5a7a))
+* chore(package): update np to version 2.14.1 ([69b6ba8](https://github.com/gitscrum/posthtml-beautify/commit/69b6ba8))
+* chore(package): update nyc to version 10.3.0 ([eb20f11](https://github.com/gitscrum/posthtml-beautify/commit/eb20f11))
+* chore(package): update nyc to version 10.3.2 ([ecb4b87](https://github.com/gitscrum/posthtml-beautify/commit/ecb4b87))
+* chore(package): update updtr to version 1.0.0 ([e18bd7d](https://github.com/gitscrum/posthtml-beautify/commit/e18bd7d))
+* fix: remove build docs to prepush ([e559371](https://github.com/gitscrum/posthtml-beautify/commit/e559371))
+* perf: options default ([a575164](https://github.com/gitscrum/posthtml-beautify/commit/a575164))
+
+
+
 <a name="0.1.5"></a>
 ## 0.1.5 (2017-03-23)
 
