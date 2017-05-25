@@ -13,7 +13,7 @@ const app = new Vue({
 			return hljs.highlightAuto(posthtml()
 				.use(beautify({
 					rules: {
-						indent: 4,
+						indent: 2,
 						eol: '\r\n'
 					}
 				}))
