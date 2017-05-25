@@ -2,7 +2,7 @@ node_modules
 .nyc_output
 npm-debug.log
 lib
-_gh-pages/
+_gh-pages
 .publish
 *.sublime*
 coverage

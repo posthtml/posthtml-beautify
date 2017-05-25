@@ -16,21 +16,20 @@
     "node": ">=4"
   },
   "scripts": {
-    "lintjs": "eslint ./src/*.js ./test/*.js",
+    "commitmsg": "conventional-changelog-lint -e",
+    "postpublish": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"chore: Update changelog\"",
+    "patch": "np patch --any-branch --no-yarn",
+    "minor": "np minor --any-branch --no-yarn",
+    "major": "np major --any-branch --no-yarn",
+    "prepublish": "npm run build",
+    "docs": "webpack --progress --env.prod -p",
+    "build": "rimraf lib && babel src/*.js -d lib",
+    "lintjs": "eslint ./{src,test}/*.js",
     "lintmd": "eslint --ext md --rule indent: [error, 4] .",
     "linthtml": "eslint **/*.{html,htm}",
     "pretest": "clinton && npm run lintjs && npm run lintmd && npm run linthtml",
-    "commitmsg": "conventional-changelog-lint -e",
-    "postpublish": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"chore(changelog): Update changelog v`npm view posthtml-beautify version`\"",
-    "patch": "np patch --any-branch",
-    "minor": "np minor --any-branch",
-    "major": "np major --any-branch",
     "test": "nyc ava",
-    "clean": "rm -rf lib && mkdir lib",
-    "build": "npm run clean && babel src/ -d lib/",
-    "prepublish": "npm run build",
-    "update": "updtr && ava-codemods --force",
-    "testen": "testen -n -- ava"
+    "serve": "webpack-dashboard -- webpack-dev-server --content-base docs/ --open"
   },
   "files": [
     "lib/"
@@ -50,27 +49,28 @@
   },
   "devDependencies": {
     "ava": "*",
-    "ava-codemods": "^0.3.1",
-    "babel-cli": "^6.22.2",
+    "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.0.0",
     "babel-plugin-add-module-exports": "^0.2.0",
     "babel-plugin-array-includes": "^2.0.3",
-    "babel-preset-babili": "0.0.11",
+    "babel-preset-babili": "0.1.2",
     "babel-preset-env": "^1.4.0",
-    "babel-register": "^6.22.0",
+    "babel-register": "^6.24.1",
     "clinton": "^0.12.0",
     "conventional-changelog-cli": "^1.2.0",
-    "eslint": "^3.19.0",
     "conventional-changelog-lint": "^1.1.9",
     "coveralls": "^2.13.1",
-    "eslint-config-xo": "^0.17.0",
+    "css-loader": "^0.28.2",
+    "eslint": "^3.15.0",
+    "eslint-config-xo": "^0.18.2",
     "eslint-formatter-pretty": "^1.1.0",
     "eslint-plugin-ava": "^4.1.0",
     "eslint-plugin-babel": "^4.0.1",
     "eslint-plugin-html": "^2.0.3",
     "eslint-plugin-markdown": "^1.0.0-beta.2",
-    "eslint-plugin-require-path-exists": "^1.1.5",
     "eslint-plugin-xo": "^1.0.0",
+    "highlight.js": "^9.11.0",
     "husky": "^0.13.1",
     "is-promise": "^2.1.0",
     "np": "^2.14.1",
@@ -78,8 +78,13 @@
     "posthtml": "^0.9.2",
     "posthtml-include": "^1.1.0",
     "posthtml-modules": "^0.4.2",
-    "testen": "^1.8.2",
-    "updtr": "^1.0.0"
+    "rimraf": "^2.6.1",
+    "vue": "^2.3.3",
+    "vue-loader": "^12.1.0",
+    "vue-template-compiler": "^2.3.3",
+    "webpack": "^2.6.0",
+    "webpack-dashboard": "^0.4.0",
+    "webpack-dev-server": "^2.4.5"
   },
   "ava": {
     "require": [
@@ -92,12 +97,19 @@
         "env",
         {
           "targets": {
-            "node": 4
+            "browsers": [
+              "last 2 versions"
+            ]
           },
           "useBuiltIns": true
         }
       ],
-      "babili"
+      [
+        "babili",
+        {
+          "mangle": false
+        }
+      ]
     ],
     "plugins": [
       "array-includes",
@@ -112,7 +124,6 @@
       "ava",
       "xo",
       "babel",
-      "require-path-exists",
       "markdown"
     ],
     "extends": [
