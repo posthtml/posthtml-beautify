@@ -17,11 +17,11 @@
   },
   "scripts": {
     "commitmsg": "conventional-changelog-lint -e",
-    "postpublish": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"chore(changelog): Update changelog\"",
+    "postpublish": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"chore: Update changelog\"",
     "patch": "np patch --any-branch --no-yarn",
     "minor": "np minor --any-branch --no-yarn",
     "major": "np major --any-branch --no-yarn",
-    "prepush": "npm run docs",
+    "prepush": "npm run docs && git commit -am \"docs: Update docs\"",
     "prepublish": "npm run build",
     "docs": "webpack",
     "build": "rimraf lib && babel src/*.js -d lib",
