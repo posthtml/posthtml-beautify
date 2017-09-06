@@ -194,10 +194,10 @@ const mini = (tree, {mini}) => {
 		) {
 			node.attrs = Object.keys(node.attrs).reduce((previousValue, key) => {
 				if (
-						mini.removeAttribute &&
-						mini.removeAttribute === 'empty' &&
-						node.attrs[key].length === 0
-					) {
+					mini.removeAttribute &&
+					mini.removeAttribute === 'empty' &&
+					node.attrs[key].length === 0
+				) {
 					return previousValue;
 				}
 
