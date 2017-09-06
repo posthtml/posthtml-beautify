@@ -16,7 +16,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "commitmsg": "conventional-changelog-lint -e",
+    "commitmsg": "commitlint --extends=@commitlint/config-angular -e",
     "postpublish": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"chore: Update changelog\"",
     "patch": "np patch --any-branch --no-yarn",
     "minor": "np minor --any-branch --no-yarn",
@@ -61,7 +61,6 @@
     "babel-register": "^6.24.1",
     "clinton": "^0.13.0",
     "conventional-changelog-cli": "^1.3.3",
-    "conventional-changelog-lint": "^2.1.1",
     "coveralls": "^2.13.1",
     "css-loader": "^0.28.2",
     "eslint": "^4.6.1",
