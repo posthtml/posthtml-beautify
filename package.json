@@ -23,7 +23,7 @@
     "major": "np major --any-branch --no-yarn",
     "prepublish": "npm run build",
     "docs": "webpack --progress --env.prod -p",
-    "build": "rimraf lib && babel src/*.js -d lib",
+    "build": "rimraf lib && babel src -d lib --ignore docs",
     "lintjs": "eslint ./{src,test}/*.js",
     "lintmd": "eslint --ext md --rule indent: [error, 4] .",
     "linthtml": "eslint **/*.{html,htm}",
