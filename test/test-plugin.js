@@ -2,7 +2,7 @@ import {readFile} from 'fs';
 import test from 'ava';
 import posthtml from 'posthtml';
 import isPromise from 'is-promise';
-import beautify from '../src/index.js';
+import beautify from '../src';
 
 function processing(html, plugins = [], options = {}) {
 	return posthtml(plugins)
