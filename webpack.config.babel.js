@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import DashboardPlugin from 'webpack-dashboard/plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 
 export default {
@@ -10,12 +11,19 @@ export default {
 	},
 	output: {
 		path: path.resolve(__dirname + '/docs/'),
-		filename: '[name].bundle.js'
+		filename: '[name].js'
 	},
 	plugins: [
 		new DashboardPlugin(),
-		new webpack.DefinePlugin({
-			'process.env':{NODE_ENV: '"production"'}
+		new HtmlWebpackPlugin({
+			title: 'posthtml-beautify',
+			minify: {
+			  collapseWhitespace: true
+			},
+			template: path.resolve(__dirname + '/src/docs/template.hbl'),
+			filename: 'index.html',
+			hash: true,
+			appMountId: 'app'
 		})
 	],
 	resolveLoader: {
@@ -30,20 +38,12 @@ export default {
 	module: {
 		rules: [
 			{
+				test: /\.hbs$/,
+				loader: 'handlebars'
+			},
+			{
 				test: /\.js?$/,
-				loader: 'babel-loader',
-				options: {
-					presets: [
-						[
-							'env',
-							{
-								targets: {
-									browsers: ['last 2 versions']
-								}
-							}
-						]
-					]
-				}
+				loader: 'babel-loader'
 			}
 		]
 	}

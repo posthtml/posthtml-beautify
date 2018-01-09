@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import posthtml from 'posthtml'
-import beautify from '../';
+import beautify from '..';
 import hljs from 'highlight.js';
 
 const app = new Vue({
