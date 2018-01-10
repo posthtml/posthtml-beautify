@@ -22,7 +22,7 @@
     "prepublish": "npm run build",
     "docs": "BABEL_ENV=docs webpack --progress --env.prod -p",
     "build": "rimraf lib && BABEL_ENV=production babel src -d lib --ignore docs",
-    "test": "nyc ava",
+    "test": "BABEL_ENV=production nyc ava",
     "serve": "BABEL_ENV=docs webpack-dashboard -- webpack-dev-server --content-base docs/ --open"
   },
   "files": [
