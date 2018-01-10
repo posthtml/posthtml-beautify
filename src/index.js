@@ -194,10 +194,10 @@ const mini = (tree, {mini}) => {
 		) {
 			node.attrs = Object.keys(node.attrs).reduce((previousValue, key) => {
 				if (
-						mini.removeAttribute &&
-						mini.removeAttribute === 'empty' &&
-						node.attrs[key].length === 0
-					) {
+					mini.removeAttribute &&
+					mini.removeAttribute === 'empty' &&
+					node.attrs[key].length === 0
+				) {
 					return previousValue;
 				}
 
@@ -223,27 +223,46 @@ const beautify = (tree, options) => [
 	mini
 ].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);
 
+const normalize = (node, options) => {
+	let {tree, api} = Object.keys(node).reduce(
+		(scope, key) => {
+			scope[Number.isNaN(Number(key)) ? 'api' : 'tree'][key] = node[key];
+
+			return scope;
+		},
+		{tree: [], api: []}
+	);
+
+	tree = beautify(tree, deepmerge(optionsDefault, options));
+
+	for (const [key, value] of Object.entries(api)) {
+		tree[key] = value;
+	}
+
+	return tree;
+}
+
 export default (options = {}) => {
-	return tree => {
-		if (!Array.isArray(tree)) {
+	return node => {
+		if (!Array.isArray(node)) {
 			return new Error(`tree is not Array`);
 		}
 
-		if (tree.length === 0) {
-			return tree;
+		if (node.length === 0) {
+			return node;
 		}
 
 		if (
 			(
-				Object.prototype.hasOwnProperty.call(tree, 'options') &&
-				Object.prototype.hasOwnProperty.call(tree.options, 'sync') &&
-				tree.options.sync
+				Object.prototype.hasOwnProperty.call(node, 'options') &&
+				Object.prototype.hasOwnProperty.call(node.options, 'sync') &&
+				node.options.sync
 			) ||
 			options.sync
 		) {
-			return beautify(tree, deepmerge(optionsDefault, options));
+			return normalize(node, options);
 		}
 
-		return Promise.resolve(beautify(tree, deepmerge(optionsDefault, options)));
+		return Promise.resolve(normalize(node, options));
 	};
 };
