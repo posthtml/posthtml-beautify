@@ -50,6 +50,7 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-add-module-exports": "^0.2.0",
     "babel-plugin-array-includes": "^2.0.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-minify": "^0.2.0",
     "babel-register": "^6.26.0",
@@ -117,6 +118,9 @@
               "useBuiltIns": true
             }
           ]
+        ],
+        "plugins": [
+          "transform-runtime"
         ]
       }
     },
@@ -162,13 +166,5 @@
         "off"
       ]
     }
-  },
-  "testen": {
-    "node": [
-      "4",
-      "5",
-      "6",
-      "7"
-    ]
   }
 }
