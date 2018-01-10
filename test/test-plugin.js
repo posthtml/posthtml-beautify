@@ -53,6 +53,29 @@ test('processing with plugin beautify should return equal html with use option s
 	t.deepEqual(fixture, (await processing(fixture, [beautify({sync: true, rules: {eof: false}})], {sync: true}).html));
 });
 
+test('processing with plugin beautify should not lost native api', async t => {
+	t.plan(3);
+	const fixture = '<div></div>\n\n<div></div>';
+	t.true(
+		Object.prototype.hasOwnProperty.call(
+			await processing(fixture, [beautify({sync: true, rules: {eof: false}})], {sync: true}).tree,
+			'walk'
+		)
+	);
+	t.true(
+		Object.prototype.hasOwnProperty.call(
+			await processing(fixture, [beautify({sync: true, rules: {eof: false}})], {sync: true}).tree,
+			'match'
+		)
+	);
+	t.true(
+		Object.prototype.hasOwnProperty.call(
+			await processing(fixture, [beautify({sync: true, rules: {eof: false}})], {sync: true}).tree,
+			'processor'
+		)
+	);
+});
+
 test('processing with plugin beautify should return equal html', async t => {
 	const fixture = '<div></div>\n\n<div></div>';
 	t.deepEqual(fixture, (await processing(fixture, [beautify({rules: {eof: false}})])).html);
