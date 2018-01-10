@@ -26,7 +26,7 @@
     "build": "rimraf lib && babel src/*.js -d lib",
     "lintjs": "eslint src test",
     "lintmd": "eslint --ext md --rule indent: [error, 4] .",
-    "linthtml": "eslint --ext html --ext htm",
+    "linthtml": "eslint --ext {html,htm}",
     "pretest": "clinton && npm run lintjs && npm run lintmd && npm run linthtml",
     "test": "nyc ava",
     "serve": "webpack-dashboard -- webpack-dev-server --content-base docs/ --open"
