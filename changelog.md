@@ -1,3 +1,29 @@
+<a name="0.1.9"></a>
+## 0.1.9 (2018-01-10)
+
+* 0.1.9 ([b927eb8](https://github.com/gitscrum/posthtml-beautify/commit/b927eb8))
+* Update .travis.yml ([82d1b69](https://github.com/gitscrum/posthtml-beautify/commit/82d1b69))
+* Update appveyor.yml ([be40a4e](https://github.com/gitscrum/posthtml-beautify/commit/be40a4e))
+* build: add envariment ([1ce7d5d](https://github.com/gitscrum/posthtml-beautify/commit/1ce7d5d))
+* build: add lint staged ([592a7e8](https://github.com/gitscrum/posthtml-beautify/commit/592a7e8))
+* build: perf lint options ([12190d9](https://github.com/gitscrum/posthtml-beautify/commit/12190d9))
+* build: perf prepublish to prepare ([a3aef86](https://github.com/gitscrum/posthtml-beautify/commit/a3aef86))
+* build: update depDev ([5c0c4e2](https://github.com/gitscrum/posthtml-beautify/commit/5c0c4e2))
+* build: use lock ([2cf0ae2](https://github.com/gitscrum/posthtml-beautify/commit/2cf0ae2))
+* fix: for cross os ([d1e1f23](https://github.com/gitscrum/posthtml-beautify/commit/d1e1f23))
+* fix: for node 4 ([a43fafa](https://github.com/gitscrum/posthtml-beautify/commit/a43fafa))
+* fix: lost native api, close #211 ([bba14e2](https://github.com/gitscrum/posthtml-beautify/commit/bba14e2)), closes [#211](https://github.com/gitscrum/posthtml-beautify/issues/211)
+* fix: transpiller for old node ([36e1a12](https://github.com/gitscrum/posthtml-beautify/commit/36e1a12))
+* test: fix one test ([6ff97cd](https://github.com/gitscrum/posthtml-beautify/commit/6ff97cd))
+* test: for #211 ([98dac51](https://github.com/gitscrum/posthtml-beautify/commit/98dac51)), closes [#211](https://github.com/gitscrum/posthtml-beautify/issues/211)
+* test: forgot env ([b1ab4b5](https://github.com/gitscrum/posthtml-beautify/commit/b1ab4b5))
+* docs: update builder ([b1dc11c](https://github.com/gitscrum/posthtml-beautify/commit/b1dc11c))
+* docs: update example ([9e9d5a3](https://github.com/gitscrum/posthtml-beautify/commit/9e9d5a3))
+* ci: up versuion ([d186d89](https://github.com/gitscrum/posthtml-beautify/commit/d186d89))
+* chore: Update changelog ([ae73402](https://github.com/gitscrum/posthtml-beautify/commit/ae73402))
+
+
+
 <a name="0.1.8"></a>
 ## 0.1.8 (2017-09-06)
 
@@ -233,7 +259,7 @@
 
 * 0.0.4 ([0c9f3e0](https://github.com/gitscrum/posthtml-beautify/commit/0c9f3e0))
 * docs(readme): add description for new feature eof ([54457fa](https://github.com/gitscrum/posthtml-beautify/commit/54457fa))
-* feat(eof): add EOF feature #29 ([cff9c3a](https://github.com/gitscrum/posthtml-beautify/commit/cff9c3a))
+* feat(eof): add EOF feature #29 ([cff9c3a](https://github.com/gitscrum/posthtml-beautify/commit/cff9c3a)), closes [#29](https://github.com/gitscrum/posthtml-beautify/issues/29)
 * refactor(index.js): add tmp conditional internet explorer comment ([4f58d27](https://github.com/gitscrum/posthtml-beautify/commit/4f58d27))
 * chore(changelog): Update changelog ([69939c3](https://github.com/gitscrum/posthtml-beautify/commit/69939c3))
 * chore(package): add testen, fixed #23 ([69a5bad](https://github.com/gitscrum/posthtml-beautify/commit/69a5bad)), closes [#23](https://github.com/gitscrum/posthtml-beautify/issues/23)
@@ -257,7 +283,7 @@
 
 * 0.0.2 ([55d93aa](https://github.com/gitscrum/posthtml-beautify/commit/55d93aa))
 * chore(*): fixed #17, add ignore to clinton config and edit editorconfig ([4a6a426](https://github.com/gitscrum/posthtml-beautify/commit/4a6a426)), closes [#17](https://github.com/gitscrum/posthtml-beautify/issues/17)
-* chore(package): add #18, auto node package publish ([6b211f1](https://github.com/gitscrum/posthtml-beautify/commit/6b211f1))
+* chore(package): add #18, auto node package publish ([6b211f1](https://github.com/gitscrum/posthtml-beautify/commit/6b211f1)), closes [#18](https://github.com/gitscrum/posthtml-beautify/issues/18)
 * chore(package): add chlog lint&generator fixed #16 ([e002543](https://github.com/gitscrum/posthtml-beautify/commit/e002543)), closes [#16](https://github.com/gitscrum/posthtml-beautify/issues/16)
 * chore(package): add key any branch on publish ([358def9](https://github.com/gitscrum/posthtml-beautify/commit/358def9))
 * chore(package): fixed #19, change config clinton ([203885a](https://github.com/gitscrum/posthtml-beautify/commit/203885a)), closes [#19](https://github.com/gitscrum/posthtml-beautify/issues/19)

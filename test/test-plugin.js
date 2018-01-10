@@ -2,7 +2,7 @@ import {readFile} from 'fs';
 import test from 'ava';
 import posthtml from 'posthtml';
 import isPromise from 'is-promise';
-import beautify from '../src/index.js';
+import beautify from '../src';
 
 function processing(html, plugins = [], options = {}) {
 	return posthtml(plugins)
@@ -51,6 +51,29 @@ test('plugin beautify should return the passed value with use option sync', t =>
 test('processing with plugin beautify should return equal html with use option sync', async t => {
 	const fixture = '<div></div>\n\n<div></div>';
 	t.deepEqual(fixture, (await processing(fixture, [beautify({sync: true, rules: {eof: false}})], {sync: true}).html));
+});
+
+test('processing with plugin beautify should not lost native api', async t => {
+	t.plan(3);
+	const fixture = '<div></div>\n\n<div></div>';
+	t.true(
+		Object.prototype.hasOwnProperty.call(
+			await processing(fixture, [beautify({sync: true, rules: {eof: false}})], {sync: true}).tree,
+			'walk'
+		)
+	);
+	t.true(
+		Object.prototype.hasOwnProperty.call(
+			await processing(fixture, [beautify({sync: true, rules: {eof: false}})], {sync: true}).tree,
+			'match'
+		)
+	);
+	t.true(
+		Object.prototype.hasOwnProperty.call(
+			await processing(fixture, [beautify({sync: true, rules: {eof: false}})], {sync: true}).tree,
+			'processor'
+		)
+	);
 });
 
 test('processing with plugin beautify should return equal html', async t => {

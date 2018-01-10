@@ -1,4 +1,12 @@
-<!DOCTYPE html><html lang="en" class="sl-row-12"><head><meta charset="UTF-8"><title>posthtml-beautify</title><link rel="stylesheet" href="//unpkg.com/slims@0.5.2"><link rel="stylesheet" href="https://unpkg.com/normalize.css@7.0.0"><style>/*
+<!DOCTYPE html>
+<html lang="en" class="sl-row-12">
+<head>
+  <meta charset="UTF-8">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="stylesheet" href="//unpkg.com/slims@0.5.2">
+  <link rel="stylesheet" href="https://unpkg.com/normalize.css@7.0.0">
+  <style>
+    /*
 
     Atom One Dark by Daniel Gamage
     Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
@@ -90,7 +98,11 @@
 
     .hljs-link {
       text-decoration: underline;
-    }</style><style>* {
+    }
+
+  </style>
+  <style>
+    * {
       border-width: 0;
     }
     .box-scroll-y {
@@ -98,5 +110,20 @@
     }
     .box-crop-x {
       overflow-x: hidden;
-    }</style></head><body class="sl-row-12"><div id="app" class="sl-row-12"><div class="sl-box-inline sl-v-top sl-col-6 sl-row-12"><textarea v-model="HTML" class="sl-col-12 sl-row-12 sl-offset-0 sl-offset-m-0 sl-offset-p-20 box-crop"></textarea></div><div class="sl-box-inline sl-v-top sl-col-6 sl-row-12 sl-offset-p-20 box-scroll-y box-crop-x hljs"><pre class="sl-offset-m-0 sl-offset-pb-20"><code class="html text-strong" v-html="processingHTML"></code>
-      </pre></div></div><script type="text/javascript" src="app.js?83d67d94529269681fe2"></script></body></html>
+    }
+  </style>
+</head>
+<body class="sl-row-12">
+  <div <% if (htmlWebpackPlugin.options.appMountId) { %>
+    id="<%= htmlWebpackPlugin.options.appMountId%>"
+    class="sl-row-12"
+    <% } %>
+    >
+    <div class="sl-box-inline sl-v-top sl-col-6 sl-row-12">
+      <textarea v-model="HTML" class="sl-col-12 sl-row-12 sl-offset-0 sl-offset-m-0 sl-offset-p-20 box-crop"></textarea>
+    </div><div class="sl-box-inline sl-v-top sl-col-6 sl-row-12 sl-offset-p-20 box-scroll-y box-crop-x hljs">
+      <pre class="sl-offset-m-0 sl-offset-pb-20"><code class="html text-strong" v-html="processingHTML"></code>
+      </pre></div>
+  </div>
+</body>
+</html>
