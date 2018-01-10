@@ -1,3 +1,20 @@
+<a name="0.1.8"></a>
+## 0.1.8 (2017-09-06)
+
+* 0.1.8 ([36b6812](https://github.com/gitscrum/posthtml-beautify/commit/36b6812))
+* chore: 0.1.7 ([393986d](https://github.com/gitscrum/posthtml-beautify/commit/393986d))
+* chore: add @commitlint ([0432ab6](https://github.com/gitscrum/posthtml-beautify/commit/0432ab6))
+* chore: not used anymore ([fbf65d6](https://github.com/gitscrum/posthtml-beautify/commit/fbf65d6))
+* chore: Update changelog ([cb092ec](https://github.com/gitscrum/posthtml-beautify/commit/cb092ec))
+* chore: Update changelog ([6019008](https://github.com/gitscrum/posthtml-beautify/commit/6019008))
+* chore: update commit lint ([eb0522e](https://github.com/gitscrum/posthtml-beautify/commit/eb0522e))
+* chore: update depDev ([ecab96d](https://github.com/gitscrum/posthtml-beautify/commit/ecab96d))
+* chore(package): update husky to version 0.13.4 ([03e1711](https://github.com/gitscrum/posthtml-beautify/commit/03e1711))
+* fix: incorrect build main file destitnation, close #206 ([8a3b90f](https://github.com/gitscrum/posthtml-beautify/commit/8a3b90f)), closes [#206](https://github.com/gitscrum/posthtml-beautify/issues/206)
+* style: fixed lint report ([43644c6](https://github.com/gitscrum/posthtml-beautify/commit/43644c6))
+
+
+
 <a name="0.1.6"></a>
 ## 0.1.6 (2017-05-25)
 

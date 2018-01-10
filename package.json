@@ -1,6 +1,6 @@
 {
   "name": "posthtml-beautify",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "A posthtml plugin to beautify you html files",
   "license": "MIT",
   "repository": "gitscrum/posthtml-beautify",
@@ -23,8 +23,8 @@
     "major": "np major --any-branch --no-yarn",
     "prepublish": "npm run build",
     "docs": "webpack --progress --env.prod -p",
-    "build": "rimraf lib && babel src/*.js -d lib",
-    "lintjs": "eslint src test",
+    "build": "rimraf lib && babel src -d lib --ignore docs",
+    "lintjs": "eslint ./{src,test}/*.js",
     "lintmd": "eslint --ext md --rule indent: [error, 4] .",
     "linthtml": "eslint --ext {html,htm}",
     "pretest": "clinton && npm run lintjs && npm run lintmd && npm run linthtml",
@@ -102,6 +102,12 @@
             ]
           },
           "useBuiltIns": true
+        }
+      ],
+      [
+        "minify",
+        {
+          "mangle": false
         }
       ]
     ],
