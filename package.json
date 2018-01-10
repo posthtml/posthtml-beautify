@@ -20,10 +20,10 @@
     "commitmsg": "commitlint --extends=@commitlint/config-angular -e",
     "postpublish": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"chore: Update changelog\"",
     "prepublish": "npm run build",
-    "docs": "webpack --progress --env.prod -p",
-    "build": "rimraf lib && babel src -d lib --ignore docs",
+    "docs": "BABEL_ENV=docs webpack --progress --env.prod -p",
+    "build": "rimraf lib && BABEL_ENV=production babel src -d lib --ignore docs",
     "test": "nyc ava",
-    "serve": "webpack-dashboard -- webpack-dev-server --content-base docs/ --open"
+    "serve": "BABEL_ENV=docs webpack-dashboard -- webpack-dev-server --content-base docs/ --open"
   },
   "files": [
     "lib/"
@@ -81,7 +81,7 @@
     "webpack-dev-server": "^2.10.0"
   },
   "lint-staged": {
-    "*.{js,html,htm}": "eslint",
+    "{src,test}/**/*.{js,html,htm}": "eslint",
     "*.md": "eslint --rule indent: [error, 4] ."
   },
   "ava": {
@@ -90,18 +90,37 @@
     ]
   },
   "babel": {
+    "env": {
+      "docs": {
+        "presets": [
+          [
+            "env",
+            {
+              "targets": {
+                "browsers": [
+                  "last 2 versions"
+                ]
+              },
+              "useBuiltIns": true
+            }
+          ]
+        ]
+      },
+      "production": {
+        "presets": [
+          [
+            "env",
+            {
+              "targets": {
+                "node": "4"
+              },
+              "useBuiltIns": true
+            }
+          ]
+        ]
+      }
+    },
     "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "browsers": [
-              "last 2 versions"
-            ]
-          },
-          "useBuiltIns": true
-        }
-      ],
       [
         "minify",
         {
