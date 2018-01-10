@@ -19,7 +19,7 @@
     "precommit": "clinton && lint-staged",
     "commitmsg": "commitlint --extends=@commitlint/config-angular -e",
     "postpublish": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"chore: Update changelog\"",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "docs": "cross-env BABEL_ENV=docs webpack --progress --env.prod -p",
     "build": "rimraf lib && cross-env BABEL_ENV=production babel src -d lib --ignore docs",
     "test": "cross-env BABEL_ENV=production nyc ava",
