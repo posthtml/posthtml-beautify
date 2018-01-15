@@ -1,3 +1,13 @@
+<a name="0.1.10"></a>
+## 0.1.10 (2018-01-15)
+
+* 0.1.10 ([bd9169c](https://github.com/gitscrum/posthtml-beautify/commit/bd9169c))
+* fix: cannot find module babel-runtime, close #213 ([b6c4bbc](https://github.com/gitscrum/posthtml-beautify/commit/b6c4bbc)), closes [#213](https://github.com/gitscrum/posthtml-beautify/issues/213)
+* build: fix postpublish script ([b7f8251](https://github.com/gitscrum/posthtml-beautify/commit/b7f8251))
+* build: update changelog ([0b3e6d5](https://github.com/gitscrum/posthtml-beautify/commit/0b3e6d5))
+
+
+
 <a name="0.1.9"></a>
 ## 0.1.9 (2018-01-10)
 
