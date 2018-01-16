@@ -50,7 +50,6 @@
     "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-add-module-exports": "^0.2.0",
-    "babel-plugin-array-includes": "^2.0.3",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-minify": "^0.2.0",
@@ -135,7 +134,6 @@
       ]
     ],
     "plugins": [
-      "array-includes",
       "add-module-exports"
     ]
   },
