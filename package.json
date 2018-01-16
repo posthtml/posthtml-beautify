@@ -1,6 +1,6 @@
 {
   "name": "posthtml-beautify",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "A posthtml plugin to beautify you html files",
   "license": "MIT",
   "repository": "gitscrum/posthtml-beautify",
@@ -122,7 +122,9 @@
           ]
         ],
         "plugins": [
-          "transform-runtime"
+          "array-includes",
+          "transform-runtime",
+          "add-module-exports"
         ]
       }
     },
@@ -133,10 +135,6 @@
           "mangle": false
         }
       ]
-    ],
-    "plugins": [
-      "array-includes",
-      "add-module-exports"
     ]
   },
   "eslintConfig": {
