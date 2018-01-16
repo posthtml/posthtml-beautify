@@ -121,7 +121,8 @@
           ]
         ],
         "plugins": [
-          "transform-runtime"
+          "transform-runtime",
+          "add-module-exports"
         ]
       }
     },
@@ -132,9 +133,6 @@
           "mangle": false
         }
       ]
-    ],
-    "plugins": [
-      "add-module-exports"
     ]
   },
   "eslintConfig": {
