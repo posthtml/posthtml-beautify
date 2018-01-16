@@ -1,3 +1,14 @@
+<a name="0.1.11"></a>
+## 0.1.11 (2018-01-16)
+
+* 0.1.11 ([c7e0dc0](https://github.com/gitscrum/posthtml-beautify/commit/c7e0dc0))
+* revert: drop array includes ([a4576b5](https://github.com/gitscrum/posthtml-beautify/commit/a4576b5))
+* build: fix add export modules plugin for babel, close #221 ([5c0703f](https://github.com/gitscrum/posthtml-beautify/commit/5c0703f)), closes [#221](https://github.com/gitscrum/posthtml-beautify/issues/221)
+* build: update changelog ([b92923d](https://github.com/gitscrum/posthtml-beautify/commit/b92923d))
+* perf: drop array includes ([665b6d0](https://github.com/gitscrum/posthtml-beautify/commit/665b6d0))
+
+
+
 <a name="0.1.10"></a>
 ## 0.1.10 (2018-01-15)
 
