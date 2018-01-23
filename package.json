@@ -88,6 +88,9 @@
     "./*.md": "eslint --rule indent: [error, 4] ."
   },
   "ava": {
+    "files": [
+      "test/test-*.js"
+    ],
     "require": [
       "babel-register"
     ]
