@@ -5,19 +5,9 @@ import {processing, read} from './utils';
 import beautify from '../src';
 
 test('plugin beautify must be function', t => {
-	const tree = ['test'];
-	tree.options = {}
-
-	t.plan(3);
+	t.plan(2);
 	t.true(typeof beautify === 'function');
 	t.true(typeof beautify() === 'function');
-	t.true(isPromise(beautify()(tree)));
-});
-
-test('plugin beautify not should return promise with use option sync', t => {
-	const tree = ['test'];
-	tree.options = {sync: true}
-	t.false(isPromise(beautify()(tree)));
 });
 
 test('plugin beautify should return Error with use option sync', t => {
@@ -30,14 +20,8 @@ test('plugin beautify should return Error with use option sync', t => {
 
 test('plugin beautify should return the passed value with use option sync', t => {
 	const tree = [];
-	tree.options = {sync: true}
 
 	t.deepEqual(tree, beautify()(tree));
-});
-
-test('processing with plugin beautify should return equal html with use posthtml option sync', async t => {
-	const fixture = '<div></div>\n\n<div></div>';
-	t.deepEqual(fixture, (await processing(fixture, [beautify({rules: {eof: false}})], {sync: true}).html));
 });
 
 test('processing with plugin beautify should not lost native api', async t => {
