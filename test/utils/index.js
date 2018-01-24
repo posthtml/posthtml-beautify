@@ -1,3 +1,4 @@
+import {readFile} from 'fs';
 import posthtml from 'posthtml';
 
 export const processing = (html, plugins = [], options = {}) => posthtml(plugins).process(html, options);

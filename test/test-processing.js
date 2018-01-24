@@ -1,4 +1,3 @@
-import {readFile} from 'fs';
 import test from 'ava';
 import isPromise from 'is-promise';
 import {processing} from './utils';
