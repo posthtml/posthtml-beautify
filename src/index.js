@@ -256,13 +256,7 @@ export default (options = {}) => node => {
 		return node;
 	}
 
-	if (node.options && !node.options.sync) {
-		return new Promise((resolve, reject) => {
-			node = normalize(node, options);
-			resolve(node);
-		});
-	}
-
-	node = normalize(node, options);
-	return node;
+	return new Promise(resolve => {
+		resolve(normalize(node, options));
+	})
 };
