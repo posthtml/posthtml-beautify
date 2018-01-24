@@ -29,19 +29,19 @@ test('processing with plugin beautify should not lost native api', async t => {
 	const fixture = '<div></div>\n\n<div></div>';
 	t.true(
 		Object.prototype.hasOwnProperty.call(
-			await processing(fixture, [beautify({rules: {eof: false}})], {sync: true}).tree,
+			(await processing(fixture, [beautify({rules: {eof: false}})])).tree,
 			'walk'
 		)
 	);
 	t.true(
 		Object.prototype.hasOwnProperty.call(
-			await processing(fixture, [beautify({rules: {eof: false}})], {sync: true}).tree,
+			(await processing(fixture, [beautify({rules: {eof: false}})])).tree,
 			'match'
 		)
 	);
 	t.true(
 		Object.prototype.hasOwnProperty.call(
-			await processing(fixture, [beautify({rules: {eof: false}})], {sync: true}).tree,
+			(await processing(fixture, [beautify({rules: {eof: false}})])).tree,
 			'processor'
 		)
 	);
