@@ -242,27 +242,22 @@ const normalize = (node, options) => {
 	return tree;
 }
 
-export default (options = {}) => {
-	return node => {
-		if (!Array.isArray(node)) {
-			return new Error(`tree is not Array`);
-		}
+export default (options = {}) => node => {
+	if (!Array.isArray(node)) {
+		throw new TypeError('tree is not Array');
+	}
 
-		if (node.length === 0) {
-			return node;
-		}
+	if (node.length === 0) {
+		return node;
+	}
 
-		if (
-			(
-				Object.prototype.hasOwnProperty.call(node, 'options') &&
-				Object.prototype.hasOwnProperty.call(node.options, 'sync') &&
-				node.options.sync
-			) ||
-			options.sync
-		) {
-			return normalize(node, options);
-		}
+	if (node.options && !node.options.sync) {
+		return new Promise((resolve, reject) => {
+			node = normalize(node, options);
+			resolve(node);
+		});
+	}
 
-		return Promise.resolve(normalize(node, options));
-	};
+	node = normalize(node, options);
+	return node;
 };
