@@ -143,11 +143,6 @@ output.html
 
 ## Options
 
-### `sync`
-Type: `Boolean`  
-Default: false  
-Description: *Used to switch between modes both synchronous and asynchronous. Will automatically be run synchronously if [posthtml](https://github.com/posthtml/posthtml#api) has option `sync: true`*  
-
 ### `rules`
 Type: `Object`  
 Default:
