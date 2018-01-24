@@ -85,7 +85,7 @@
   },
   "lint-staged": {
     "{src,test}/**/*.{js,html,htm}": "eslint",
-    "./*.md": "eslint --rule indent: [error, 4] ."
+    "*.md": "eslint"
   },
   "ava": {
     "files": [
