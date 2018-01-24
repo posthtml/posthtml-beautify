@@ -68,7 +68,7 @@ const renderConditional = tree => {
 	}, []);
 };
 
-const indent = (tree, {rules: {indent, eol}}) => {
+const indent = (tree, {rules: {indent, eol, blankLines}}) => {
 	const indentString = typeof indent === 'number' ? ' '.repeat(indent) : '\t';
 
 	const getIndent = level => `${eol}${indentString.repeat(level)}`;
@@ -92,11 +92,11 @@ const indent = (tree, {rules: {indent, eol}}) => {
 		}
 
 		if (level === 0 && index === 0) {
-			return [...previousValue, node, getIndent(level)];
+			return [...previousValue, node, blankLines];
 		}
 
 		if (level === 0) {
-			return [...previousValue, getIndent(level), node, getIndent(level)];
+			return [...previousValue, getIndent(level), node, blankLines];
 		}
 
 		if ((tree.length - 1) === index) {
@@ -104,7 +104,7 @@ const indent = (tree, {rules: {indent, eol}}) => {
 		}
 
 		if (typeof node === 'string' && /<!(?:--)?\[endif]*?]>/.test(node)) {
-			return [...previousValue, getIndent(level), node, getIndent(0)];
+			return [...previousValue, getIndent(level), node, blankLines];
 		}
 
 		if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
@@ -115,7 +115,7 @@ const indent = (tree, {rules: {indent, eol}}) => {
 			return [...previousValue, ...node.content.slice(0, -1)];
 		}
 
-		return [...previousValue, getIndent(level), node, getIndent(0)];
+		return [...previousValue, getIndent(level), node, blankLines];
 	}, []);
 
 	return setIndent(tree);
