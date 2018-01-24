@@ -152,9 +152,14 @@ Default:
   Default: 2  
   Description: *A numeric value indicates specifies the number of spaces. The string value only `tab`*
 
+  - **blankLines**  
+  Type: `String|Boolean(only false)`  
+  Default: '\n'  
+  Description: *Add or remove blank lines to separate large or logical code blocks*
+
   - **eol** (*end of line*)  
   Type: `String`  
-  Default: [os.EOL](https://nodejs.org/api/os.html#os_os_eol)  
+  Default: '\n'  
   Description: *As value is a string symbol which is added to the end of the row*
 
   - **eof** (*end of file*)  
