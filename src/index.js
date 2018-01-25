@@ -68,7 +68,7 @@ const renderConditional = tree => {
 	}, []);
 };
 
-const indent = (tree, {rules: {indent, eol}}) => {
+const indent = (tree, {rules: {indent, eol, blankLines}}) => {
 	const indentString = typeof indent === 'number' ? ' '.repeat(indent) : '\t';
 
 	const getIndent = level => `${eol}${indentString.repeat(level)}`;
@@ -92,11 +92,11 @@ const indent = (tree, {rules: {indent, eol}}) => {
 		}
 
 		if (level === 0 && index === 0) {
-			return [...previousValue, node, getIndent(level)];
+			return [...previousValue, node, blankLines];
 		}
 
 		if (level === 0) {
-			return [...previousValue, getIndent(level), node, getIndent(level)];
+			return [...previousValue, getIndent(level), node, blankLines];
 		}
 
 		if ((tree.length - 1) === index) {
@@ -104,7 +104,7 @@ const indent = (tree, {rules: {indent, eol}}) => {
 		}
 
 		if (typeof node === 'string' && /<!(?:--)?\[endif]*?]>/.test(node)) {
-			return [...previousValue, getIndent(level), node, getIndent(0)];
+			return [...previousValue, getIndent(level), node, blankLines];
 		}
 
 		if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
@@ -115,7 +115,7 @@ const indent = (tree, {rules: {indent, eol}}) => {
 			return [...previousValue, ...node.content.slice(0, -1)];
 		}
 
-		return [...previousValue, getIndent(level), node, getIndent(0)];
+		return [...previousValue, getIndent(level), node, blankLines];
 	}, []);
 
 	return setIndent(tree);
@@ -129,7 +129,12 @@ const attrsBoolean = (tree, {attrs: {boolean}}) => {
 
 		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')) {
 			Object.keys(node.attrs).forEach(key => {
-				node.attrs[key] = boolean.includes(key) ? true : node.attrs[key].trim();
+				node.attrs[key] = boolean.includes(key) ||
+					node.attrs[key]
+						.trim()
+						.split(' ')
+						.filter(value => value.length)
+						.join(' ');
 			});
 		}
 
@@ -242,27 +247,16 @@ const normalize = (node, options) => {
 	return tree;
 }
 
-export default (options = {}) => {
-	return node => {
-		if (!Array.isArray(node)) {
-			return new Error(`tree is not Array`);
-		}
+export default (options = {}) => node => {
+	if (!Array.isArray(node)) {
+		throw new TypeError('tree is not Array');
+	}
 
-		if (node.length === 0) {
-			return node;
-		}
+	if (node.length === 0) {
+		return node;
+	}
 
-		if (
-			(
-				Object.prototype.hasOwnProperty.call(node, 'options') &&
-				Object.prototype.hasOwnProperty.call(node.options, 'sync') &&
-				node.options.sync
-			) ||
-			options.sync
-		) {
-			return normalize(node, options);
-		}
-
-		return Promise.resolve(normalize(node, options));
-	};
+	return new Promise(resolve => {
+		resolve(normalize(node, options));
+	})
 };

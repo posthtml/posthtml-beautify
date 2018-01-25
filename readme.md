@@ -143,11 +143,6 @@ output.html
 
 ## Options
 
-### `sync`
-Type: `Boolean`  
-Default: false  
-Description: *Used to switch between modes both synchronous and asynchronous. Will automatically be run synchronously if [posthtml](https://github.com/posthtml/posthtml#api) has option `sync: true`*  
-
 ### `rules`
 Type: `Object`  
 Default:
@@ -157,9 +152,14 @@ Default:
   Default: 2  
   Description: *A numeric value indicates specifies the number of spaces. The string value only `tab`*
 
+  - **blankLines**  
+  Type: `String|Boolean(only false)`  
+  Default: '\n'  
+  Description: *Add or remove blank lines to separate large or logical code blocks*
+
   - **eol** (*end of line*)  
   Type: `String`  
-  Default: [os.EOL](https://nodejs.org/api/os.html#os_os_eol)  
+  Default: '\n'  
   Description: *As value is a string symbol which is added to the end of the row*
 
   - **eof** (*end of file*)  
@@ -175,27 +175,3 @@ Default:
   Type: `String|Boolean`  
   Default: false  
   Description: *Removes attributes that do not matter. The string value only `empty`*
-
-## LICENSE
-
-> MIT License (MIT)
-
->Copyright (c) Ivan Demidov <scrum@list.ru>
-
-> Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-> The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

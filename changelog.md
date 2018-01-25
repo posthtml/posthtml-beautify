@@ -1,3 +1,27 @@
+<a name="0.2.0"></a>
+# 0.2.0 (2018-01-25)
+
+* 0.2.0 ([a0def3b](https://github.com/gitscrum/posthtml-beautify/commit/a0def3b))
+* fix: fucking htmlparser2 incorrect parse ([d4996dc](https://github.com/gitscrum/posthtml-beautify/commit/d4996dc))
+* test: drop test with async ([f3c3cfe](https://github.com/gitscrum/posthtml-beautify/commit/f3c3cfe))
+* test: fix lost readFile ([7df4222](https://github.com/gitscrum/posthtml-beautify/commit/7df4222))
+* test: for blank lines, #217, #216 ([6e51770](https://github.com/gitscrum/posthtml-beautify/commit/6e51770)), closes [#217](https://github.com/gitscrum/posthtml-beautify/issues/217) [#216](https://github.com/gitscrum/posthtml-beautify/issues/216)
+* test: only test-* file ([30c1ec5](https://github.com/gitscrum/posthtml-beautify/commit/30c1ec5))
+* test: remove process and read file to utils ([92b2c40](https://github.com/gitscrum/posthtml-beautify/commit/92b2c40))
+* test: return commnet tests ([5993060](https://github.com/gitscrum/posthtml-beautify/commit/5993060))
+* test: revrite check api to async ([6f94812](https://github.com/gitscrum/posthtml-beautify/commit/6f94812))
+* test: update according perf detect sync/async ([06680b2](https://github.com/gitscrum/posthtml-beautify/commit/06680b2))
+* docs: add description for balnk lines option ([5543e74](https://github.com/gitscrum/posthtml-beautify/commit/5543e74))
+* docs: drop license, github have tab license ([8997330](https://github.com/gitscrum/posthtml-beautify/commit/8997330))
+* docs: drop sync option because this resolve in posthtml ([6de6b0b](https://github.com/gitscrum/posthtml-beautify/commit/6de6b0b))
+* feat: option blank lines, close #216, close #217 ([00ce993](https://github.com/gitscrum/posthtml-beautify/commit/00ce993)), closes [#216](https://github.com/gitscrum/posthtml-beautify/issues/216) [#217](https://github.com/gitscrum/posthtml-beautify/issues/217)
+* perf: detect sync async from tree options ([13e8a3e](https://github.com/gitscrum/posthtml-beautify/commit/13e8a3e))
+* perf: rewrited to the promise ([793f487](https://github.com/gitscrum/posthtml-beautify/commit/793f487))
+* perf: trim attributes value ([421a6f1](https://github.com/gitscrum/posthtml-beautify/commit/421a6f1))
+* build: update changelog ([0690f1c](https://github.com/gitscrum/posthtml-beautify/commit/0690f1c))
+
+
+
 <a name="0.1.11"></a>
 ## 0.1.11 (2018-01-16)
 

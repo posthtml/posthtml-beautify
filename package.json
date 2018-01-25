@@ -1,6 +1,6 @@
 {
   "name": "posthtml-beautify",
-  "version": "0.1.11",
+  "version": "0.2.0",
   "description": "A posthtml plugin to beautify you html files",
   "license": "MIT",
   "repository": "gitscrum/posthtml-beautify",
@@ -85,9 +85,12 @@
   },
   "lint-staged": {
     "{src,test}/**/*.{js,html,htm}": "eslint",
-    "./*.md": "eslint --rule indent: [error, 4] ."
+    "*.md": "eslint"
   },
   "ava": {
+    "files": [
+      "test/test-*.js"
+    ],
     "require": [
       "babel-register"
     ]
