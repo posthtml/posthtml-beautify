@@ -47,53 +47,46 @@ const getEdgeWhitespace = (node) => {
 };
 
 const clean = (tree, options) => {
-	const parsedTree = parser(render(tree));
 	let previousNodeRightLinebreaks = '';
 
-	if (options.rules.useExistingLineBreaks) {
-		return parsedTree
-			.map(node => {
-				if (Object.prototype.hasOwnProperty.call(node, 'content')) {
-					node.content = clean(node.content, options);
+	return parser(render(tree))
+		.filter(node => {
+			return options.rules.useExistingLineBreaks
+				? node
+				: typeof node === 'object' || (typeof node === 'string' && (node.trim().length !== 0 || /doctype/gi.test(node)));
+		})
+		.map(node => {
+			if (Object.prototype.hasOwnProperty.call(node, 'content')) {
+				node.content = clean(node.content, options);
+			}
+
+			if (typeof node === 'string') {
+				if (!options.rules.useExistingLineBreaks) {
+					return node.trim();
 				}
 
-				if (typeof node === 'string') {
-					const nodeTrimmed = node.trim();
-					const {leftWhitespace, rightWhitespace, leftLinebreaks, rightLinebreaks} = getEdgeWhitespace(node);
-					let nodeCleaned;
+				const nodeTrimmed = node.trim();
+				const {leftWhitespace, rightWhitespace, leftLinebreaks, rightLinebreaks} = getEdgeWhitespace(node);
+				let nodeCleaned;
 
-					if (nodeTrimmed.length === 0) {
-						nodeCleaned = node.replace(horizontalWhitespace, '') || ' ';
-					} else {
-						nodeCleaned =
-							`${leftLinebreaks || (previousNodeRightLinebreaks ? '' : leftWhitespace.replace(horizontalWhitespace, ' '))}` +
-							`${nodeTrimmed.replace(horizontalWhitespace, ' ').replace(/([\r\n]+)[\t ]/gm, '$1')}` +
-							`${rightLinebreaks || rightWhitespace.replace(horizontalWhitespace, ' ')}`;
-
-						previousNodeRightLinebreaks = rightLinebreaks;
-					}
-
-					return nodeCleaned;
+				if (nodeTrimmed.length === 0) {
+					nodeCleaned = node.replace(horizontalWhitespace, '') || ' ';
 				} else {
-					previousNodeRightLinebreaks = '';
+					nodeCleaned =
+						`${leftLinebreaks || (previousNodeRightLinebreaks ? '' : leftWhitespace.replace(horizontalWhitespace, ' '))}` +
+						`${nodeTrimmed.replace(horizontalWhitespace, ' ').replace(/([\r\n]+)[\t ]/gm, '$1')}` +
+						`${rightLinebreaks || rightWhitespace.replace(horizontalWhitespace, ' ')}`;
 
-					return node;
-				}
-			});
-	} else {
-		return parsedTree
-			.filter(node => {
-				return typeof node === 'object' || (typeof node === 'string' && (node.trim().length !== 0 || /doctype/gi.test(node)));
-			})
-			.map(node => {
-				if (Object.prototype.hasOwnProperty.call(node, 'content')) {
-					node.content = clean(node.content, options);
+					previousNodeRightLinebreaks = rightLinebreaks;
 				}
 
-				return typeof node === 'string' ? node.trim() : node;
-			})
-	}
+				return nodeCleaned;
+			} else {
+				previousNodeRightLinebreaks = '';
 
+				return node;
+			}
+		});
 };
 
 const parseConditional = (tree, options) => {
