@@ -139,39 +139,39 @@ const renderConditional = tree => {
 
 const indent = (tree, {rules: {indent, eol, blankLines, useExistingLineBreaks}}) => {
 	const indentString = typeof indent === 'number' ? ' '.repeat(indent) : '\t';
-	let getIndent;
-	let setIndent;
 
-	if (useExistingLineBreaks) {
-		getIndent = level => `${indentString.repeat(level)}`;
+	const getIndent = level => `${useExistingLineBreaks ? '' : eol}${indentString.repeat(level)}`;
 
-		setIndent = (tree, level = 0) => tree.map((node, i) => {
-			if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+	const setIndent = (tree, level = 0) => tree.reduce((previousValue, node, index) => {
+		if (typeof node === 'object') {
+			if (Object.prototype.hasOwnProperty.call(node, 'content')) {
 				node.content = setIndent(node.content, ++level);
 				--level;
 			}
 
+			if (
+				useExistingLineBreaks
+				&& (index === tree.length - 1)
+				&& typeof tree[0] === 'string'
+				&& getEdgeWhitespace(tree[0]).leftLinebreaks
+			) {
+				return [...previousValue, node, `\n${getIndent(--level)}`];
+			}
+		}
+
+		if (useExistingLineBreaks) {
 			if (typeof node === 'string') {
-				return node.replace(/([\r\n]+)/gm, function (match, p1, offset, string) {
-				  if ((tree.length - 1 === i) && (offset + match.length === string.length)) {
+				return [...previousValue, node.replace(/([\r\n]+)/gm, function (match, p1, offset, string) {
+				  if ((index === tree.length - 1) && (offset + match.length === string.length)) {
 					--level;
 				  }
 
 				  return `${p1}${getIndent(Math.max(level, 0))}`
-				});
+				})];
 			}
 
-			return node;
-		});
-	} else {
-		getIndent = level => `${eol}${indentString.repeat(level)}`;
-
-		setIndent = (tree, level = 0) => tree.reduce((previousValue, node, index) => {
-			if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
-				node.content = setIndent(node.content, ++level);
-				--level;
-			}
-
+			return [...previousValue, node];
+		} else {
 			if (tree.length === 1 && typeof tree[index] === 'string') {
 				return [...previousValue, node];
 			}
@@ -209,8 +209,8 @@ const indent = (tree, {rules: {indent, eol, blankLines, useExistingLineBreaks}})
 			}
 
 			return [...previousValue, getIndent(level), node, blankLines];
-		}, []);
-	}
+		}
+	}, []);
 
 	return setIndent(tree);
 };
