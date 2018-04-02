@@ -136,31 +136,38 @@ const indent = (tree, {rules: {indent, eol, blankLines, useExistingLineBreaks}})
 	const getIndent = level => `${useExistingLineBreaks ? '' : eol}${indentString.repeat(level)}`;
 
 	const setIndent = (tree, level = 0) => tree.reduce((previousValue, node, index) => {
-		if (typeof node === 'object') {
-			if (Object.prototype.hasOwnProperty.call(node, 'content')) {
-				node.content = setIndent(node.content, ++level);
-				--level;
-			}
-
-			if (
-				useExistingLineBreaks
-				&& (index === tree.length - 1)
-				&& typeof tree[0] === 'string'
-				&& getEdgeWhitespace(tree[0]).leftLinebreaks
-			) {
-				return [...previousValue, node, `\n${getIndent(--level)}`];
-			}
+		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+			node.content = setIndent(node.content, ++level);
+			--level;
 		}
 
 		if (useExistingLineBreaks) {
 			if (typeof node === 'string') {
-				return [...previousValue, node.replace(/([\r\n]+)/gm, function (match, p1, offset, string) {
-				  if ((index === tree.length - 1) && (offset + match.length === string.length)) {
-					--level;
-				  }
+				node = node.replace(/([\r\n]+)/gm, function (match, p1, offset, string) {
+					if ((index === tree.length - 1) && (offset + match.length === string.length)) {
+						--level;
+					}
 
-				  return `${p1}${getIndent(Math.max(level, 0))}`
-				})];
+					return `${p1}${getIndent(Math.max(level, 0))}`
+				});
+			}
+
+			if (
+				(index === tree.length - 1)
+				&& typeof tree[0] === 'string'
+				&& getEdgeWhitespace(tree[0]).leftLinebreaks
+				&& ((typeof node === 'string' && node.trim() && !getEdgeWhitespace(node).rightLinebreaks) || typeof node === 'object')
+			) {
+				return [ ...previousValue, node, `\n${getIndent(--level)}` ];
+			}
+
+			if (
+				(index === 0)
+				&& typeof tree[tree.length - 1] === 'string'
+				&& getEdgeWhitespace(tree[tree.length - 1]).rightLinebreaks
+				&& ((typeof node === 'string' && node.trim() && !getEdgeWhitespace(node).leftLinebreaks) || typeof node === 'object')
+			) {
+				return [ ...previousValue, `\n${getIndent(typeof node === 'string' ? ++level : level)}`, node];
 			}
 
 			return [...previousValue, node];
@@ -242,6 +249,7 @@ const lowerElementName = (tree, {tags}) => {
 		if (
 			typeof node === 'object' &&
 			Object.prototype.hasOwnProperty.call(node, 'tag') &&
+			typeof node.tag === 'string' &&
 			tags.includes(node.tag.toLowerCase())
 		) {
 			node.tag = node.tag.toLowerCase();

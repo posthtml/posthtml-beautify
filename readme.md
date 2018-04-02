@@ -165,7 +165,7 @@ Default:
   - **useExistingLineBreaks**  
   Type: `Boolean`  
   Default: false  
-  Description: *Preserve and use existing line breaks. Do not add new line breaks (exception: absent line break before closing tag is restored if matching opening tag has line break as first child). `blankLines` and `eol` are ignored if this option set to `true`*
+  Description: *Preserve existing line breaks. Don't add new line breaks (exception: adds missing line break at the start/end of a tag if it already has line break at the end/start). `blankLines` and `eol` are ignored if this option set to `true`*
 
   - **lowerAttributeName**  
   Type: `Boolean`  
