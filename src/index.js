@@ -153,7 +153,8 @@ const indent = (tree, {rules: {indent, eol, blankLines, useExistingLineBreaks}})
 			}
 
 			if (
-				(index === tree.length - 1)
+				level > 0
+				&& (index === tree.length - 1)
 				&& typeof tree[0] === 'string'
 				&& getEdgeWhitespace(tree[0]).leftLinebreaks
 				&& ((typeof node === 'string' && node.trim() && !getEdgeWhitespace(node).rightLinebreaks) || typeof node === 'object')
@@ -162,7 +163,8 @@ const indent = (tree, {rules: {indent, eol, blankLines, useExistingLineBreaks}})
 			}
 
 			if (
-				(index === 0)
+				level > 0
+				&& (index === 0)
 				&& typeof tree[tree.length - 1] === 'string'
 				&& getEdgeWhitespace(tree[tree.length - 1]).rightLinebreaks
 				&& ((typeof node === 'string' && node.trim() && !getEdgeWhitespace(node).leftLinebreaks) || typeof node === 'object')
