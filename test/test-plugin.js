@@ -133,7 +133,7 @@ test('processing with plugin beautify should keep existing line breaks if instru
 	t.deepEqual(expected, fixtures);
 });
 
-test('processing with plugin beautify and `useExistingLineBreaks: true` should insert missing line break as a last child of a tag if there is a line break as a first child of this tag', async t => {
+test('processing with plugin beautify and `useExistingLineBreaks: true` should insert missing line break as a first/last child of a tag if there is a line break as a last/first child of this tag', async t => {
 	const expected = await read('test/expected/output-with-unbalanced-line-breaks.html');
 	const fixtures = (await processing(await read('test/fixtures/input-with-unbalanced-line-breaks.html'), [beautify({rules: {useExistingLineBreaks: true}})])).html;
 	t.deepEqual(expected, fixtures);
