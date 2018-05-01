@@ -16,7 +16,7 @@ const optionsDefault = {
 };
 
 const horizontalWhitespace = /[\t ]+/gm;
-const verticalWhitespace = /[\r\n]+/gm;
+const verticalWhitespace = /[\r\n\v\f]+/gm;
 
 const getEdgeWhitespace = (node) => {
 	let leftWhitespace;
@@ -74,7 +74,7 @@ const clean = (tree, options) => {
 				} else {
 					nodeCleaned =
 						`${leftLinebreaks || (previousNodeRightLinebreaks ? '' : leftWhitespace.replace(horizontalWhitespace, ' '))}` +
-						`${nodeTrimmed.replace(horizontalWhitespace, ' ').replace(/([\r\n]+)[\t ]/gm, '$1')}` +
+						`${nodeTrimmed.replace(horizontalWhitespace, ' ').replace(/([\r\n\v\f]+)[\t ]/gm, '$1')}` +
 						`${rightLinebreaks || rightWhitespace.replace(horizontalWhitespace, ' ')}`;
 
 					previousNodeRightLinebreaks = rightLinebreaks;
@@ -143,7 +143,7 @@ const indent = (tree, {rules: {indent, eol, blankLines, useExistingLineBreaks}})
 
 		if (useExistingLineBreaks) {
 			if (typeof node === 'string') {
-				node = node.replace(/([\r\n]+)/gm, function (match, p1, offset, string) {
+				node = node.replace(/([\r\n\v\f]+)/gm, function (match, p1, offset, string) {
 					if ((index === tree.length - 1) && (offset + match.length === string.length)) {
 						--level;
 					}
