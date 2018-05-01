@@ -33,8 +33,8 @@ const getEdgeWhitespace = (node) => {
 			leftLinebreaks = node.replace(horizontalWhitespace, '');
 			rightLinebreaks = node.replace(horizontalWhitespace, '');
 		} else {
-			leftWhitespace = node.trimRight().replace(nodeTrimmed, '');
-			rightWhitespace = node.trimLeft().replace(nodeTrimmed, '');
+			leftWhitespace = node.replace(/\s+$/,'').replace(nodeTrimmed, '');
+			rightWhitespace = node.replace(/^\s+/,'').replace(nodeTrimmed, '');
 			leftLinebreaks = leftWhitespace.replace(horizontalWhitespace, '');
 			rightLinebreaks = rightWhitespace.replace(horizontalWhitespace, '');
 		}
