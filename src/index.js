@@ -15,29 +15,91 @@ const optionsDefault = {
 	}
 };
 
-const clean = tree => parser(render(tree))
-	.filter(node => {
-		return typeof node === 'object' || (typeof node === 'string' && (node.trim().length !== 0 || /doctype/gi.test(node)));
-	})
-	.map(node => {
-		if (Object.prototype.hasOwnProperty.call(node, 'content')) {
-			node.content = clean(node.content);
+const horizontalWhitespace = /[\t ]+/g;
+const verticalWhitespace = /[\r\n\v\f]+/g;
+
+const getEdgeWhitespace = (node) => {
+	let leftWhitespace;
+	let rightWhitespace;
+	let leftLinebreaks;
+	let rightLinebreaks;
+
+	if (typeof node === 'string') {
+		const nodeTrimmed = node.trim();
+
+		if (nodeTrimmed.length === 0) {
+			leftWhitespace = node.replace(verticalWhitespace, '');
+			rightWhitespace = node.replace(verticalWhitespace, '');
+			leftLinebreaks = node.replace(horizontalWhitespace, '');
+			rightLinebreaks = node.replace(horizontalWhitespace, '');
+		} else {
+			leftWhitespace = node.replace(/\s+$/,'').replace(nodeTrimmed, '');
+			rightWhitespace = node.replace(/^\s+/,'').replace(nodeTrimmed, '');
+			leftLinebreaks = leftWhitespace.replace(horizontalWhitespace, '');
+			rightLinebreaks = rightWhitespace.replace(horizontalWhitespace, '');
 		}
 
-		return typeof node === 'string' ? node.trim() : node;
-	});
+		return {leftWhitespace, rightWhitespace, leftLinebreaks, rightLinebreaks};
+	} else {
+		return false;
+	}
 
-const parseConditional = tree => {
+};
+
+const clean = (tree, options) => {
+	let previousNodeRightLinebreaks = '';
+
+	return parser(render(tree))
+		.filter(node => {
+			return options.rules.useExistingLineBreaks
+				? node
+				: typeof node === 'object' || (typeof node === 'string' && (node.trim().length !== 0 || /doctype/gi.test(node)));
+		})
+		.map(node => {
+			if (Object.prototype.hasOwnProperty.call(node, 'content')) {
+				node.content = clean(node.content, options);
+			}
+
+			if (typeof node === 'string') {
+				if (!options.rules.useExistingLineBreaks) {
+					return node.trim();
+				}
+
+				const nodeTrimmed = node.trim();
+				const {leftWhitespace, rightWhitespace, leftLinebreaks, rightLinebreaks} = getEdgeWhitespace(node);
+				let nodeCleaned;
+
+				if (nodeTrimmed.length === 0) {
+					nodeCleaned = node.replace(horizontalWhitespace, '') || ' ';
+				} else {
+					nodeCleaned =
+						`${leftLinebreaks || (previousNodeRightLinebreaks ? '' : leftWhitespace.replace(horizontalWhitespace, ' '))}` +
+						`${nodeTrimmed.replace(horizontalWhitespace, ' ').replace(/([\r\n\v\f]+)[\t ]/g, '$1')}` +
+						`${rightLinebreaks || rightWhitespace.replace(horizontalWhitespace, ' ')}`;
+
+					previousNodeRightLinebreaks = rightLinebreaks;
+				}
+
+				return nodeCleaned;
+			} else {
+				previousNodeRightLinebreaks = '';
+
+				return node;
+			}
+		});
+};
+
+const parseConditional = (tree, options) => {
 	return tree.map(node => {
 		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
-			node.content = parseConditional(node.content);
+			node.content = parseConditional(node.content, options);
 		}
 
 		if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
 			const conditional = /^((?:<[^>]+>)?<!(?:--)?\[[\s\S]*?]>(?:<!)?(?:-->)?)([\s\S]*?)(<!(?:--<!)?\[[\s\S]*?](?:--)?>)$/
 				.exec(node)
 				.slice(1)
-				.map((node, index) => index === 1 ? {tag: 'conditional-content', content: clean(parser(node))} : node);
+				.map((node, index) => index === 1 ? {tag: 'conditional-content', content: clean(parser(node), options)} : node);
 
 			return {
 				tag: 'conditional',
@@ -68,10 +130,10 @@ const renderConditional = tree => {
 	}, []);
 };
 
-const indent = (tree, {rules: {indent, eol, blankLines}}) => {
+const indent = (tree, {rules: {indent, eol, blankLines, useExistingLineBreaks}}) => {
 	const indentString = typeof indent === 'number' ? ' '.repeat(indent) : '\t';
 
-	const getIndent = level => `${eol}${indentString.repeat(level)}`;
+	const getIndent = level => `${useExistingLineBreaks ? '' : eol}${indentString.repeat(level)}`;
 
 	const setIndent = (tree, level = 0) => tree.reduce((previousValue, node, index) => {
 		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
@@ -79,43 +141,77 @@ const indent = (tree, {rules: {indent, eol, blankLines}}) => {
 			--level;
 		}
 
-		if (tree.length === 1 && typeof tree[index] === 'string') {
+		if (useExistingLineBreaks) {
+			if (typeof node === 'string') {
+				node = node.replace(/([\r\n\v\f]+)/g, function (match, p1, offset, string) {
+					if ((index === tree.length - 1) && (offset + match.length === string.length)) {
+						--level;
+					}
+
+					return `${p1}${getIndent(Math.max(level, 0))}`
+				});
+			}
+
+			if (
+				level > 0
+				&& (index === tree.length - 1)
+				&& typeof tree[0] === 'string'
+				&& getEdgeWhitespace(tree[0]).leftLinebreaks
+				&& ((typeof node === 'string' && node.trim() && !getEdgeWhitespace(node).rightLinebreaks) || typeof node === 'object')
+			) {
+				return [ ...previousValue, node, `\n${getIndent(--level)}` ];
+			}
+
+			if (
+				level > 0
+				&& (index === 0)
+				&& typeof tree[tree.length - 1] === 'string'
+				&& getEdgeWhitespace(tree[tree.length - 1]).rightLinebreaks
+				&& ((typeof node === 'string' && node.trim() && !getEdgeWhitespace(node).leftLinebreaks) || typeof node === 'object')
+			) {
+				return [ ...previousValue, `\n${getIndent(typeof node === 'string' ? ++level : level)}`, node];
+			}
+
 			return [...previousValue, node];
-		}
+		} else {
+			if (tree.length === 1 && typeof tree[index] === 'string') {
+				return [...previousValue, node];
+			}
 
-		if (level === 0 && (tree.length - 1) === index && tree.length > 1) {
-			return [...previousValue, getIndent(level), node];
-		}
+			if (level === 0 && (tree.length - 1) === index && tree.length > 1) {
+				return [...previousValue, getIndent(level), node];
+			}
 
-		if (level === 0 && (tree.length - 1) === index && tree.length === 1) {
-			return [...previousValue, node];
-		}
+			if (level === 0 && (tree.length - 1) === index && tree.length === 1) {
+				return [...previousValue, node];
+			}
 
-		if (level === 0 && index === 0) {
-			return [...previousValue, node, blankLines];
-		}
+			if (level === 0 && index === 0) {
+				return [...previousValue, node, blankLines];
+			}
 
-		if (level === 0) {
+			if (level === 0) {
+				return [...previousValue, getIndent(level), node, blankLines];
+			}
+
+			if ((tree.length - 1) === index) {
+				return [...previousValue, getIndent(level), node, getIndent(--level)];
+			}
+
+			if (typeof node === 'string' && /<!(?:--)?\[endif]*?]>/.test(node)) {
+				return [...previousValue, getIndent(level), node, blankLines];
+			}
+
+			if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
+				return [...previousValue, getIndent(level), node];
+			}
+
+			if (node.tag === false) {
+				return [...previousValue, ...node.content.slice(0, -1)];
+			}
+
 			return [...previousValue, getIndent(level), node, blankLines];
 		}
-
-		if ((tree.length - 1) === index) {
-			return [...previousValue, getIndent(level), node, getIndent(--level)];
-		}
-
-		if (typeof node === 'string' && /<!(?:--)?\[endif]*?]>/.test(node)) {
-			return [...previousValue, getIndent(level), node, blankLines];
-		}
-
-		if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
-			return [...previousValue, getIndent(level), node];
-		}
-
-		if (node.tag === false) {
-			return [...previousValue, ...node.content.slice(0, -1)];
-		}
-
-		return [...previousValue, getIndent(level), node, blankLines];
 	}, []);
 
 	return setIndent(tree);
@@ -141,7 +237,7 @@ const attrsBoolean = (tree, {attrs: {boolean}}) => {
 		return node;
 	});
 
-	return removeAttrValue(tree);
+	return boolean ? removeAttrValue(tree) : tree;
 };
 
 const lowerElementName = (tree, {tags}) => {
@@ -155,6 +251,7 @@ const lowerElementName = (tree, {tags}) => {
 		if (
 			typeof node === 'object' &&
 			Object.prototype.hasOwnProperty.call(node, 'tag') &&
+			typeof node.tag === 'string' &&
 			tags.includes(node.tag.toLowerCase())
 		) {
 			node.tag = node.tag.toLowerCase();
@@ -166,7 +263,7 @@ const lowerElementName = (tree, {tags}) => {
 	return bypass(tree);
 };
 
-const lowerAttributeName = tree => {
+const lowerAttributeName = (tree, {rules: {lowerAttributeName}}) => {
 	const bypass = tree => tree.map(node => {
 		if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
 			node.content = bypass(node.content);
@@ -182,7 +279,7 @@ const lowerAttributeName = tree => {
 		return node;
 	});
 
-	return bypass(tree);
+	return lowerAttributeName ? bypass(tree) : tree;
 };
 
 const eof = (tree, {rules: {eof}}) => eof ? [...tree, eof] : tree;
@@ -213,7 +310,7 @@ const mini = (tree, {mini}) => {
 		return node;
 	});
 
-	return bypass(tree);
+	return mini ? bypass(tree) : tree;
 };
 
 const beautify = (tree, options) => [

@@ -159,7 +159,8 @@
       "test/**",
       "tmp/**",
       "lib/**",
-      "*.{html,jpg}"
+      "*.{html,jpg}",
+      ".idea/**"
     ],
     "rules": {
       "pkg-main": [

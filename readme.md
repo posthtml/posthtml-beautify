@@ -162,13 +162,25 @@ Default:
   Default: '\n'  
   Description: *As value is a string symbol which is added to the end of the row*
 
+  - **useExistingLineBreaks**  
+  Type: `Boolean`  
+  Default: false  
+  Description: *Preserve existing line breaks. Don't add new line breaks (exception: adds missing line break at the start/end of a tag if it already has line break at the end/start). `blankLines` and `eol` are ignored if this option set to `true`*
+
+  - **lowerAttributeName**  
+  Type: `Boolean`  
+  Default: true  
+  Description: *Control case of attribute names*
+
   - **eof** (*end of file*)  
   Type: `String|Boolean`  
   Default: '\n'  
   Description: *As value is a string symbol which is added to the end of the file and will not adds if you specify a boolean value of `false`*
 
 ### `mini`
-Type: `Object`  
+Type: `Object|Boolean(only false)`  
+Description: *Describe options for tidying up html output. Can be turned off with `false` value*
+
 Default:
 
   - **removeAttribute**  
