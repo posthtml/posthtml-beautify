@@ -46,7 +46,7 @@ posthtml()
     .use(beautify({rules: {indent: 4}}))
     .process(html)
     .then(result => {
-            writeFileSync('output.html', result.html);
+        writeFileSync('output.html', result.html);
     });
 
 ```
