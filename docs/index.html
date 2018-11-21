@@ -1,102 +1,102 @@
 <!DOCTYPE html><html lang="en" class="sl-row-12"><head><meta charset="UTF-8"><title>posthtml-beautify</title><link rel="stylesheet" href="//unpkg.com/slims@0.5.2"><link rel="stylesheet" href="https://unpkg.com/normalize.css@7.0.0"><style>/*
 
-    Atom One Dark by Daniel Gamage
-    Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+        Atom One Dark by Daniel Gamage
+        Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
 
-    base:    #282c34
-    mono-1:  #abb2bf
-    mono-2:  #818896
-    mono-3:  #5c6370
-    hue-1:   #56b6c2
-    hue-2:   #61aeee
-    hue-3:   #c678dd
-    hue-4:   #98c379
-    hue-5:   #e06c75
-    hue-5-2: #be5046
-    hue-6:   #d19a66
-    hue-6-2: #e6c07b
+        base:    #282c34
+        mono-1:  #abb2bf
+        mono-2:  #818896
+        mono-3:  #5c6370
+        hue-1:   #56b6c2
+        hue-2:   #61aeee
+        hue-3:   #c678dd
+        hue-4:   #98c379
+        hue-5:   #e06c75
+        hue-5-2: #be5046
+        hue-6:   #d19a66
+        hue-6-2: #e6c07b
 
-    */
+        */
 
-    .hljs {
-      color: #abb2bf;
-      background: #282c34;
-    }
+        .hljs {
+            color: #abb2bf;
+            background: #282c34;
+        }
 
-    .hljs-comment,
-    .hljs-quote {
-      color: #5c6370;
-      font-style: italic;
-    }
+        .hljs-comment,
+        .hljs-quote {
+            color: #5c6370;
+            font-style: italic;
+        }
 
-    .hljs-doctag,
-    .hljs-keyword,
-    .hljs-formula {
-      color: #c678dd;
-    }
+        .hljs-doctag,
+        .hljs-keyword,
+        .hljs-formula {
+            color: #c678dd;
+        }
 
-    .hljs-section,
-    .hljs-name,
-    .hljs-selector-tag,
-    .hljs-deletion,
-    .hljs-subst {
-      color: #e06c75;
-    }
+        .hljs-section,
+        .hljs-name,
+        .hljs-selector-tag,
+        .hljs-deletion,
+        .hljs-subst {
+            color: #e06c75;
+        }
 
-    .hljs-literal {
-      color: #56b6c2;
-    }
+        .hljs-literal {
+            color: #56b6c2;
+        }
 
-    .hljs-string,
-    .hljs-regexp,
-    .hljs-addition,
-    .hljs-attribute,
-    .hljs-meta-string {
-      color: #98c379;
-    }
+        .hljs-string,
+        .hljs-regexp,
+        .hljs-addition,
+        .hljs-attribute,
+        .hljs-meta-string {
+            color: #98c379;
+        }
 
-    .hljs-built_in,
-    .hljs-class .hljs-title {
-      color: #e6c07b;
-    }
+        .hljs-built_in,
+        .hljs-class .hljs-title {
+            color: #e6c07b;
+        }
 
-    .hljs-attr,
-    .hljs-variable,
-    .hljs-template-variable,
-    .hljs-type,
-    .hljs-selector-class,
-    .hljs-selector-attr,
-    .hljs-selector-pseudo,
-    .hljs-number {
-      color: #d19a66;
-    }
+        .hljs-attr,
+        .hljs-variable,
+        .hljs-template-variable,
+        .hljs-type,
+        .hljs-selector-class,
+        .hljs-selector-attr,
+        .hljs-selector-pseudo,
+        .hljs-number {
+            color: #d19a66;
+        }
 
-    .hljs-symbol,
-    .hljs-bullet,
-    .hljs-link,
-    .hljs-meta,
-    .hljs-selector-id,
-    .hljs-title {
-      color: #61aeee;
-    }
+        .hljs-symbol,
+        .hljs-bullet,
+        .hljs-link,
+        .hljs-meta,
+        .hljs-selector-id,
+        .hljs-title {
+            color: #61aeee;
+        }
 
-    .hljs-emphasis {
-      font-style: italic;
-    }
+        .hljs-emphasis {
+            font-style: italic;
+        }
 
-    .hljs-strong {
-      font-weight: bold;
-    }
+        .hljs-strong {
+            font-weight: bold;
+        }
 
-    .hljs-link {
-      text-decoration: underline;
-    }</style><style>* {
-      border-width: 0;
-    }
-    .box-scroll-y {
-      overflow-y: auto;
-    }
-    .box-crop-x {
-      overflow-x: hidden;
-    }</style></head><body class="sl-row-12"><div id="app" class="sl-row-12"><div class="sl-box-inline sl-v-top sl-col-6 sl-row-12"><textarea v-model="HTML" class="sl-col-12 sl-row-12 sl-offset-0 sl-offset-m-0 sl-offset-p-20 box-crop"></textarea></div><div class="sl-box-inline sl-v-top sl-col-6 sl-row-12 sl-offset-p-20 box-scroll-y box-crop-x hljs"><pre class="sl-offset-m-0 sl-offset-pb-20"><code class="html text-strong" v-html="processingHTML"></code>
-      </pre></div></div><script type="text/javascript" src="app.js?83d67d94529269681fe2"></script></body></html>
+        .hljs-link {
+            text-decoration: underline;
+        }</style><style>* {
+            border-width: 0;
+        }
+        .box-scroll-y {
+            overflow-y: auto;
+        }
+        .box-crop-x {
+            overflow-x: hidden;
+        }</style></head><body class="sl-row-12"><div id="app" class="sl-row-12"><div class="sl-box-inline sl-v-top sl-col-6 sl-row-12"><textarea v-model="HTML" class="sl-col-12 sl-row-12 sl-offset-0 sl-offset-m-0 sl-offset-p-20 box-crop"></textarea></div><div class="sl-box-inline sl-v-top sl-col-6 sl-row-12 sl-offset-p-20 box-scroll-y box-crop-x hljs"><pre class="sl-offset-m-0 sl-offset-pb-20"><code class="html text-strong" v-html="processingHTML"></code>
+            </pre></div></div><script type="text/javascript" src="app.js?574beddb392d6bef3890"></script></body></html>
