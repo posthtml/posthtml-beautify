@@ -1,17 +1,26 @@
+## <small>0.2.2 (2018-11-21)</small>
+
+
+
+
 ## <small>0.2.1 (2018-11-21)</small>
 
-* perf: downgrade for ie 11, close #224 ([74a99f5](https://github.com/gitscrum/posthtml-beautify/commit/74a99f5)), closes [#224](https://github.com/gitscrum/posthtml-beautify/issues/224)
-* perf: drop support old node ([01d4c4e](https://github.com/gitscrum/posthtml-beautify/commit/01d4c4e))
-* perf: not need return promise because posthtml promise ([b955f3b](https://github.com/gitscrum/posthtml-beautify/commit/b955f3b))
+* 0.2.1 ([1ca2151](https://github.com/gitscrum/posthtml-beautify/commit/1ca2151))
+* Create CNAME ([d5a27c6](https://github.com/gitscrum/posthtml-beautify/commit/d5a27c6))
+* Delete CNAME ([cf4f194](https://github.com/gitscrum/posthtml-beautify/commit/cf4f194))
 * build: add changelog file ([c0f17e1](https://github.com/gitscrum/posthtml-beautify/commit/c0f17e1))
 * build: add config xo, close #221 ([d16e6a2](https://github.com/gitscrum/posthtml-beautify/commit/d16e6a2)), closes [#221](https://github.com/gitscrum/posthtml-beautify/issues/221)
 * build: add xo space ([efebefc](https://github.com/gitscrum/posthtml-beautify/commit/efebefc))
 * build: migration to 4 version ([1f0a798](https://github.com/gitscrum/posthtml-beautify/commit/1f0a798))
 * build: update and perf for script and config system ([8b03cc5](https://github.com/gitscrum/posthtml-beautify/commit/8b03cc5))
+* build: update changelog ([b2e5c91](https://github.com/gitscrum/posthtml-beautify/commit/b2e5c91))
 * build: update changelog ([95aedb5](https://github.com/gitscrum/posthtml-beautify/commit/95aedb5))
 * build: update dep dev ([60633a5](https://github.com/gitscrum/posthtml-beautify/commit/60633a5))
 * build: update depDev ([8df8e9d](https://github.com/gitscrum/posthtml-beautify/commit/8df8e9d))
 * build: update rules for eslint and clinton ([c374a4f](https://github.com/gitscrum/posthtml-beautify/commit/c374a4f))
+* perf: downgrade for ie 11, close #224 ([74a99f5](https://github.com/gitscrum/posthtml-beautify/commit/74a99f5)), closes [#224](https://github.com/gitscrum/posthtml-beautify/issues/224)
+* perf: drop support old node ([01d4c4e](https://github.com/gitscrum/posthtml-beautify/commit/01d4c4e))
+* perf: not need return promise because posthtml promise ([b955f3b](https://github.com/gitscrum/posthtml-beautify/commit/b955f3b))
 * test: fix forgot change plain ([f564e61](https://github.com/gitscrum/posthtml-beautify/commit/f564e61))
 * test: remove because this remove from new version posthtml ([34dd65e](https://github.com/gitscrum/posthtml-beautify/commit/34dd65e))
 * style: according stylelint ([e757486](https://github.com/gitscrum/posthtml-beautify/commit/e757486))
@@ -19,8 +28,6 @@
 * style: according stylelint ([38cdec3](https://github.com/gitscrum/posthtml-beautify/commit/38cdec3))
 * style: according stylelint ([74140b2](https://github.com/gitscrum/posthtml-beautify/commit/74140b2))
 * ci: add new node version ([e3f0a0b](https://github.com/gitscrum/posthtml-beautify/commit/e3f0a0b))
-* Create CNAME ([d5a27c6](https://github.com/gitscrum/posthtml-beautify/commit/d5a27c6))
-* Delete CNAME ([cf4f194](https://github.com/gitscrum/posthtml-beautify/commit/cf4f194))
 * docs: change user name ([dc7eaa9](https://github.com/gitscrum/posthtml-beautify/commit/dc7eaa9))
 
 
