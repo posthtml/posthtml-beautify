@@ -4,10 +4,12 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 
 export default {
-    devtool: 'eval',
+    mode: 'development',
+    target: 'web',
+    devtool: 'eval-source-map',
     context: path.resolve(__dirname + '/src/docs/'),
     entry: {
-        app: './app.js'
+        app: ['babel-polyfill','./app.js']
     },
     output: {
         path: path.resolve(__dirname + '/docs/'),
