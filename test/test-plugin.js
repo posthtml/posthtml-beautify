@@ -39,12 +39,6 @@ test('processing with plugin beautify should not lost native api', async t => {
 			'match'
 		)
 	);
-	t.true(
-		Object.prototype.hasOwnProperty.call(
-			(await processing(fixture, [beautify({rules: {eof: false}})])).tree,
-			'processor'
-		)
-	);
 });
 
 test('processing with plugin beautify should return equal html', async t => {
