@@ -256,7 +256,5 @@ export default (options = {}) => node => {
         return node;
     }
 
-    return new Promise(resolve => {
-        resolve(normalize(node, options));
-    });
+    return normalize(node, options);
 };
