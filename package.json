@@ -16,9 +16,7 @@
     "node": ">=4"
   },
   "scripts": {
-    "precommit": "clinton && lint-staged",
-    "commitmsg": "commitlint --extends=@commitlint/config-angular -e",
-    "postpublish": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"build: update changelog\"",
+    "version": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"build: update changelog\"",
     "prepare": "npm run build",
     "docs": "cross-env BABEL_ENV=docs webpack --progress --env.prod -p",
     "build": "rimraf lib && cross-env BABEL_ENV=production babel src -d lib --ignore docs",
@@ -37,24 +35,24 @@
     "code-quality"
   ],
   "dependencies": {
-    "babel-runtime": "^6.26.0",
+    "@babel/runtime": "^7.1.5",
     "deepmerge": "^2.2.1",
     "posthtml-parser": "^0.4.1",
     "posthtml-render": "^1.1.4"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/register": "^7.0.0",
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-angular": "^7.1.2",
     "ava": "*",
-    "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "babel-plugin-add-module-exports": "^1.0.0",
-    "babel-plugin-array-includes": "^2.0.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-minify": "^0.5.0",
-    "babel-register": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "clinton": "^0.14.0",
     "conventional-changelog-cli": "^2.0.11",
     "coveralls": "^3.0.2",
@@ -81,8 +79,16 @@
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.17",
     "webpack": "^4.26.0",
+    "webpack-cli": "^3.1.2",
     "webpack-dashboard": "^2.0.0",
     "webpack-dev-server": "^3.1.10"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm t",
+      "pre-commit": "clinton && lint-staged",
+      "commit-msg": "commitlint --extends=@commitlint/config-angular -e"
+    }
   },
   "lint-staged": {
     "{src,test}/**/*.{js,html,htm}": "eslint --fix",
@@ -93,7 +99,7 @@
       "test/test-*.js"
     ],
     "require": [
-      "babel-register"
+      "@babel/register"
     ]
   },
   "babel": {
@@ -101,14 +107,13 @@
       "docs": {
         "presets": [
           [
-            "env",
+            "@babel/preset-env",
             {
               "targets": {
                 "browsers": [
                   "last 2 versions"
                 ]
-              },
-              "useBuiltIns": true
+              }
             }
           ]
         ]
@@ -116,30 +121,23 @@
       "production": {
         "presets": [
           [
-            "env",
+            "@babel/preset-env",
             {
               "targets": {
                 "node": "4"
-              },
-              "useBuiltIns": true
+              }
             }
           ]
         ],
         "plugins": [
-          "array-includes",
-          "transform-runtime",
+          [
+            "@babel/plugin-transform-runtime"
+          ],
           "add-module-exports"
         ]
       }
     },
-    "presets": [
-      [
-        "minify",
-        {
-          "mangle": false
-        }
-      ]
-    ]
+    "presets": []
   },
   "eslintConfig": {
     "parser": "babel-eslint",
