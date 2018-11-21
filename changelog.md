@@ -1,5 +1,31 @@
-<a name="0.2.0"></a>
-# 0.2.0 (2018-01-25)
+## <small>0.2.1 (2018-11-21)</small>
+
+* perf: downgrade for ie 11, close #224 ([74a99f5](https://github.com/gitscrum/posthtml-beautify/commit/74a99f5)), closes [#224](https://github.com/gitscrum/posthtml-beautify/issues/224)
+* perf: drop support old node ([01d4c4e](https://github.com/gitscrum/posthtml-beautify/commit/01d4c4e))
+* perf: not need return promise because posthtml promise ([b955f3b](https://github.com/gitscrum/posthtml-beautify/commit/b955f3b))
+* build: add changelog file ([c0f17e1](https://github.com/gitscrum/posthtml-beautify/commit/c0f17e1))
+* build: add config xo, close #221 ([d16e6a2](https://github.com/gitscrum/posthtml-beautify/commit/d16e6a2)), closes [#221](https://github.com/gitscrum/posthtml-beautify/issues/221)
+* build: add xo space ([efebefc](https://github.com/gitscrum/posthtml-beautify/commit/efebefc))
+* build: migration to 4 version ([1f0a798](https://github.com/gitscrum/posthtml-beautify/commit/1f0a798))
+* build: update and perf for script and config system ([8b03cc5](https://github.com/gitscrum/posthtml-beautify/commit/8b03cc5))
+* build: update changelog ([95aedb5](https://github.com/gitscrum/posthtml-beautify/commit/95aedb5))
+* build: update dep dev ([60633a5](https://github.com/gitscrum/posthtml-beautify/commit/60633a5))
+* build: update depDev ([8df8e9d](https://github.com/gitscrum/posthtml-beautify/commit/8df8e9d))
+* build: update rules for eslint and clinton ([c374a4f](https://github.com/gitscrum/posthtml-beautify/commit/c374a4f))
+* test: fix forgot change plain ([f564e61](https://github.com/gitscrum/posthtml-beautify/commit/f564e61))
+* test: remove because this remove from new version posthtml ([34dd65e](https://github.com/gitscrum/posthtml-beautify/commit/34dd65e))
+* style: according stylelint ([e757486](https://github.com/gitscrum/posthtml-beautify/commit/e757486))
+* style: according stylelint ([fcddb21](https://github.com/gitscrum/posthtml-beautify/commit/fcddb21))
+* style: according stylelint ([38cdec3](https://github.com/gitscrum/posthtml-beautify/commit/38cdec3))
+* style: according stylelint ([74140b2](https://github.com/gitscrum/posthtml-beautify/commit/74140b2))
+* ci: add new node version ([e3f0a0b](https://github.com/gitscrum/posthtml-beautify/commit/e3f0a0b))
+* Create CNAME ([d5a27c6](https://github.com/gitscrum/posthtml-beautify/commit/d5a27c6))
+* Delete CNAME ([cf4f194](https://github.com/gitscrum/posthtml-beautify/commit/cf4f194))
+* docs: change user name ([dc7eaa9](https://github.com/gitscrum/posthtml-beautify/commit/dc7eaa9))
+
+
+
+## 0.2.0 (2018-01-25)
 
 * 0.2.0 ([a0def3b](https://github.com/gitscrum/posthtml-beautify/commit/a0def3b))
 * fix: fucking htmlparser2 incorrect parse ([d4996dc](https://github.com/gitscrum/posthtml-beautify/commit/d4996dc))
@@ -22,8 +48,7 @@
 
 
 
-<a name="0.1.11"></a>
-## 0.1.11 (2018-01-16)
+## <small>0.1.11 (2018-01-16)</small>
 
 * 0.1.11 ([c7e0dc0](https://github.com/gitscrum/posthtml-beautify/commit/c7e0dc0))
 * revert: drop array includes ([a4576b5](https://github.com/gitscrum/posthtml-beautify/commit/a4576b5))
@@ -33,8 +58,7 @@
 
 
 
-<a name="0.1.10"></a>
-## 0.1.10 (2018-01-15)
+## <small>0.1.10 (2018-01-15)</small>
 
 * 0.1.10 ([bd9169c](https://github.com/gitscrum/posthtml-beautify/commit/bd9169c))
 * fix: cannot find module babel-runtime, close #213 ([b6c4bbc](https://github.com/gitscrum/posthtml-beautify/commit/b6c4bbc)), closes [#213](https://github.com/gitscrum/posthtml-beautify/issues/213)
@@ -43,8 +67,7 @@
 
 
 
-<a name="0.1.9"></a>
-## 0.1.9 (2018-01-10)
+## <small>0.1.9 (2018-01-10)</small>
 
 * 0.1.9 ([b927eb8](https://github.com/gitscrum/posthtml-beautify/commit/b927eb8))
 * Update .travis.yml ([82d1b69](https://github.com/gitscrum/posthtml-beautify/commit/82d1b69))
@@ -69,8 +92,7 @@
 
 
 
-<a name="0.1.8"></a>
-## 0.1.8 (2017-09-06)
+## <small>0.1.8 (2017-09-06)</small>
 
 * 0.1.8 ([36b6812](https://github.com/gitscrum/posthtml-beautify/commit/36b6812))
 * chore: 0.1.7 ([393986d](https://github.com/gitscrum/posthtml-beautify/commit/393986d))
@@ -86,8 +108,7 @@
 
 
 
-<a name="0.1.6"></a>
-## 0.1.6 (2017-05-25)
+## <small>0.1.6 (2017-05-25)</small>
 
 * 0.1.6 ([07a4def](https://github.com/gitscrum/posthtml-beautify/commit/07a4def))
 * docs: add online service, close #57 ([c498d81](https://github.com/gitscrum/posthtml-beautify/commit/c498d81)), closes [#57](https://github.com/gitscrum/posthtml-beautify/issues/57)
@@ -126,8 +147,7 @@
 
 
 
-<a name="0.1.5"></a>
-## 0.1.5 (2017-03-23)
+## <small>0.1.5 (2017-03-23)</small>
 
 * 0.1.5 ([8cc6cc2](https://github.com/gitscrum/posthtml-beautify/commit/8cc6cc2))
 * docs(readme): add description for option mini ([b86bb89](https://github.com/gitscrum/posthtml-beautify/commit/b86bb89))
@@ -145,8 +165,7 @@
 
 
 
-<a name="0.1.4"></a>
-## 0.1.4 (2017-02-08)
+## <small>0.1.4 (2017-02-08)</small>
 
 * 0.1.4 ([bf56175](https://github.com/gitscrum/posthtml-beautify/commit/bf56175))
 * fix(*): cannot find module es6.map, close #153 ([7848934](https://github.com/gitscrum/posthtml-beautify/commit/7848934)), closes [#153](https://github.com/gitscrum/posthtml-beautify/issues/153)
@@ -155,8 +174,7 @@
 
 
 
-<a name="0.1.3"></a>
-## 0.1.3 (2017-02-07)
+## <small>0.1.3 (2017-02-07)</small>
 
 * 0.1.3 ([cf8ab76](https://github.com/gitscrum/posthtml-beautify/commit/cf8ab76))
 * revert(index): revert reflect because throw error ([cc563cf](https://github.com/gitscrum/posthtml-beautify/commit/cc563cf))
@@ -185,8 +203,7 @@
 
 
 
-<a name="0.1.2"></a>
-## 0.1.2 (2016-12-30)
+## <small>0.1.2 (2016-12-30)</small>
 
 * 0.1.2 ([571279e](https://github.com/gitscrum/posthtml-beautify/commit/571279e))
 * fix(package): change pkg name in postpublish ([d0cb61b](https://github.com/gitscrum/posthtml-beautify/commit/d0cb61b))
@@ -196,8 +213,7 @@
 
 
 
-<a name="0.1.1"></a>
-## 0.1.1 (2016-12-29)
+## <small>0.1.1 (2016-12-29)</small>
 
 * 0.1.1 ([d1570ad](https://github.com/gitscrum/posthtml-beautify/commit/d1570ad))
 * Update readme.md ([f7426d8](https://github.com/gitscrum/posthtml-beautify/commit/f7426d8))
@@ -237,8 +253,7 @@
 
 
 
-<a name="0.1.0"></a>
-# 0.1.0 (2016-10-12)
+## 0.1.0 (2016-10-12)
 
 * 0.1.0 ([74183a3](https://github.com/gitscrum/posthtml-beautify/commit/74183a3))
 * docs(readme): add description for options sync ([dcf6b06](https://github.com/gitscrum/posthtml-beautify/commit/dcf6b06))
@@ -260,8 +275,7 @@
 
 
 
-<a name="0.0.6"></a>
-## 0.0.6 (2016-09-19)
+## <small>0.0.6 (2016-09-19)</small>
 
 * 0.0.6 ([9b3f61a](https://github.com/gitscrum/posthtml-beautify/commit/9b3f61a))
 * fix(*): fix last indent if only one element ([def6fcd](https://github.com/gitscrum/posthtml-beautify/commit/def6fcd))
@@ -287,8 +301,7 @@
 
 
 
-<a name="0.0.5"></a>
-## 0.0.5 (2016-08-04)
+## <small>0.0.5 (2016-08-04)</small>
 
 * 0.0.5 ([b306412](https://github.com/gitscrum/posthtml-beautify/commit/b306412))
 * fix(*): fix according to clinton recommendations ([b791b71](https://github.com/gitscrum/posthtml-beautify/commit/b791b71))
@@ -299,8 +312,7 @@
 
 
 
-<a name="0.0.4"></a>
-## 0.0.4 (2016-08-01)
+## <small>0.0.4 (2016-08-01)</small>
 
 * 0.0.4 ([0c9f3e0](https://github.com/gitscrum/posthtml-beautify/commit/0c9f3e0))
 * docs(readme): add description for new feature eof ([54457fa](https://github.com/gitscrum/posthtml-beautify/commit/54457fa))
@@ -314,8 +326,7 @@
 
 
 
-<a name="0.0.3"></a>
-## 0.0.3 (2016-07-22)
+## <small>0.0.3 (2016-07-22)</small>
 
 * 0.0.3 ([e80f9af](https://github.com/gitscrum/posthtml-beautify/commit/e80f9af))
 * fix(package): lose dependencies pkg ([ed033da](https://github.com/gitscrum/posthtml-beautify/commit/ed033da))
@@ -323,8 +334,7 @@
 
 
 
-<a name="0.0.2"></a>
-## 0.0.2 (2016-07-22)
+## <small>0.0.2 (2016-07-22)</small>
 
 * 0.0.2 ([55d93aa](https://github.com/gitscrum/posthtml-beautify/commit/55d93aa))
 * chore(*): fixed #17, add ignore to clinton config and edit editorconfig ([4a6a426](https://github.com/gitscrum/posthtml-beautify/commit/4a6a426)), closes [#17](https://github.com/gitscrum/posthtml-beautify/issues/17)
@@ -341,12 +351,11 @@
 
 
 
-<a name="0.0.1"></a>
-## 0.0.1 (2016-07-08)
+## <small>0.0.1 (2016-07-08)</small>
 
 * Added posthtml in devDependencies for testing ([b32764c](https://github.com/gitscrum/posthtml-beautify/commit/b32764c))
-* bump ([9fee393](https://github.com/gitscrum/posthtml-beautify/commit/9fee393))
 * bump ([fae6efa](https://github.com/gitscrum/posthtml-beautify/commit/fae6efa))
+* bump ([9fee393](https://github.com/gitscrum/posthtml-beautify/commit/9fee393))
 * Fixed #11, now rules as property ([0d2d4f2](https://github.com/gitscrum/posthtml-beautify/commit/0d2d4f2)), closes [#11](https://github.com/gitscrum/posthtml-beautify/issues/11)
 * Fixed #12, added clinton ([2a0eef9](https://github.com/gitscrum/posthtml-beautify/commit/2a0eef9)), closes [#12](https://github.com/gitscrum/posthtml-beautify/issues/12)
 * Fixed #12, change xo to eslint ([4774642](https://github.com/gitscrum/posthtml-beautify/commit/4774642)), closes [#12](https://github.com/gitscrum/posthtml-beautify/issues/12)
@@ -361,8 +370,7 @@
 
 
 
-<a name="0.0.0"></a>
-# 0.0.0 (2016-07-01)
+## 0.0.0 (2016-07-01)
 
 * Fixed #1, init project ([c879e64](https://github.com/gitscrum/posthtml-beautify/commit/c879e64)), closes [#1](https://github.com/gitscrum/posthtml-beautify/issues/1)
 * init ([6ba3b22](https://github.com/gitscrum/posthtml-beautify/commit/6ba3b22))
