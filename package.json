@@ -44,6 +44,7 @@
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
     "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/plugin-transform-template-literals": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/register": "^7.0.0",
     "@commitlint/cli": "^7.2.1",
@@ -135,6 +136,7 @@
           [
             "@babel/plugin-transform-runtime"
           ],
+          "@babel/plugin-transform-template-literals",
           "add-module-exports"
         ]
       }
