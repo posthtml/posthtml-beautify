@@ -1,6 +1,6 @@
 {
   "name": "posthtml-beautify",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "A posthtml plugin to beautify you html files",
   "license": "MIT",
   "repository": "gitscrum/posthtml-beautify",

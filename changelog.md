@@ -1,5 +1,21 @@
+## <small>0.2.4 (2018-11-22)</small>
+
+
+
+
+## <small>0.2.3 (2018-11-22)</small>
+
+* 0.2.3 ([03291ec](https://github.com/gitscrum/posthtml-beautify/commit/03291ec))
+* build: update changelog ([4a22aa1](https://github.com/gitscrum/posthtml-beautify/commit/4a22aa1))
+* feat: install Babel plugin for IE11 support ([21cbc34](https://github.com/gitscrum/posthtml-beautify/commit/21cbc34))
+* docs: rebuild ([c1b8f0f](https://github.com/gitscrum/posthtml-beautify/commit/c1b8f0f))
+
+
+
 ## <small>0.2.2 (2018-11-21)</small>
 
+* 0.2.2 ([ffcc253](https://github.com/gitscrum/posthtml-beautify/commit/ffcc253))
+* build: update changelog ([830ae8c](https://github.com/gitscrum/posthtml-beautify/commit/830ae8c))
 
 
 
