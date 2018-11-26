@@ -1,5 +1,13 @@
+## <small>0.2.5 (2018-11-25)</small>
+
+* feat: revert previous changes ([ea89ba6](https://github.com/gitscrum/posthtml-beautify/commit/ea89ba6))
+
+
+
 ## <small>0.2.4 (2018-11-22)</small>
 
+* 0.2.4 ([b302ed4](https://github.com/gitscrum/posthtml-beautify/commit/b302ed4))
+* build: update changelog ([0d0b4fb](https://github.com/gitscrum/posthtml-beautify/commit/0d0b4fb))
 
 
 
