@@ -43,11 +43,11 @@ import beautify from 'posthtml-beautify';
 const html = readFileSync('input.html', 'utf8');
 
 posthtml()
-    .use(beautify({rules: {indent: 4}}))
-    .process(html)
-    .then(result => {
-        writeFileSync('output.html', result.html);
-    });
+  .use(beautify({rules: {indent: 4}}))
+  .process(html)
+  .then(result => {
+    writeFileSync('output.html', result.html);
+  });
 
 ```
 *Returns html-formatted according to rules based on the use [HTML5 syntax Style Guide](http://www.w3schools.com/html/html5_syntax.asp), [Code Guide](http://codeguide.co/#html) with custom settings `indent: 4`*
