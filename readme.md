@@ -31,7 +31,7 @@ Format your html and inline css markup according to the [HTML5 syntax Style Guid
 npm i -S posthtml posthtml-beautify
 ```
 
-> **Note:** This project is compatible with node v7+
+> **Note:** This project is compatible with node v8+
 
 ## Usage
 
