@@ -2,7 +2,7 @@
 
 > A [posthtml](https://github.com/posthtml) plugin to beautify you html files
 
-[![Travis Build Status](https://img.shields.io/travis/Scrum/posthtml-beautify/master.svg?style=flat-square&label=unix)](https://travis-ci.org/Scrum/posthtml-beautify)[![AppVeyor Build Status](https://img.shields.io/appveyor/ci/GitScrum/posthtml-beautify/master.svg?style=flat-square&label=windows)](https://ci.appveyor.com/project/GitScrum/posthtml-beautify)[![node](https://img.shields.io/node/v/post-sequence.svg?maxAge=2592000&style=flat-square)]()[![npm version](https://img.shields.io/npm/v/posthtml-beautify.svg?style=flat-square)](https://www.npmjs.com/package/posthtml-beautify)[![Dependency Status](https://david-dm.org/gitscrum/posthtml-beautify.svg?style=flat-square)](https://david-dm.org/gitscrum/posthtml-beautify)[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg?style=flat-square)](https://github.com/sindresorhus/xo)[![Coveralls status](https://img.shields.io/coveralls/Scrum/posthtml-beautify.svg?style=flat-square)](https://coveralls.io/r/Scrum/posthtml-beautify)
+[![Travis Build Status](https://img.shields.io/travis/posthtml/posthtml-beautify/master.svg?style=flat-square&label=unix)](https://travis-ci.org/posthtml/posthtml-beautify)[![AppVeyor Build Status](https://img.shields.io/appveyor/ci/gitscrum/posthtml-beautify/master.svg?style=flat-square&label=windows)](https://ci.appveyor.com/project/gitscrum/posthtml-beautify)[![node](https://img.shields.io/node/v/post-sequence.svg?maxAge=2592000&style=flat-square)]()[![npm version](https://img.shields.io/npm/v/posthtml-beautify.svg?style=flat-square)](https://www.npmjs.com/package/posthtml-beautify)[![Dependency Status](https://david-dm.org/gitscrum/posthtml-beautify.svg?style=flat-square)](https://david-dm.org/gitscrum/posthtml-beautify)[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg?style=flat-square)](https://github.com/sindresorhus/xo)[![Coveralls status](https://img.shields.io/coveralls/posthtml/posthtml-beautify.svg?style=flat-square)](https://coveralls.io/r/posthtml/posthtml-beautify)
 
 [![npm downloads](https://img.shields.io/npm/dm/posthtml-beautify.svg?style=flat-square)](https://www.npmjs.com/package/posthtml-beautify)[![npm](https://img.shields.io/npm/dt/posthtml-beautify.svg?style=flat-square)](https://www.npmjs.com/package/posthtml-beautify)[![Package Quality](http://npm.packagequality.com/shield/posthtml-beautify.svg?style=flat-square)](http://packagequality.com/#?package=posthtml-beautify)
 
@@ -23,7 +23,7 @@ Format your html and inline css markup according to the [HTML5 syntax Style Guid
 - [ ] Creates file from the inline styles
 - [ ] Create scoped class name (*use css-modules*) instead inline styles
 - [ ] validate elements and attributes name
-- [x] parses Internet Explorer Conditional Comments (*not support Downlevel-revealed and valid version, [htmlparse2 invalid parses](https://github.com/Scrum/posthtml-beautify/issues/36)*)
+- [x] parses Internet Explorer Conditional Comments (*not support Downlevel-revealed and valid version, [htmlparse2 invalid parses](https://github.com/posthtml/posthtml-beautify/issues/36)*)
 
 ## Install
 
@@ -31,7 +31,7 @@ Format your html and inline css markup according to the [HTML5 syntax Style Guid
 npm i -S posthtml posthtml-beautify
 ```
 
-> **Note:** This project is compatible with node v7+
+> **Note:** This project is compatible with node v8+
 
 ## Usage
 
@@ -43,11 +43,11 @@ import beautify from 'posthtml-beautify';
 const html = readFileSync('input.html', 'utf8');
 
 posthtml()
-    .use(beautify({rules: {indent: 4}}))
-    .process(html)
-    .then(result => {
-        writeFileSync('output.html', result.html);
-    });
+  .use(beautify({rules: {indent: 4}}))
+  .process(html)
+  .then(result => {
+    writeFileSync('output.html', result.html);
+  });
 
 ```
 *Returns html-formatted according to rules based on the use [HTML5 syntax Style Guide](http://www.w3schools.com/html/html5_syntax.asp), [Code Guide](http://codeguide.co/#html) with custom settings `indent: 4`*
