@@ -16,8 +16,11 @@
     "node": ">=7"
   },
   "scripts": {
-    "version": "conventional-changelog -i changelog.md -s -r 0 && git commit -am \"build: update changelog\"",
+    "version": "conventional-changelog -i changelog.md -s -r 0 && git add changelog.md && git commit -m \"build: update changelog\"",
     "prepare": "npm run build",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "lint": "eslint {src,test}/*.js *.md --fix",
+    "pretest": "clinton && npm run lint",
     "docs": "cross-env BABEL_ENV=docs webpack --progress --env.prod -p",
     "build": "rimraf lib && cross-env BABEL_ENV=production babel src -d lib --ignore docs",
     "test": "cross-env BABEL_ENV=production nyc ava",
@@ -93,8 +96,8 @@
     }
   },
   "lint-staged": {
-    "{src,test}/**/*.{js,html,htm}": "eslint --fix",
-    "*.md": "eslint --fix"
+    "{src,test}/**/*.js": "eslint",
+    "*.md": "eslint"
   },
   "ava": {
     "files": [
@@ -158,13 +161,6 @@
       "xo-space"
     ],
     "rules": {
-      "indent": [
-        2,
-        4,
-        {
-          "SwitchCase": 1
-        }
-      ],
       "capitalized-comments": "off",
       "no-new": "off"
     }
