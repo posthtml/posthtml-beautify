@@ -15,6 +15,20 @@ const optionsDefault = {
   }
 };
 
+const nodeHasContent = (node, callback) => {
+  if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+    node.content = callback(node.content);
+  }
+};
+
+const nodeHasAttrs = (node, callback) => {
+  if (
+    typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')
+  ) {
+    node.attrs = Object.keys(node.attrs).reduce(callback, {});
+  }
+};
+
 const clean = tree => parser(render(tree))
   .filter(node => {
     return typeof node === 'object' || (typeof node === 'string' && (node.trim().length !== 0 || /doctype/gi.test(node)));
@@ -29,9 +43,7 @@ const clean = tree => parser(render(tree))
 
 const parseConditional = tree => {
   return tree.map(node => {
-    if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
-      node.content = parseConditional(node.content);
-    }
+    nodeHasContent(node, parseConditional);
 
     if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
       const conditional = /^((?:<[^>]+>)?<!(?:--)?\[[\s\S]*?]>(?:<!)?(?:-->)?)([\s\S]*?)(<!(?:--<!)?\[[\s\S]*?](?:--)?>)$/
@@ -123,9 +135,7 @@ const indent = (tree, {rules: {indent, eol, blankLines}}) => {
 
 const attributesBoolean = (tree, {attrs: {boolean}}) => {
   const removeAttributeValue = tree => tree.map(node => {
-    if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
-      node.content = removeAttributeValue(node.content);
-    }
+    nodeHasContent(node, removeAttributeValue);
 
     if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')) {
       Object.keys(node.attrs).forEach(key => {
@@ -148,9 +158,7 @@ const lowerElementName = (tree, {tags}) => {
   tags = tags.map(({name}) => name);
 
   const bypass = tree => tree.map(node => {
-    if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
-      node.content = bypass(node.content);
-    }
+    nodeHasContent(node, bypass);
 
     if (
       typeof node === 'object' &&
@@ -168,16 +176,9 @@ const lowerElementName = (tree, {tags}) => {
 
 const lowerAttributeName = tree => {
   const bypass = tree => tree.map(node => {
-    if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
-      node.content = bypass(node.content);
-    }
+    nodeHasContent(node, bypass);
 
-    if (
-      typeof node === 'object' &&
-            Object.prototype.hasOwnProperty.call(node, 'attrs')
-    ) {
-      node.attrs = Object.keys(node.attrs).reduce((previousValue, key) => Object.assign(previousValue, {[key.toLowerCase()]: node.attrs[key]}), {});
-    }
+    nodeHasAttrs(node, (previousValue, key) => Object.assign(previousValue, {[key.toLowerCase()]: node.attrs[key]}));
 
     return node;
   });
@@ -189,26 +190,19 @@ const eof = (tree, {rules: {eof}}) => eof ? [...tree, eof] : tree;
 
 const mini = (tree, {mini}) => {
   const bypass = tree => tree.map(node => {
-    if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
-      node.content = bypass(node.content);
-    }
+    nodeHasContent(node, bypass);
 
-    if (
-      typeof node === 'object' &&
-            Object.prototype.hasOwnProperty.call(node, 'attrs')
-    ) {
-      node.attrs = Object.keys(node.attrs).reduce((previousValue, key) => {
-        if (
-          mini.removeAttribute &&
-                    mini.removeAttribute === 'empty' &&
-                    node.attrs[key].length === 0
-        ) {
-          return previousValue;
-        }
+    nodeHasAttrs(node, (previousValue, key) => {
+      if (
+        mini.removeAttribute &&
+        mini.removeAttribute === 'empty' &&
+        node.attrs[key].length === 0
+      ) {
+        return previousValue;
+      }
 
-        return Object.assign(previousValue, {[key.toLowerCase()]: node.attrs[key]});
-      }, {});
-    }
+      return Object.assign(previousValue, {[key.toLowerCase()]: node.attrs[key]});
+    });
 
     return node;
   });
