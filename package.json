@@ -4,7 +4,7 @@
   "description": "A posthtml plugin to beautify you html files",
   "license": "MIT",
   "repository": "gitscrum/posthtml-beautify",
-  "homepage": "gitscrum/posthtml-beautify#readme",
+  "homepage": "https://github.com/gitscrum/posthtml-beautify#readme",
   "bugs": "gitscrum/posthtml-beautify/issues",
   "author": {
     "name": "Ivan Demidov",
