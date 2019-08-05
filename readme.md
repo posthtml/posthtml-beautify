@@ -147,31 +147,31 @@ output.html
 Type: `Object`  
 Default:
 
-    - **Indent**  
-    Type: `Number|String(only tab)`  
-    Default: 2  
-    Description: *A numeric value indicates specifies the number of spaces. The string value only `tab`*
+  - **Indent**  
+  Type: `Number|String(only tab)`  
+  Default: 2  
+  Description: *A numeric value indicates specifies the number of spaces. The string value only `tab`*
 
-    - **blankLines**  
-    Type: `String|Boolean(only false)`  
-    Default: '\n'  
-    Description: *Add or remove blank lines to separate large or logical code blocks*
+  - **blankLines**  
+  Type: `String|Boolean(only false)`  
+  Default: '\n'  
+  Description: *Add or remove blank lines to separate large or logical code blocks*
 
-    - **eol** (*end of line*)  
-    Type: `String`  
-    Default: '\n'  
-    Description: *As value is a string symbol which is added to the end of the row*
+  - **eol** (*end of line*)  
+  Type: `String`  
+  Default: '\n'  
+  Description: *As value is a string symbol which is added to the end of the row*
 
-    - **eof** (*end of file*)  
-    Type: `String|Boolean`  
-    Default: '\n'  
-    Description: *As value is a string symbol which is added to the end of the file and will not adds if you specify a boolean value of `false`*
+  - **eof** (*end of file*)  
+  Type: `String|Boolean`  
+  Default: '\n'  
+  Description: *As value is a string symbol which is added to the end of the file and will not adds if you specify a boolean value of `false`*
 
 ### `mini`
 Type: `Object`  
 Default:
 
-    - **removeAttribute**  
-    Type: `String|Boolean`  
-    Default: false  
-    Description: *Removes attributes that do not matter. The string value only `empty`*
+  - **removeAttribute**  
+  Type: `String|Boolean`  
+  Default: false  
+  Description: *Removes attributes that do not matter. The string value only `empty`*
