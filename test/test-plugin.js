@@ -1,6 +1,4 @@
-// import {readFile} from 'fs';
 import test from 'ava';
-// import isPromise from 'is-promise';
 import {processing, read} from './utils';
 import beautify from '../src';
 
@@ -119,4 +117,11 @@ test('processing with plugin beautify and include should return equal html which
   const expected = await read('test/expected/output-conditional-comment.html');
   const fixtures = (await processing(await read('test/fixtures/input-conditional-comment.html'), [require('posthtml-include')(), beautify()])).html;
   t.deepEqual(expected, fixtures);
+});
+
+test('processing with plugin beautify should return format js', async t => {
+  t.deepEqual(
+    (await read('test/expected/output-inline-js.html')),
+    (await processing(await read('test/fixtures/input-inline-js.html'), [beautify()])).html
+  );
 });
