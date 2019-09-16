@@ -11,5 +11,5 @@ test('processing not should return promise with use option sync', t => {
 });
 
 test('processing should return object with use option sync', t => {
-  t.deepEqual(typeof processing('<div></div>', [], {sync: true}), 'object');
+  t.is(typeof processing('<div></div>', [], {sync: true}), 'object');
 });
