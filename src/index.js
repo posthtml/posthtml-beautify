@@ -4,6 +4,7 @@ import rules from './rules.js';
 import attrs from './attrs.js';
 import tags from './tags.js';
 import deepmerge from 'deepmerge';
+import {js} from 'js-beautify';
 
 const optionsDefault = {
   rules,
@@ -12,6 +13,10 @@ const optionsDefault = {
   sync: false,
   mini: {
     removeAttribute: false
+  },
+  jsBeautifyOptions: {
+    indent_size: 2, // eslint-disable-line camelcase
+    jslint_happy: true // eslint-disable-line camelcase
   }
 };
 
@@ -27,6 +32,12 @@ const nodeHasAttrs = (node, callback) => {
   ) {
     node.attrs = Object.keys(node.attrs).reduce(callback, {});
   }
+};
+
+const getIndent = (level, {indent, eol}) => {
+  const indentString = typeof indent === 'number' ? ' '.repeat(indent) : '\t';
+
+  return `${eol}${indentString.repeat(level)}`;
 };
 
 const clean = tree => parser(render(tree))
@@ -81,10 +92,6 @@ const renderConditional = tree => {
 };
 
 const indent = (tree, {rules: {indent, eol, blankLines}}) => {
-  const indentString = typeof indent === 'number' ? ' '.repeat(indent) : '\t';
-
-  const getIndent = level => `${eol}${indentString.repeat(level)}`;
-
   const setIndent = (tree, level = 0) => tree.reduce((previousValue, node, index) => {
     if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
       node.content = setIndent(node.content, ++level);
@@ -96,7 +103,7 @@ const indent = (tree, {rules: {indent, eol, blankLines}}) => {
     }
 
     if (level === 0 && (tree.length - 1) === index && tree.length > 1) {
-      return [...previousValue, getIndent(level), node];
+      return [...previousValue, getIndent(level, {indent, eol}), node];
     }
 
     if (level === 0 && (tree.length - 1) === index && tree.length === 1) {
@@ -108,26 +115,26 @@ const indent = (tree, {rules: {indent, eol, blankLines}}) => {
     }
 
     if (level === 0) {
-      return [...previousValue, getIndent(level), node, blankLines];
+      return [...previousValue, getIndent(level, {indent, eol}), node, blankLines];
     }
 
     if ((tree.length - 1) === index) {
-      return [...previousValue, getIndent(level), node, getIndent(--level)];
+      return [...previousValue, getIndent(level, {indent, eol}), node, getIndent(--level, {indent, eol})];
     }
 
     if (typeof node === 'string' && /<!(?:--)?\[endif]*?]>/.test(node)) {
-      return [...previousValue, getIndent(level), node, blankLines];
+      return [...previousValue, getIndent(level, {indent, eol}), node, blankLines];
     }
 
     if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
-      return [...previousValue, getIndent(level), node];
+      return [...previousValue, getIndent(level, {indent, eol}), node];
     }
 
     if (node.tag === false) {
       return [...previousValue, ...node.content.slice(0, -1)];
     }
 
-    return [...previousValue, getIndent(level), node, blankLines];
+    return [...previousValue, getIndent(level, {indent, eol}), node, blankLines];
   }, []);
 
   return setIndent(tree);
@@ -210,11 +217,32 @@ const mini = (tree, {mini}) => {
   return bypass(tree);
 };
 
+const jsPrettier = (tree, {rules: {indent, eol}, jsBeautifyOptions}) => {
+  let level = 0;
+  const prettier = tree => tree.map(node => {
+    ++level;
+    nodeHasContent(node, prettier);
+
+    if (node.tag === 'script') {
+      node.content = ['\n', js(node.content.join(''), {
+        ...jsBeautifyOptions,
+        indent_level: level // eslint-disable-line camelcase
+      }), getIndent(--level, {indent, eol})];
+    }
+
+    --level;
+    return node;
+  });
+
+  return prettier(tree);
+};
+
 const beautify = (tree, options) => [
   clean,
   parseConditional,
   renderConditional,
   indent,
+  jsPrettier,
   lowerElementName,
   lowerAttributeName,
   attributesBoolean,
