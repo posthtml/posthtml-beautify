@@ -1,17 +1,35 @@
+## 0.3.0 (2019-09-16)
+
+* docs: add description for js-beautify ([b47f230](https://github.com/posthtml/posthtml-beautify/commit/b47f230))
+* docs: fix options ([14d09bd](https://github.com/posthtml/posthtml-beautify/commit/14d09bd))
+* docs: rebuild ([18de96f](https://github.com/posthtml/posthtml-beautify/commit/18de96f))
+* docs: update demo page ([257d0dd](https://github.com/posthtml/posthtml-beautify/commit/257d0dd))
+* build: bundle ([49b5978](https://github.com/posthtml/posthtml-beautify/commit/49b5978))
+* build: fix lost pkg ([24afb0c](https://github.com/posthtml/posthtml-beautify/commit/24afb0c))
+* build: update depDev ([4fbacfc](https://github.com/posthtml/posthtml-beautify/commit/4fbacfc))
+* feat: beautify script, close #234 ([8556f97](https://github.com/posthtml/posthtml-beautify/commit/8556f97)), closes [#234](https://github.com/posthtml/posthtml-beautify/issues/234)
+* test: auto update ([37c2867](https://github.com/posthtml/posthtml-beautify/commit/37c2867))
+* test: for beautify script, issue #234 ([d407493](https://github.com/posthtml/posthtml-beautify/commit/d407493)), closes [#234](https://github.com/posthtml/posthtml-beautify/issues/234)
+* style: indent according linter ([5c92797](https://github.com/posthtml/posthtml-beautify/commit/5c92797))
+
+
+
 ## <small>0.2.6 (2019-06-18)</small>
 
+* 0.2.6 ([97163aa](https://github.com/posthtml/posthtml-beautify/commit/97163aa))
+* build: add babel upgrade ([29dc2d1](https://github.com/posthtml/posthtml-beautify/commit/29dc2d1))
+* build: add jsinspector, close #132 ([22cb9b1](https://github.com/posthtml/posthtml-beautify/commit/22cb9b1)), closes [#132](https://github.com/posthtml/posthtml-beautify/issues/132)
+* build: add minify for js ([b67708f](https://github.com/posthtml/posthtml-beautify/commit/b67708f))
+* build: fix path to homepage ([c2a4416](https://github.com/posthtml/posthtml-beautify/commit/c2a4416))
+* build: update build system, close #209 ([ae50086](https://github.com/posthtml/posthtml-beautify/commit/ae50086)), closes [#209](https://github.com/posthtml/posthtml-beautify/issues/209)
+* build: update changelog ([7898989](https://github.com/posthtml/posthtml-beautify/commit/7898989))
+* build: update depDev ([1cfb2b4](https://github.com/posthtml/posthtml-beautify/commit/1cfb2b4))
 * ci: drop support for old node ([7e26211](https://github.com/posthtml/posthtml-beautify/commit/7e26211))
 * style: according eslint ([f7fd1dc](https://github.com/posthtml/posthtml-beautify/commit/f7fd1dc))
 * style: fix indent ([e824c60](https://github.com/posthtml/posthtml-beautify/commit/e824c60))
 * style: fix indent ([52a56d5](https://github.com/posthtml/posthtml-beautify/commit/52a56d5))
 * style: update indent rules ([932be49](https://github.com/posthtml/posthtml-beautify/commit/932be49))
 * perf: according jsinspect, close #132 ([4bd4e2c](https://github.com/posthtml/posthtml-beautify/commit/4bd4e2c)), closes [#132](https://github.com/posthtml/posthtml-beautify/issues/132)
-* build: add babel upgrade ([29dc2d1](https://github.com/posthtml/posthtml-beautify/commit/29dc2d1))
-* build: add jsinspector, close #132 ([22cb9b1](https://github.com/posthtml/posthtml-beautify/commit/22cb9b1)), closes [#132](https://github.com/posthtml/posthtml-beautify/issues/132)
-* build: add minify for js ([b67708f](https://github.com/posthtml/posthtml-beautify/commit/b67708f))
-* build: fix path to homepage ([c2a4416](https://github.com/posthtml/posthtml-beautify/commit/c2a4416))
-* build: update build system, close #209 ([ae50086](https://github.com/posthtml/posthtml-beautify/commit/ae50086)), closes [#209](https://github.com/posthtml/posthtml-beautify/issues/209)
-* build: update depDev ([1cfb2b4](https://github.com/posthtml/posthtml-beautify/commit/1cfb2b4))
 * docs: change user name, close #232 ([c736183](https://github.com/posthtml/posthtml-beautify/commit/c736183)), closes [#232](https://github.com/posthtml/posthtml-beautify/issues/232)
 
 
