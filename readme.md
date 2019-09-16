@@ -175,3 +175,10 @@ Default:
   Type: `String|Boolean`  
   Default: false  
   Description: *Removes attributes that do not matter. The string value only `empty`*
+
+### `jsBeautifyOptions`
+Type: `Object`  
+Default: *All options as per package [js-beautify](https://github.com/beautify-web/js-beautify) except, `indent_level` because calculated and set according to context*
+
+## Related
+  - [js-beautify](https://github.com/beautify-web/js-beautify) - Beautifier for javascript
