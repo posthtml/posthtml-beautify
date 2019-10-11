@@ -1,12 +1,26 @@
+## <small>0.3.1 (2019-10-11)</small>
+
+* ci: drop and up node version ([e8b9bf8](https://github.com/posthtml/posthtml-beautify/commit/e8b9bf8))
+* build: update depDev ([213b8c3](https://github.com/posthtml/posthtml-beautify/commit/213b8c3))
+* docs: change example to link on demo ([7afd330](https://github.com/posthtml/posthtml-beautify/commit/7afd330))
+* docs: rebuild ([0f544b3](https://github.com/posthtml/posthtml-beautify/commit/0f544b3))
+* docs: update ([0c54fa5](https://github.com/posthtml/posthtml-beautify/commit/0c54fa5))
+* docs: update example ([40b95be](https://github.com/posthtml/posthtml-beautify/commit/40b95be))
+* fix: script witchout content, close #237 ([06231d5](https://github.com/posthtml/posthtml-beautify/commit/06231d5)), closes [#237](https://github.com/posthtml/posthtml-beautify/issues/237)
+
+
+
 ## 0.3.0 (2019-09-16)
 
+* 0.3.0 ([a6e08f0](https://github.com/posthtml/posthtml-beautify/commit/a6e08f0))
+* build: bundle ([49b5978](https://github.com/posthtml/posthtml-beautify/commit/49b5978))
+* build: fix lost pkg ([24afb0c](https://github.com/posthtml/posthtml-beautify/commit/24afb0c))
+* build: update changelog ([c511193](https://github.com/posthtml/posthtml-beautify/commit/c511193))
+* build: update depDev ([4fbacfc](https://github.com/posthtml/posthtml-beautify/commit/4fbacfc))
 * docs: add description for js-beautify ([b47f230](https://github.com/posthtml/posthtml-beautify/commit/b47f230))
 * docs: fix options ([14d09bd](https://github.com/posthtml/posthtml-beautify/commit/14d09bd))
 * docs: rebuild ([18de96f](https://github.com/posthtml/posthtml-beautify/commit/18de96f))
 * docs: update demo page ([257d0dd](https://github.com/posthtml/posthtml-beautify/commit/257d0dd))
-* build: bundle ([49b5978](https://github.com/posthtml/posthtml-beautify/commit/49b5978))
-* build: fix lost pkg ([24afb0c](https://github.com/posthtml/posthtml-beautify/commit/24afb0c))
-* build: update depDev ([4fbacfc](https://github.com/posthtml/posthtml-beautify/commit/4fbacfc))
 * feat: beautify script, close #234 ([8556f97](https://github.com/posthtml/posthtml-beautify/commit/8556f97)), closes [#234](https://github.com/posthtml/posthtml-beautify/issues/234)
 * test: auto update ([37c2867](https://github.com/posthtml/posthtml-beautify/commit/37c2867))
 * test: for beautify script, issue #234 ([d407493](https://github.com/posthtml/posthtml-beautify/commit/d407493)), closes [#234](https://github.com/posthtml/posthtml-beautify/issues/234)

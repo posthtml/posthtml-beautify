@@ -224,10 +224,13 @@ const jsPrettier = (tree, {rules: {indent, eol}, jsBeautifyOptions}) => {
     nodeHasContent(node, prettier);
 
     if (node.tag === 'script') {
-      node.content = ['\n', js(node.content.join(''), {
-        ...jsBeautifyOptions,
-        indent_level: level // eslint-disable-line camelcase
-      }), getIndent(--level, {indent, eol})];
+      const content = node.content ?
+        ['\n', js(node.content.join(''), {
+          ...jsBeautifyOptions,
+          indent_level: level // eslint-disable-line camelcase
+        }), getIndent(--level, {indent, eol})] :
+        [''];
+      node.content = content;
     }
 
     --level;
