@@ -44,6 +44,24 @@ test('processing with plugin beautify should return equal html', async t => {
   t.deepEqual(fixture, (await processing(fixture, [beautify({rules: {eof: false}})])).html);
 });
 
+test('processing with plugin beautify should return allowed max line content', async t => {
+  const fixture = '<div>some long long content here to test max len</div>';
+  const expected = `<div>
+  some long long content here to test max len
+</div>`;
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false, maxlen: 10}})])).html);
+});
+
+test('processing with plugin beautify should return allowed max line content #2', async t => {
+  const fixture = '<div><a>some long long content here to test max len</a></div>';
+  const expected = `<div>
+  <a>
+    some long long content here to test max len
+  </a>
+</div>`;
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false, maxlen: 10}})])).html);
+});
+
 test('processing with plugin beautify should removing trailing slash in self-closing', async t => {
   const fixture = '<img src="image.jpg" />';
   const expected = '<img src="image.jpg">';
