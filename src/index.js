@@ -91,7 +91,7 @@ const renderConditional = tree => {
   }, []);
 };
 
-const indent = (tree, {rules: {indent, eol, blankLines}}) => {
+const indent = (tree, {rules: {indent, eol, blankLines, maxlen}}) => {
   const setIndent = (tree, level = 0) => tree.reduce((previousValue, node, index) => {
     if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
       node.content = setIndent(node.content, ++level);
@@ -99,6 +99,10 @@ const indent = (tree, {rules: {indent, eol, blankLines}}) => {
     }
 
     if (tree.length === 1 && typeof tree[index] === 'string') {
+      if (tree[index].length >= maxlen) {
+        return [...previousValue, getIndent(level, {indent, eol}), node, getIndent(--level, {indent, eol})];
+      }
+
       return [...previousValue, node];
     }
 

@@ -80,6 +80,11 @@ Default:
   Default: '\n'  
   Description: *As value is a string symbol which is added to the end of the file and will not adds if you specify a boolean value of `false`*
 
+  - **maxlen**  
+  Type: `Number`  
+  Default: '80'  
+  Description: *checks for the max length of the content, indents the whole content to a new line*
+
 ### `mini`
 Type: `Object`  
 Default:

@@ -173,7 +173,8 @@
     "rules": {
       "unicorn/prevent-abbreviations": "off",
       "capitalized-comments": "off",
-      "no-new": "off"
+      "no-new": "off",
+      "complexity": ["warn", 21]
     }
   },
   "clinton": {
