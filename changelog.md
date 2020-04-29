@@ -1,7 +1,22 @@
+## 0.4.0 (2020-04-29)
+
+* ci: appveyor incorrect with node 14 ([3864d1a](https://github.com/posthtml/posthtml-beautify/commit/3864d1a))
+* ci: drop support appveyor, issue #242 ([a8fba66](https://github.com/posthtml/posthtml-beautify/commit/a8fba66)), closes [#242](https://github.com/posthtml/posthtml-beautify/issues/242)
+* ci: drop support old node ([8e2dc29](https://github.com/posthtml/posthtml-beautify/commit/8e2dc29))
+* docs: update ([df36a8a](https://github.com/posthtml/posthtml-beautify/commit/df36a8a))
+* fix: after update dep ([aeb6e3a](https://github.com/posthtml/posthtml-beautify/commit/aeb6e3a))
+* build: update dep dev ([f7f2a43](https://github.com/posthtml/posthtml-beautify/commit/f7f2a43))
+* refactor: removed unneccesary variables ([774951c](https://github.com/posthtml/posthtml-beautify/commit/774951c))
+* feat: added maxlen option ([205af78](https://github.com/posthtml/posthtml-beautify/commit/205af78))
+
+
+
 ## <small>0.3.1 (2019-10-11)</small>
 
-* ci: drop and up node version ([e8b9bf8](https://github.com/posthtml/posthtml-beautify/commit/e8b9bf8))
+* 0.3.1 ([7552dfb](https://github.com/posthtml/posthtml-beautify/commit/7552dfb))
+* build: update changelog ([3522d53](https://github.com/posthtml/posthtml-beautify/commit/3522d53))
 * build: update depDev ([213b8c3](https://github.com/posthtml/posthtml-beautify/commit/213b8c3))
+* ci: drop and up node version ([e8b9bf8](https://github.com/posthtml/posthtml-beautify/commit/e8b9bf8))
 * docs: change example to link on demo ([7afd330](https://github.com/posthtml/posthtml-beautify/commit/7afd330))
 * docs: rebuild ([0f544b3](https://github.com/posthtml/posthtml-beautify/commit/0f544b3))
 * docs: update ([0c54fa5](https://github.com/posthtml/posthtml-beautify/commit/0c54fa5))
@@ -390,8 +405,10 @@
 * fix(*): fix according to clinton recommendations ([b791b71](https://github.com/posthtml/posthtml-beautify/commit/b791b71))
 * fix(*): incorrect write value ([2ba2a13](https://github.com/posthtml/posthtml-beautify/commit/2ba2a13))
 * chore(changelog): Update changelog ([d7ac7fe](https://github.com/posthtml/posthtml-beautify/commit/d7ac7fe))
+* chore(package): add testen, fixed #23 ([69a5bad](https://github.com/posthtml/posthtml-beautify/commit/69a5bad)), closes [#23](https://github.com/posthtml/posthtml-beautify/issues/23)
 * chore(package): update devDep ([a3401bf](https://github.com/posthtml/posthtml-beautify/commit/a3401bf))
 * refactor(*): adds a parser ie conditional comments, fixed #8 ([a5b6ffc](https://github.com/posthtml/posthtml-beautify/commit/a5b6ffc)), closes [#8](https://github.com/posthtml/posthtml-beautify/issues/8)
+* refactor(index.js): add tmp conditional internet explorer comment ([4f58d27](https://github.com/posthtml/posthtml-beautify/commit/4f58d27))
 
 
 
@@ -400,9 +417,7 @@
 * 0.0.4 ([0c9f3e0](https://github.com/posthtml/posthtml-beautify/commit/0c9f3e0))
 * docs(readme): add description for new feature eof ([54457fa](https://github.com/posthtml/posthtml-beautify/commit/54457fa))
 * feat(eof): add EOF feature #29 ([cff9c3a](https://github.com/posthtml/posthtml-beautify/commit/cff9c3a)), closes [#29](https://github.com/posthtml/posthtml-beautify/issues/29)
-* refactor(index.js): add tmp conditional internet explorer comment ([4f58d27](https://github.com/posthtml/posthtml-beautify/commit/4f58d27))
 * chore(changelog): Update changelog ([69939c3](https://github.com/posthtml/posthtml-beautify/commit/69939c3))
-* chore(package): add testen, fixed #23 ([69a5bad](https://github.com/posthtml/posthtml-beautify/commit/69a5bad)), closes [#23](https://github.com/posthtml/posthtml-beautify/issues/23)
 * chore(package): update babel-register to version 6.11.6 ([a66b160](https://github.com/posthtml/posthtml-beautify/commit/a66b160))
 * chore(package): update coveralls to version 2.11.12 ([29b1d6b](https://github.com/posthtml/posthtml-beautify/commit/29b1d6b))
 * chore(package): update nyc to version 7.1.0 ([c1bcd7f](https://github.com/posthtml/posthtml-beautify/commit/c1bcd7f))
