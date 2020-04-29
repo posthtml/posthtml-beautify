@@ -30,7 +30,7 @@ const nodeHasAttrs = (node, callback) => {
   if (
     typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')
   ) {
-    node.attrs = Object.keys(node.attrs).reduce(callback, {});
+    node.attrs = Object.keys(node.attrs).reduce(callback, {}); // eslint-disable-line unicorn/no-fn-reference-in-iterator
   }
 };
 
@@ -56,8 +56,8 @@ const parseConditional = tree => {
   return tree.map(node => {
     nodeHasContent(node, parseConditional);
 
-    if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
-      const conditional = /^((?:<[^>]+>)?<!(?:--)?\[[\s\S]*?]>(?:<!)?(?:-->)?)([\s\S]*?)(<!(?:--<!)?\[[\s\S]*?](?:--)?>)$/
+    if (typeof node === 'string' && /<!(?:--)?\[[\S\s]*?]>/.test(node)) {
+      const conditional = /^((?:<[^>]+>)?<!(?:--)?\[[\S\s]*?]>(?:<!)?(?:-->)?)([\S\s]*?)(<!(?:--<!)?\[[\S\s]*?](?:--)?>)$/
         .exec(node)
         .slice(1)
         .map((node, index) => index === 1 ? {tag: 'conditional-content', content: clean(parser(node))} : node);
@@ -130,7 +130,7 @@ const indent = (tree, {rules: {indent, eol, blankLines, maxlen}}) => {
       return [...previousValue, getIndent(level, {indent, eol}), node, blankLines];
     }
 
-    if (typeof node === 'string' && /<!(?:--)?\[[\s\S]*?]>/.test(node)) {
+    if (typeof node === 'string' && /<!(?:--)?\[[\S\s]*?]>/.test(node)) {
       return [...previousValue, getIndent(level, {indent, eol}), node];
     }
 

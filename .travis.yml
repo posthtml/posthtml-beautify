@@ -1,10 +1,8 @@
 language: node_js
 node_js:
-  - v12
-  - v11
-  - v10
-  - v9
-  - v8
+  - 'node'
+  - 'lts/*'
+  - '10'
 
 after_success:
   - npm run coverage
