@@ -100,9 +100,7 @@ const indent = (tree, {rules: {indent, eol, blankLines, maxlen}}) => {
 
     if (tree.length === 1 && typeof tree[index] === 'string') {
       if (tree[index].length >= maxlen) {
-        let l = level;
-        let e = l;
-        return [...previousValue, getIndent(l, {indent, eol}), node, getIndent(--e, {indent, eol})];
+        return [...previousValue, getIndent(level, {indent, eol}), node, getIndent(--level, {indent, eol})];
       }
 
       return [...previousValue, node];
