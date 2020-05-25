@@ -223,9 +223,10 @@ const mini = (tree, {mini}) => {
 
 const sortAttr = (tree, {rules: {sortAttr}}) => {
   tree.map(node => {
-    if (node.attrs && Object.keys(node.attrs).length > 1 && sortAttr) {
-      var key = Object.keys(node.attrs)
-        .sort(function (key1, key2) {
+    if (sortAttr && node.attrs) {
+      var keys = Object.keys(node.attrs);
+      if (keys.length > 1) {
+        keys.sort(function (key1, key2) {
           if (key1 < key2) {
             return -1;
           }
@@ -237,13 +238,14 @@ const sortAttr = (tree, {rules: {sortAttr}}) => {
           return 0;
         });
 
-      const newAttrsObject = {};
+        const newAttrsObject = {};
 
-      key.forEach(k => {
-        newAttrsObject[k] = node.attrs[k];
-      });
+        keys.forEach(k => {
+          newAttrsObject[k] = node.attrs[k];
+        });
 
-      node.attrs = newAttrsObject;
+        node.attrs = newAttrsObject;
+      }
     }
 
     return node;
