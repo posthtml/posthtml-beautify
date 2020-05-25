@@ -221,23 +221,24 @@ const mini = (tree, {mini}) => {
   return bypass(tree);
 };
 
+const sortLogic = function (key1, key2) {
+  if (key1 < key2) {
+    return -1;
+  }
+
+  if (key1 > key2) {
+    return +1;
+  }
+
+  return 0;
+};
+
 const sortAttr = (tree, {rules: {sortAttr}}) => {
   tree.map(node => {
     if (sortAttr && node.attrs) {
       var keys = Object.keys(node.attrs);
       if (keys.length > 1) {
-        keys.sort(function (key1, key2) {
-          if (key1 < key2) {
-            return -1;
-          }
-
-          if (key1 > key2) {
-            return +1;
-          }
-
-          return 0;
-        });
-
+        keys = keys.sort(sortLogic);
         const newAttrsObject = {};
 
         keys.forEach(k => {
