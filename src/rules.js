@@ -3,5 +3,6 @@ export default {
   maxlen: 80,
   blankLines: '\n',
   eof: '\n',
-  eol: '\n'
+  eol: '\n',
+  sortAttr: false
 };

@@ -18,7 +18,7 @@ Format your html and inline css markup according to the [HTML5 syntax Style Guid
 - [x] Add 2 spaces of indentation. *Do not use TAB*.
 - [ ] Add language attribute
 - [ ] Add character encoding
-- [ ] Attribute order
+- [x] Attribute order
 - [x] Boolean attributes
 - [ ] Creates file from the inline styles
 - [ ] Create scoped class name (*use css-modules*) instead inline styles
@@ -84,6 +84,11 @@ Default:
   Type: `Number`  
   Default: '80'  
   Description: *checks for the max length of the content, indents the whole content to a new line*
+
+  - **sortAttr**  
+  Type: `Boolean`  
+  Default: false  
+  Description: *Sort the order of attributes in elements*
 
 ### `mini`
 Type: `Object`  
