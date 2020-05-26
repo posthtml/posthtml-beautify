@@ -236,17 +236,9 @@ const sortLogic = function (key1, key2) {
 const sortAttr = (tree, {rules: {sortAttr}}) => {
   tree.map(node => {
     if (sortAttr && node.attrs) {
-      var keys = Object.keys(node.attrs);
-      if (keys.length > 1) {
-        keys = keys.sort(sortLogic);
-        const newAttrsObject = {};
-
-        keys.forEach(k => {
-          newAttrsObject[k] = node.attrs[k];
-        });
-
-        node.attrs = newAttrsObject;
-      }
+      node.attrs = Object.keys(node.attrs)
+        .sort(sortLogic)
+        .reduce((current, key) => Object.assign(current, {[key]: node.attrs[key]}), {})
     }
 
     return node;
