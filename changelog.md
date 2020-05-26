@@ -1,11 +1,27 @@
+## 0.5.0 (2020-05-26)
+
+* build: update dep dev ([5f66365](https://github.com/posthtml/posthtml-beautify/commit/5f66365))
+* style: after update dev dep and lint ([cead49c](https://github.com/posthtml/posthtml-beautify/commit/cead49c))
+* refactor: added keys length check for perf ([58c56c9](https://github.com/posthtml/posthtml-beautify/commit/58c56c9))
+* refactor: extraced sort logic ([5382e21](https://github.com/posthtml/posthtml-beautify/commit/5382e21))
+* refactor: refactore checks for sortAttrs ([a2c1b53](https://github.com/posthtml/posthtml-beautify/commit/a2c1b53))
+* refactor: removed + sign for positive ([3e7ff26](https://github.com/posthtml/posthtml-beautify/commit/3e7ff26))
+* Update index.js ([2c702ac](https://github.com/posthtml/posthtml-beautify/commit/2c702ac))
+* feat: sorting of attributes ([0ef866b](https://github.com/posthtml/posthtml-beautify/commit/0ef866b))
+* ci: added github action ([1fbfb1b](https://github.com/posthtml/posthtml-beautify/commit/1fbfb1b))
+
+
+
 ## 0.4.0 (2020-04-29)
 
+* 0.4.0 ([c847758](https://github.com/posthtml/posthtml-beautify/commit/c847758))
+* build: update changelog ([086c003](https://github.com/posthtml/posthtml-beautify/commit/086c003))
+* build: update dep dev ([f7f2a43](https://github.com/posthtml/posthtml-beautify/commit/f7f2a43))
 * ci: appveyor incorrect with node 14 ([3864d1a](https://github.com/posthtml/posthtml-beautify/commit/3864d1a))
 * ci: drop support appveyor, issue #242 ([a8fba66](https://github.com/posthtml/posthtml-beautify/commit/a8fba66)), closes [#242](https://github.com/posthtml/posthtml-beautify/issues/242)
 * ci: drop support old node ([8e2dc29](https://github.com/posthtml/posthtml-beautify/commit/8e2dc29))
 * docs: update ([df36a8a](https://github.com/posthtml/posthtml-beautify/commit/df36a8a))
 * fix: after update dep ([aeb6e3a](https://github.com/posthtml/posthtml-beautify/commit/aeb6e3a))
-* build: update dep dev ([f7f2a43](https://github.com/posthtml/posthtml-beautify/commit/f7f2a43))
 * refactor: removed unneccesary variables ([774951c](https://github.com/posthtml/posthtml-beautify/commit/774951c))
 * feat: added maxlen option ([205af78](https://github.com/posthtml/posthtml-beautify/commit/205af78))
 
