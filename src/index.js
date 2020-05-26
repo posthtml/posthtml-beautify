@@ -221,6 +221,34 @@ const mini = (tree, {mini}) => {
   return bypass(tree);
 };
 
+const sortLogic = function (key1, key2) {
+  if (key1 < key2) {
+    return -1;
+  }
+
+  if (key1 > key2) {
+    return 1;
+  }
+
+  return 0;
+};
+
+const sortAttr = (tree, {rules: {sortAttr}}) => {
+  tree.map(node => {
+    if (sortAttr && node.attrs) {
+      const keys = Object.keys(node.attrs);
+      if (keys.length > 1) {
+        node.attrs = keys
+          .sort(sortLogic)
+          .reduce((current, key) => Object.assign(current, {[key]: node.attrs[key]}), {});
+      }
+    }
+
+    return node;
+  });
+  return tree;
+};
+
 const jsPrettier = (tree, {rules: {indent, eol}, jsBeautifyOptions}) => {
   let level = 0;
   const prettier = tree => tree.map(node => {
@@ -253,6 +281,7 @@ const beautify = (tree, options) => [
   lowerElementName,
   lowerAttributeName,
   attributesBoolean,
+  sortAttr,
   eof,
   mini
 ].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);

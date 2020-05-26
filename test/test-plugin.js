@@ -68,6 +68,24 @@ test('processing with plugin beautify should removing trailing slash in self-clo
   t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false}})])).html);
 });
 
+test('processing with plugin beautify sort the attribute list', async t => {
+  const fixture = '<p a="aa" c="cc" b="bb">a</p>';
+  const expected = '<p a="aa" b="bb" c="cc">a</p>';
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false, sortAttr: true}})])).html);
+});
+
+test('processing with plugin beautify sort the attribute list example 2', async t => {
+  const fixture = '<p a="aa" c b="bb">a</p>';
+  const expected = '<p a="aa" b="bb" c="">a</p>';
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false, sortAttr: true}})])).html);
+});
+
+test('processing with plugin beautify sort the attribute list example 3', async t => {
+  const fixture = '<p abc="aa" cba="" bac="bb">a</p>';
+  const expected = '<p abc="aa" bac="bb" cba="">a</p>';
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false, sortAttr: true}})])).html);
+});
+
 test('processing with plugin beautify should removing empty attribute', async t => {
   const fixture = '<img src="image.jpg" alt="">';
   const expected = '<img src="image.jpg">';
@@ -143,3 +161,4 @@ test('processing with plugin beautify should return format js', async t => {
     (await processing(await read('test/fixtures/input-inline-js.html'), [beautify()])).html
   );
 });
+
