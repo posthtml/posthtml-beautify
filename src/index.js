@@ -30,7 +30,7 @@ const nodeHasAttrs = (node, callback) => {
   if (
     typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')
   ) {
-    node.attrs = Object.keys(node.attrs).reduce(callback, {}); // eslint-disable-line unicorn/no-fn-reference-in-iterator
+    node.attrs = Object.keys(node.attrs).reduce(callback, {});
   }
 };
 
