@@ -11,7 +11,7 @@ test('plugin beautify must be function', t => {
 test('plugin beautify should return Error with use option sync', t => {
   const error = t.throws(() => {
     beautify()();
-  }, undefined);
+  });
 
   t.is(error.message, 'tree is not Array');
 });
