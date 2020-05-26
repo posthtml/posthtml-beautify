@@ -227,7 +227,7 @@ const sortLogic = function (key1, key2) {
   }
 
   if (key1 > key2) {
-    return +1;
+    return 1;
   }
 
   return 0;
