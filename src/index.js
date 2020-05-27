@@ -272,6 +272,22 @@ const jsPrettier = (tree, {rules: {indent, eol}, jsBeautifyOptions}) => {
   return prettier(tree);
 };
 
+const addLang = (tree, {rules: {lang}}) => {
+  if (!lang) {
+    return tree;
+  }
+
+  tree.map(node => {
+    if (node.tag) {
+      node.attrs = Object.assign({}, {lang}, node.attrs);
+    }
+
+    return node;
+  });
+
+  return tree;
+};
+
 const beautify = (tree, options) => [
   clean,
   parseConditional,
@@ -282,6 +298,7 @@ const beautify = (tree, options) => [
   lowerAttributeName,
   attributesBoolean,
   sortAttr,
+  addLang,
   eof,
   mini
 ].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);

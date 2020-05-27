@@ -4,5 +4,6 @@ export default {
   blankLines: '\n',
   eof: '\n',
   eol: '\n',
-  sortAttr: false
+  sortAttr: false,
+  lang: false
 };

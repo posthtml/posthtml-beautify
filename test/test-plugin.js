@@ -162,3 +162,20 @@ test('processing with plugin beautify should return format js', async t => {
   );
 });
 
+test('processing with plugin beautify to add language attribute', async t => {
+  const fixture = '<p >a</p>';
+  const expected = '<p lang="en">a</p>\n';
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {lang: 'en'}})])).html);
+});
+
+test('processing with plugin beautify to add language attribute with existing attr', async t => {
+  const fixture = '<p data="e">a</p>';
+  const expected = '<p lang="en" data="e">a</p>\n';
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {lang: 'en'}})])).html);
+});
+
+test('processing with plugin beautify to add language attribute with existing lang attribute', async t => {
+  const fixture = '<p lang="fr">a</p>';
+  const expected = '<p lang="fr">a</p>\n';
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {lang: 'en'}})])).html);
+});
