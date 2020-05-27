@@ -1,5 +1,6 @@
 import parser from 'posthtml-parser';
 import render from 'posthtml-render';
+import {walk} from 'posthtml/lib/api';
 import rules from './rules.js';
 import attrs from './attrs.js';
 import tags from './tags.js';
@@ -234,7 +235,8 @@ const sortLogic = function (key1, key2) {
 };
 
 const sortAttr = (tree, {rules: {sortAttr}}) => {
-  tree.map(node => {
+  tree.walk = walk;
+  tree.walk(node => {
     if (sortAttr && node.attrs) {
       const keys = Object.keys(node.attrs);
       if (keys.length > 1) {
@@ -246,6 +248,8 @@ const sortAttr = (tree, {rules: {sortAttr}}) => {
 
     return node;
   });
+
+  delete tree.walk;
   return tree;
 };
 
@@ -277,14 +281,24 @@ const addLang = (tree, {rules: {lang}}) => {
     return tree;
   }
 
-  tree.map(node => {
+  tree.walk = walk;
+
+  tree.walk(node => {
     if (node.tag) {
-      node.attrs = Object.assign({}, {lang}, node.attrs);
+      if (!node.attrs) {
+        node.attrs = {lang};
+        return node;
+      }
+
+      nodeHasAttrs(node, (previousValue, key) => {
+        return Object.assign({}, {lang, [key]: node.attrs[key]}, previousValue);
+      });
     }
 
     return node;
   });
 
+  delete tree.walk;
   return tree;
 };
 
