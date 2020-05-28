@@ -1,6 +1,6 @@
 {
   "name": "posthtml-beautify",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A posthtml plugin to beautify you html files",
   "license": "MIT",
   "repository": "posthtml/posthtml-beautify",
@@ -38,19 +38,19 @@
     "code-quality"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.9.6",
+    "@babel/runtime": "^7.10.1",
     "deepmerge": "^4.2.2",
     "js-beautify": "^1.11.0",
     "posthtml-parser": "^0.4.2",
     "posthtml-render": "^1.2.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-transform-runtime": "^7.9.6",
-    "@babel/polyfill": "^7.8.7",
-    "@babel/preset-env": "^7.9.6",
-    "@babel/register": "^7.9.0",
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/polyfill": "^7.10.1",
+    "@babel/preset-env": "^7.10.1",
+    "@babel/register": "^7.10.1",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-angular": "^8.3.4",
     "ava": "^3.8.2",
@@ -71,7 +71,7 @@
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-html": "^6.0.2",
     "eslint-plugin-markdown": "^1.0.2",
-    "eslint-plugin-unicorn": "^20.0.0",
+    "eslint-plugin-unicorn": "^20.1.0",
     "highlight.js": "^10.0.3",
     "html-webpack-plugin": "^4.3.0",
     "husky": "^4.2.5",
