@@ -1,12 +1,22 @@
+## 0.6.0 (2020-05-28)
+
+* build: update dep dev ([b0df484](https://github.com/posthtml/posthtml-beautify/commit/b0df484))
+* refactor: using walk method and added some tests ([c5821bc](https://github.com/posthtml/posthtml-beautify/commit/c5821bc))
+* feat: language attribute support ([71aa6c2](https://github.com/posthtml/posthtml-beautify/commit/71aa6c2))
+
+
+
 ## 0.5.0 (2020-05-26)
 
+* 0.5.0 ([3046e89](https://github.com/posthtml/posthtml-beautify/commit/3046e89))
+* Update index.js ([2c702ac](https://github.com/posthtml/posthtml-beautify/commit/2c702ac))
+* build: update changelog ([541091a](https://github.com/posthtml/posthtml-beautify/commit/541091a))
 * build: update dep dev ([5f66365](https://github.com/posthtml/posthtml-beautify/commit/5f66365))
 * style: after update dev dep and lint ([cead49c](https://github.com/posthtml/posthtml-beautify/commit/cead49c))
 * refactor: added keys length check for perf ([58c56c9](https://github.com/posthtml/posthtml-beautify/commit/58c56c9))
 * refactor: extraced sort logic ([5382e21](https://github.com/posthtml/posthtml-beautify/commit/5382e21))
 * refactor: refactore checks for sortAttrs ([a2c1b53](https://github.com/posthtml/posthtml-beautify/commit/a2c1b53))
 * refactor: removed + sign for positive ([3e7ff26](https://github.com/posthtml/posthtml-beautify/commit/3e7ff26))
-* Update index.js ([2c702ac](https://github.com/posthtml/posthtml-beautify/commit/2c702ac))
 * feat: sorting of attributes ([0ef866b](https://github.com/posthtml/posthtml-beautify/commit/0ef866b))
 * ci: added github action ([1fbfb1b](https://github.com/posthtml/posthtml-beautify/commit/1fbfb1b))
 
