@@ -16,7 +16,7 @@ Format your html and inline css markup according to the [HTML5 syntax Style Guid
 - [x] Removes spaces at the equal sign
 - [x] Add blank lines to separate large or logical code blocks
 - [x] Add 2 spaces of indentation. *Do not use TAB*.
-- [ ] Add language attribute
+- [x] Add language attribute
 - [ ] Add character encoding
 - [x] Attribute order
 - [x] Boolean attributes
@@ -89,6 +89,11 @@ Default:
   Type: `Boolean`  
   Default: false  
   Description: *Sort the order of attributes in elements*
+
+  - **lang**  
+  Type: `String | Boolean(only false)`  
+  Default: false  
+  Description: *Add a `lang` attribute in elements, eg: `{ lang: 'fr' }`*
 
 ### `mini`
 Type: `Object`  

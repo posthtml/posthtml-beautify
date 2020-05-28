@@ -74,6 +74,12 @@ test('processing with plugin beautify sort the attribute list', async t => {
   t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false, sortAttr: true}})])).html);
 });
 
+test('processing with plugin beautify sort the attribute list wrapper', async t => {
+  const fixture = '<div a="aa" c="cc" b="bb"><p a="aa" c="cc" b="bb">a</p></div>';
+  const expected = '<div a="aa" b="bb" c="cc">\n  <p a="aa" b="bb" c="cc">a</p>\n</div>';
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {eof: false, sortAttr: true}})])).html);
+});
+
 test('processing with plugin beautify sort the attribute list example 2', async t => {
   const fixture = '<p a="aa" c b="bb">a</p>';
   const expected = '<p a="aa" b="bb" c="">a</p>';
@@ -162,3 +168,32 @@ test('processing with plugin beautify should return format js', async t => {
   );
 });
 
+test('processing with plugin beautify to add language attribute', async t => {
+  const fixture = '<p >a</p>';
+  const expected = '<p lang="en">a</p>\n';
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {lang: 'en'}})])).html);
+});
+
+test('processing with plugin beautify to add language attribute with wrapper', async t => {
+  const fixture = '<div><p >a</p></div>';
+  const expected = '<div lang="en">\n  <p lang="en">a</p>\n</div>\n';
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {lang: 'en'}})])).html);
+});
+
+test('processing with plugin beautify to add language attribute with existing attr', async t => {
+  const fixture = '<p data="e">a</p>';
+  const expected = '<p lang="en" data="e">a</p>\n';
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {lang: 'en'}})])).html);
+});
+
+test('processing with plugin beautify to add language attribute with existing lang attribute', async t => {
+  const fixture = '<p lang="fr">a</p>';
+  const expected = '<p lang="fr">a</p>\n';
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {lang: 'en'}})])).html);
+});
+
+test('processing with plugin beautify to add language attribute with existing lang attribute nested', async t => {
+  const fixture = '<div><p lang="fr">a</p></div>';
+  const expected = '<div lang="en">\n  <p lang="fr">a</p>\n</div>\n';
+  t.deepEqual(expected, (await processing(fixture, [beautify({rules: {lang: 'en'}})])).html);
+});

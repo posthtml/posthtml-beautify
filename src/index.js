@@ -1,5 +1,6 @@
 import parser from 'posthtml-parser';
 import render from 'posthtml-render';
+import {walk} from 'posthtml/lib/api';
 import rules from './rules.js';
 import attrs from './attrs.js';
 import tags from './tags.js';
@@ -234,7 +235,8 @@ const sortLogic = function (key1, key2) {
 };
 
 const sortAttr = (tree, {rules: {sortAttr}}) => {
-  tree.map(node => {
+  tree.walk = walk;
+  tree.walk(node => {
     if (sortAttr && node.attrs) {
       const keys = Object.keys(node.attrs);
       if (keys.length > 1) {
@@ -246,6 +248,8 @@ const sortAttr = (tree, {rules: {sortAttr}}) => {
 
     return node;
   });
+
+  delete tree.walk;
   return tree;
 };
 
@@ -272,6 +276,32 @@ const jsPrettier = (tree, {rules: {indent, eol}, jsBeautifyOptions}) => {
   return prettier(tree);
 };
 
+const addLang = (tree, {rules: {lang}}) => {
+  if (!lang) {
+    return tree;
+  }
+
+  tree.walk = walk;
+
+  tree.walk(node => {
+    if (node.tag) {
+      if (!node.attrs) {
+        node.attrs = {lang};
+        return node;
+      }
+
+      nodeHasAttrs(node, (previousValue, key) => {
+        return Object.assign({}, {lang, [key]: node.attrs[key]}, previousValue);
+      });
+    }
+
+    return node;
+  });
+
+  delete tree.walk;
+  return tree;
+};
+
 const beautify = (tree, options) => [
   clean,
   parseConditional,
@@ -282,6 +312,7 @@ const beautify = (tree, options) => [
   lowerAttributeName,
   attributesBoolean,
   sortAttr,
+  addLang,
   eof,
   mini
 ].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);
