@@ -302,10 +302,34 @@ const addLang = (tree, {rules: {lang}}) => {
   return tree;
 };
 
+const commentsFormatting = tree => {
+  tree.walk = walk;
+  tree.walk(node => {
+    if (typeof node === 'string' && /<!--[^]*-->/gm.test(node.trim())) {
+      const originalComments = node.trim();
+      const content = originalComments.replace(/^<!--/g, '').replace(/-->$/, '');
+      const contentArr = content.split('\n').filter(c => c.trim() !== '');
+
+      if (contentArr.length === 1) {
+        return `<!-- ${contentArr[0].trim()} -->`;
+      }
+
+      const newContent = `<!--\n ${contentArr.join('\n')}\n-->`;
+      return newContent;
+    }
+
+    return node;
+  });
+
+  delete tree.walk;
+  return tree;
+};
+
 const beautify = (tree, options) => [
   clean,
   parseConditional,
   renderConditional,
+  commentsFormatting,
   indent,
   jsPrettier,
   lowerElementName,
