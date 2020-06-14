@@ -12,6 +12,7 @@ const optionsDefault = {
   attrs,
   tags,
   sync: false,
+  commentFormat: true,
   mini: {
     removeAttribute: false
   },
@@ -20,6 +21,9 @@ const optionsDefault = {
     jslint_happy: true // eslint-disable-line camelcase
   }
 };
+
+const COMMENT_START = /^<!--/g;
+const COMMENT_END = /-->$/g;
 
 const nodeHasContent = (node, callback) => {
   if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
@@ -302,20 +306,25 @@ const addLang = (tree, {rules: {lang}}) => {
   return tree;
 };
 
-const commentsFormatting = tree => {
+const commentsFormatting = (tree, {commentFormat}) => {
+  if (!commentFormat) {
+    return tree;
+  }
+
   tree.walk = walk;
   tree.walk(node => {
-    if (typeof node === 'string' && /<!--[^]*-->/gm.test(node.trim())) {
+    if (typeof node === 'string' && /<!--([\S\s]*?)-->/g.test(node.trim())) {
       const originalComments = node.trim();
-      const content = originalComments.replace(/^<!--/g, '').replace(/-->$/, '');
+      const content = originalComments.replace(COMMENT_START, '').replace(COMMENT_END, '');
       const contentArr = content.split('\n').filter(c => c.trim() !== '');
 
-      if (contentArr.length === 1) {
-        return `<!-- ${contentArr[0].trim()} -->`;
-      }
+      const newContent = [
+        '<!--',
+        ...contentArr,
+        '-->'
+      ];
 
-      const newContent = `<!--\n ${contentArr.join('\n')}\n-->`;
-      return newContent;
+      return newContent.map(c => c.trim()).join(contentArr.length === 1 ? ' ' : '\n');
     }
 
     return node;

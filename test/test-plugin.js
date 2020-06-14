@@ -200,7 +200,7 @@ test('processing with plugin beautify to add language attribute with existing la
 
 test('processing with plugin beautify to add leading newline for multiline comments', async t => {
   const fixture = '<a>h</a><!-- multi \n line \n comment -->';
-  const expected = '<a>h</a>\n\n<!--\n  multi \n line \n comment \n-->\n';
+  const expected = '<a>h</a>\n\n<!--\nmulti\nline\ncomment\n-->\n';
   t.deepEqual(expected, (await processing(fixture, [beautify()])).html);
 });
 
@@ -214,7 +214,7 @@ line
   const expected = `<a></a>
 
 <!--
-  multi
+multi
 line
 -->
 `;
@@ -261,8 +261,8 @@ test('processing with plugin beautify to format comments', async t => {
   const expected = `<a>as</a>
 
 <!--
-    nulti
- lie
+nulti
+lie
 -->
 
 <!-- mm -->
