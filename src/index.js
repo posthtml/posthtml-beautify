@@ -22,8 +22,8 @@ const optionsDefault = {
   }
 };
 
-const COMMENT_START = /^<!--/g;
-const COMMENT_END = /-->$/g;
+const COMMENT_START_REG = /^<!--/g;
+const COMMENT_END_REG = /-->$/g;
 
 const nodeHasContent = (node, callback) => {
   if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
@@ -315,7 +315,7 @@ const commentsFormatting = (tree, {commentFormat}) => {
   tree.walk(node => {
     if (typeof node === 'string' && /<!--([\S\s]*?)-->/g.test(node.trim())) {
       const originalComments = node.trim();
-      const content = originalComments.replace(COMMENT_START, '').replace(COMMENT_END, '');
+      const content = originalComments.replace(COMMENT_START_REG, '').replace(COMMENT_END_REG, '');
       const contentArr = content.split('\n').filter(c => c.trim() !== '');
 
       const newContent = [

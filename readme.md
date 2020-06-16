@@ -95,6 +95,41 @@ Default:
   Default: false  
   Description: *Add a `lang` attribute in elements, eg: `{ lang: 'fr' }`*
 
+  - **commentFormat**  
+  Type: `Boolean`  
+  Default: true  
+  Description: Formats the comments. It does the following 
+    - If there are multi line comments then there would be 
+      leading and trailing newline like this 
+
+      ```html
+      // Input
+
+      <!-- multiline 
+      comments-->
+
+      // Output
+
+      <!-- 
+      multiline 
+      comments
+      -->
+      ``` 
+    - If there is a single line comment, it would make it to a single line with the comment starting and ending
+      notation in same line
+
+      Input
+      ```
+      <!-- 
+        singleline comments
+      -->
+      ```
+
+      Output
+
+      `<!-- singleline comments -->`
+
+
 ### `mini`
 Type: `Object`  
 Default:
