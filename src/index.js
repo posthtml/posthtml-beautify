@@ -390,7 +390,7 @@ const commentsFormatting = (tree, {commentFormat}) => {
       if (contentMatch === null) {
         return node;
       }
-      
+
       const content = contentMatch[0]
           .trim()
           .split('\n')
