@@ -392,15 +392,16 @@ const commentsFormatting = (tree, {commentFormat}) => {
       }
 
       const content = contentMatch[1]
-          .trim()
-          .split('\n')
-          .filter(part => part.trim());
+        .trim()
+        .split('\n')
+        .map(part => part.trim())
+        .filter(Boolean);
 
       return [
         COMMENT_START,
         ...content,
         COMMENT_END
-      ].join('\n')
+      ].join(content.length === 1 ? ' ' : '\n');
     }
 
     return node;
