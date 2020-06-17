@@ -386,16 +386,16 @@ const commentsFormatting = (tree, {commentFormat}) => {
   tree.walk(node => {
     if (typeof node === 'string') {
       const contentMatch = node.match(COMMENT_CONTENT_REG)
-      
+
       if (contentMatch === null) {
         return node;
       }
-      
+
       const content = contentMatch[1]
         .trim()
         .split('\n')
         .filter(part => part.trim())
-      
+
       return [
         COMMENT_START,
         ...content,
