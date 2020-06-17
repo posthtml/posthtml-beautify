@@ -22,8 +22,9 @@ const optionsDefault = {
   }
 };
 
-const COMMENT_START_REG = /^<!--/g;
-const COMMENT_END_REG = /-->$/g;
+const COMMENT_START = '<!--';
+const COMMENT_END = '-->';
+const COMMENT_CONTENT_REG = new RegExp(`${COMMENT_START}([\S\s]*?)${COMMENT_END}`, 'g');
 
 const nodeHasContent = (node, callback) => {
   if (
@@ -384,19 +385,22 @@ const commentsFormatting = (tree, {commentFormat}) => {
   tree.walk = walk;
   tree.walk(node => {
     if (typeof node === 'string') {
-      const originalComments = node.trim();
-      if (/<!--([\S\s]*?)-->/g.test(originalComments)) {
-        const content = originalComments
-          .replace(COMMENT_START_REG, '')
-          .replace(COMMENT_END_REG, '');
-        const contentArr = content.split('\n').filter(c => c.trim() !== '');
-
-        const newContent = ['<!--', ...contentArr, '-->'];
-
-        return newContent
-          .map(c => c.trim())
-          .join(contentArr.length === 1 ? ' ' : '\n');
+      const contentMatch = node.match(COMMENT_CONTENT_REG)
+      
+      if (contentMatch === null) {
+        return node;
       }
+      
+      const content = contentMatch[1]
+        .trim()
+        .split('\n')
+        .filter(part => part.trim())
+      
+      return [
+        COMMENT_START,
+        ...content,
+        COMMENT_END
+      ].join('\n')
     }
 
     return node;
