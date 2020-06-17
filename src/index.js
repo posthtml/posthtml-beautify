@@ -24,7 +24,7 @@ const optionsDefault = {
 
 const COMMENT_START = '<!--';
 const COMMENT_END = '-->';
-const COMMENT_CONTENT_REG = new RegExp(`${COMMENT_START}([\\S\\s]*?)${COMMENT_END}`, 'g');
+const COMMENT_CONTENT_REG = new RegExp(`${COMMENT_START}([\\S\\s]*?)${COMMENT_END}`);
 
 const nodeHasContent = (node, callback) => {
   if (
@@ -391,7 +391,7 @@ const commentsFormatting = (tree, {commentFormat}) => {
         return node;
       }
 
-      const content = contentMatch[0]
+      const content = contentMatch[1]
           .trim()
           .split('\n')
           .filter(part => part.trim());
