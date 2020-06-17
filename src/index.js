@@ -12,6 +12,7 @@ const optionsDefault = {
   attrs,
   tags,
   sync: false,
+  commentFormat: true,
   mini: {
     removeAttribute: false
   },
@@ -21,15 +22,23 @@ const optionsDefault = {
   }
 };
 
+const COMMENT_START = '<!--';
+const COMMENT_END = '-->';
+const COMMENT_CONTENT_REG = new RegExp(`${COMMENT_START}([\\S\\s]*?)${COMMENT_END}`);
+
 const nodeHasContent = (node, callback) => {
-  if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+  if (
+    typeof node === 'object' &&
+    Object.prototype.hasOwnProperty.call(node, 'content')
+  ) {
     node.content = callback(node.content);
   }
 };
 
 const nodeHasAttrs = (node, callback) => {
   if (
-    typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')
+    typeof node === 'object' &&
+    Object.prototype.hasOwnProperty.call(node, 'attrs')
   ) {
     node.attrs = Object.keys(node.attrs).reduce(callback, {});
   }
@@ -41,17 +50,22 @@ const getIndent = (level, {indent, eol}) => {
   return `${eol}${indentString.repeat(level)}`;
 };
 
-const clean = tree => parser(render(tree))
-  .filter(node => {
-    return typeof node === 'object' || (typeof node === 'string' && (node.trim().length !== 0 || /doctype/gi.test(node)));
-  })
-  .map(node => {
-    if (Object.prototype.hasOwnProperty.call(node, 'content')) {
-      node.content = clean(node.content);
-    }
+const clean = tree =>
+  parser(render(tree))
+    .filter(node => {
+      return (
+        typeof node === 'object' ||
+        (typeof node === 'string' &&
+          (node.trim().length !== 0 || /doctype/gi.test(node)))
+      );
+    })
+    .map(node => {
+      if (Object.prototype.hasOwnProperty.call(node, 'content')) {
+        node.content = clean(node.content);
+      }
 
-    return typeof node === 'string' ? node.trim() : node;
-  });
+      return typeof node === 'string' ? node.trim() : node;
+    });
 
 const parseConditional = tree => {
   return tree.map(node => {
@@ -61,7 +75,11 @@ const parseConditional = tree => {
       const conditional = /^((?:<[^>]+>)?<!(?:--)?\[[\S\s]*?]>(?:<!)?(?:-->)?)([\S\s]*?)(<!(?:--<!)?\[[\S\s]*?](?:--)?>)$/
         .exec(node)
         .slice(1)
-        .map((node, index) => index === 1 ? {tag: 'conditional-content', content: clean(parser(node))} : node);
+        .map((node, index) =>
+          index === 1 ?
+            {tag: 'conditional-content', content: clean(parser(node))} :
+            node
+        );
 
       return {
         tag: 'conditional',
@@ -75,7 +93,10 @@ const parseConditional = tree => {
 
 const renderConditional = tree => {
   return tree.reduce((previousValue, node) => {
-    if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
+    if (
+      typeof node === 'object' &&
+      Object.prototype.hasOwnProperty.call(node, 'content')
+    ) {
       node.content = renderConditional(node.content);
     }
 
@@ -93,75 +114,109 @@ const renderConditional = tree => {
 };
 
 const indent = (tree, {rules: {indent, eol, blankLines, maxlen}}) => {
-  const setIndent = (tree, level = 0) => tree.reduce((previousValue, node, index) => {
-    if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'content')) {
-      node.content = setIndent(node.content, ++level);
-      --level;
-    }
-
-    if (tree.length === 1 && typeof tree[index] === 'string') {
-      if (tree[index].length >= maxlen) {
-        return [...previousValue, getIndent(level, {indent, eol}), node, getIndent(--level, {indent, eol})];
+  const setIndent = (tree, level = 0) =>
+    tree.reduce((previousValue, node, index) => {
+      if (
+        typeof node === 'object' &&
+        Object.prototype.hasOwnProperty.call(node, 'content')
+      ) {
+        node.content = setIndent(node.content, ++level);
+        --level;
       }
 
-      return [...previousValue, node];
-    }
+      if (tree.length === 1 && typeof tree[index] === 'string') {
+        if (tree[index].length >= maxlen) {
+          return [
+            ...previousValue,
+            getIndent(level, {indent, eol}),
+            node,
+            getIndent(--level, {indent, eol})
+          ];
+        }
 
-    if (level === 0 && (tree.length - 1) === index && tree.length > 1) {
-      return [...previousValue, getIndent(level, {indent, eol}), node];
-    }
+        return [...previousValue, node];
+      }
 
-    if (level === 0 && (tree.length - 1) === index && tree.length === 1) {
-      return [...previousValue, node];
-    }
+      if (level === 0 && tree.length - 1 === index && tree.length > 1) {
+        return [...previousValue, getIndent(level, {indent, eol}), node];
+      }
 
-    if (level === 0 && index === 0) {
-      return [...previousValue, node, blankLines];
-    }
+      if (level === 0 && tree.length - 1 === index && tree.length === 1) {
+        return [...previousValue, node];
+      }
 
-    if (level === 0) {
-      return [...previousValue, getIndent(level, {indent, eol}), node, blankLines];
-    }
+      if (level === 0 && index === 0) {
+        return [...previousValue, node, blankLines];
+      }
 
-    if ((tree.length - 1) === index) {
-      return [...previousValue, getIndent(level, {indent, eol}), node, getIndent(--level, {indent, eol})];
-    }
+      if (level === 0) {
+        return [
+          ...previousValue,
+          getIndent(level, {indent, eol}),
+          node,
+          blankLines
+        ];
+      }
 
-    if (typeof node === 'string' && /<!(?:--)?\[endif]*?]>/.test(node)) {
-      return [...previousValue, getIndent(level, {indent, eol}), node, blankLines];
-    }
+      if (tree.length - 1 === index) {
+        return [
+          ...previousValue,
+          getIndent(level, {indent, eol}),
+          node,
+          getIndent(--level, {indent, eol})
+        ];
+      }
 
-    if (typeof node === 'string' && /<!(?:--)?\[[\S\s]*?]>/.test(node)) {
-      return [...previousValue, getIndent(level, {indent, eol}), node];
-    }
+      if (typeof node === 'string' && /<!(?:--)?\[endif]*?]>/.test(node)) {
+        return [
+          ...previousValue,
+          getIndent(level, {indent, eol}),
+          node,
+          blankLines
+        ];
+      }
 
-    if (node.tag === false) {
-      return [...previousValue, ...node.content.slice(0, -1)];
-    }
+      if (typeof node === 'string' && /<!(?:--)?\[[\S\s]*?]>/.test(node)) {
+        return [...previousValue, getIndent(level, {indent, eol}), node];
+      }
 
-    return [...previousValue, getIndent(level, {indent, eol}), node, blankLines];
-  }, []);
+      if (node.tag === false) {
+        return [...previousValue, ...node.content.slice(0, -1)];
+      }
+
+      return [
+        ...previousValue,
+        getIndent(level, {indent, eol}),
+        node,
+        blankLines
+      ];
+    }, []);
 
   return setIndent(tree);
 };
 
 const attributesBoolean = (tree, {attrs: {boolean}}) => {
-  const removeAttributeValue = tree => tree.map(node => {
-    nodeHasContent(node, removeAttributeValue);
+  const removeAttributeValue = tree =>
+    tree.map(node => {
+      nodeHasContent(node, removeAttributeValue);
 
-    if (typeof node === 'object' && Object.prototype.hasOwnProperty.call(node, 'attrs')) {
-      Object.keys(node.attrs).forEach(key => {
-        node.attrs[key] = boolean.includes(key) ||
-                    node.attrs[key]
-                      .trim()
-                      .split(' ')
-                      .filter(value => value.length)
-                      .join(' ');
-      });
-    }
+      if (
+        typeof node === 'object' &&
+        Object.prototype.hasOwnProperty.call(node, 'attrs')
+      ) {
+        Object.keys(node.attrs).forEach(key => {
+          node.attrs[key] =
+            boolean.includes(key) ||
+            node.attrs[key]
+              .trim()
+              .split(' ')
+              .filter(value => value.length)
+              .join(' ');
+        });
+      }
 
-    return node;
-  });
+      return node;
+    });
 
   return removeAttributeValue(tree);
 };
@@ -169,55 +224,62 @@ const attributesBoolean = (tree, {attrs: {boolean}}) => {
 const lowerElementName = (tree, {tags}) => {
   tags = tags.map(({name}) => name);
 
-  const bypass = tree => tree.map(node => {
-    nodeHasContent(node, bypass);
+  const bypass = tree =>
+    tree.map(node => {
+      nodeHasContent(node, bypass);
 
-    if (
-      typeof node === 'object' &&
-            Object.prototype.hasOwnProperty.call(node, 'tag') &&
-            tags.includes(node.tag.toLowerCase())
-    ) {
-      node.tag = node.tag.toLowerCase();
-    }
+      if (
+        typeof node === 'object' &&
+        Object.prototype.hasOwnProperty.call(node, 'tag') &&
+        tags.includes(node.tag.toLowerCase())
+      ) {
+        node.tag = node.tag.toLowerCase();
+      }
 
-    return node;
-  });
+      return node;
+    });
 
   return bypass(tree);
 };
 
 const lowerAttributeName = tree => {
-  const bypass = tree => tree.map(node => {
-    nodeHasContent(node, bypass);
+  const bypass = tree =>
+    tree.map(node => {
+      nodeHasContent(node, bypass);
 
-    nodeHasAttrs(node, (previousValue, key) => Object.assign(previousValue, {[key.toLowerCase()]: node.attrs[key]}));
+      nodeHasAttrs(node, (previousValue, key) =>
+        Object.assign(previousValue, {[key.toLowerCase()]: node.attrs[key]})
+      );
 
-    return node;
-  });
+      return node;
+    });
 
   return bypass(tree);
 };
 
-const eof = (tree, {rules: {eof}}) => eof ? [...tree, eof] : tree;
+const eof = (tree, {rules: {eof}}) => (eof ? [...tree, eof] : tree);
 
 const mini = (tree, {mini}) => {
-  const bypass = tree => tree.map(node => {
-    nodeHasContent(node, bypass);
+  const bypass = tree =>
+    tree.map(node => {
+      nodeHasContent(node, bypass);
 
-    nodeHasAttrs(node, (previousValue, key) => {
-      if (
-        mini.removeAttribute &&
-        mini.removeAttribute === 'empty' &&
-        node.attrs[key].length === 0
-      ) {
-        return previousValue;
-      }
+      nodeHasAttrs(node, (previousValue, key) => {
+        if (
+          mini.removeAttribute &&
+          mini.removeAttribute === 'empty' &&
+          node.attrs[key].length === 0
+        ) {
+          return previousValue;
+        }
 
-      return Object.assign(previousValue, {[key.toLowerCase()]: node.attrs[key]});
+        return Object.assign(previousValue, {
+          [key.toLowerCase()]: node.attrs[key]
+        });
+      });
+
+      return node;
     });
-
-    return node;
-  });
 
   return bypass(tree);
 };
@@ -242,7 +304,11 @@ const sortAttr = (tree, {rules: {sortAttr}}) => {
       if (keys.length > 1) {
         node.attrs = keys
           .sort(sortLogic)
-          .reduce((current, key) => Object.assign(current, {[key]: node.attrs[key]}), {});
+          .reduce(
+            (current, key) =>
+              Object.assign(current, {[key]: node.attrs[key]}),
+            {}
+          );
       }
     }
 
@@ -255,23 +321,28 @@ const sortAttr = (tree, {rules: {sortAttr}}) => {
 
 const jsPrettier = (tree, {rules: {indent, eol}, jsBeautifyOptions}) => {
   let level = 0;
-  const prettier = tree => tree.map(node => {
-    ++level;
-    nodeHasContent(node, prettier);
+  const prettier = tree =>
+    tree.map(node => {
+      ++level;
+      nodeHasContent(node, prettier);
 
-    if (node.tag === 'script') {
-      const content = node.content ?
-        ['\n', js(node.content.join(''), {
-          ...jsBeautifyOptions,
-          indent_level: level // eslint-disable-line camelcase
-        }), getIndent(--level, {indent, eol})] :
-        [''];
-      node.content = content;
-    }
+      if (node.tag === 'script') {
+        const content = node.content ?
+          [
+            '\n',
+            js(node.content.join(''), {
+              ...jsBeautifyOptions,
+              indent_level: level // eslint-disable-line camelcase
+            }),
+            getIndent(--level, {indent, eol})
+          ] :
+          [''];
+        node.content = content;
+      }
 
-    --level;
-    return node;
-  });
+      --level;
+      return node;
+    });
 
   return prettier(tree);
 };
@@ -291,7 +362,11 @@ const addLang = (tree, {rules: {lang}}) => {
       }
 
       nodeHasAttrs(node, (previousValue, key) => {
-        return Object.assign({}, {lang, [key]: node.attrs[key]}, previousValue);
+        return Object.assign(
+          {},
+          {lang, [key]: node.attrs[key]},
+          previousValue
+        );
       });
     }
 
@@ -302,20 +377,62 @@ const addLang = (tree, {rules: {lang}}) => {
   return tree;
 };
 
-const beautify = (tree, options) => [
-  clean,
-  parseConditional,
-  renderConditional,
-  indent,
-  jsPrettier,
-  lowerElementName,
-  lowerAttributeName,
-  attributesBoolean,
-  sortAttr,
-  addLang,
-  eof,
-  mini
-].reduce((previousValue, module) => typeof module === 'function' ? module(previousValue, options) : previousValue, tree);
+const commentsFormatting = (tree, {commentFormat}) => {
+  if (!commentFormat) {
+    return tree;
+  }
+
+  tree.walk = walk;
+  tree.walk(node => {
+    if (typeof node === 'string') {
+      const contentMatch = node.match(COMMENT_CONTENT_REG)
+
+      if (contentMatch === null) {
+        return node;
+      }
+
+      const content = contentMatch[1]
+        .trim()
+        .split('\n')
+        .map(part => part.trim())
+        .filter(Boolean);
+
+      return [
+        COMMENT_START,
+        ...content,
+        COMMENT_END
+      ].join(content.length === 1 ? ' ' : '\n');
+    }
+
+    return node;
+  });
+
+  delete tree.walk;
+  return tree;
+};
+
+const beautify = (tree, options) =>
+  [
+    clean,
+    parseConditional,
+    renderConditional,
+    commentsFormatting,
+    indent,
+    jsPrettier,
+    lowerElementName,
+    lowerAttributeName,
+    attributesBoolean,
+    sortAttr,
+    addLang,
+    eof,
+    mini
+  ].reduce(
+    (previousValue, module) =>
+      typeof module === 'function' ?
+        module(previousValue, options) :
+        previousValue,
+    tree
+  );
 
 const normalize = (node, options) => {
   let {tree, api} = Object.keys(node).reduce(

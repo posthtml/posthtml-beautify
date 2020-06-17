@@ -197,3 +197,77 @@ test('processing with plugin beautify to add language attribute with existing la
   const expected = '<div lang="en">\n  <p lang="fr">a</p>\n</div>\n';
   t.deepEqual(expected, (await processing(fixture, [beautify({rules: {lang: 'en'}})])).html);
 });
+
+test('processing with plugin beautify to add leading newline for multiline comments', async t => {
+  const fixture = '<a>h</a><!-- multi \n line \n comment -->';
+  const expected = '<a>h</a>\n\n<!--\nmulti\nline\ncomment\n-->\n';
+  t.deepEqual(expected, (await processing(fixture, [beautify()])).html);
+});
+
+test('processing with plugin beautify to add leading newline for multiline comments 2', async t => {
+  const fixture = `
+<a></a>
+<!-- multi
+line
+-->
+`;
+  const expected = `<a></a>
+
+<!--
+multi
+line
+-->
+`;
+  t.deepEqual(expected, (await processing(fixture, [beautify()])).html);
+});
+
+test('processing with plugin beautify to remove leading newline for singleline comments', async t => {
+  const fixture = `
+<a></a>
+<!--
+line
+-->
+`;
+  const expected = `<a></a>
+
+<!-- line -->
+`;
+  t.deepEqual(expected, (await processing(fixture, [beautify()])).html);
+});
+
+test('processing with plugin beautify to remove leading newline for singleline comments 2', async t => {
+  const fixture = `
+<a></a>
+<!-- line
+-->
+`;
+  const expected = `<a></a>
+
+<!-- line -->
+`;
+  t.deepEqual(expected, (await processing(fixture, [beautify()])).html);
+});
+
+test('processing with plugin beautify to format comments', async t => {
+  const fixture = `<a>as</a>
+<!--   nulti
+ lie-->
+
+<!-- mm -->
+
+<!--
+  on
+-->`;
+  const expected = `<a>as</a>
+
+<!--
+nulti
+lie
+-->
+
+<!-- mm -->
+
+<!-- on -->
+`;
+  t.deepEqual(expected, (await processing(fixture, [beautify()])).html);
+});
