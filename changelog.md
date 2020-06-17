@@ -1,5 +1,25 @@
+## 0.7.0 (2020-06-17)
+
+* build: update dep dev ([e2e8762](https://github.com/posthtml/posthtml-beautify/commit/e2e8762))
+* fix: escape character in regexp ([b77ecca](https://github.com/posthtml/posthtml-beautify/commit/b77ecca))
+* fix: get matching ([e2c32da](https://github.com/posthtml/posthtml-beautify/commit/e2c32da))
+* fix: global matching ([5afbfec](https://github.com/posthtml/posthtml-beautify/commit/5afbfec))
+* fix: match content ([dbd49a2](https://github.com/posthtml/posthtml-beautify/commit/dbd49a2))
+* fix: trim parts ([95e26c1](https://github.com/posthtml/posthtml-beautify/commit/95e26c1))
+* style: trailing spaces ([84fe2de](https://github.com/posthtml/posthtml-beautify/commit/84fe2de))
+* style: trailing spaces ([b8c72eb](https://github.com/posthtml/posthtml-beautify/commit/b8c72eb))
+* refactor: code orderinh ([83a4fe9](https://github.com/posthtml/posthtml-beautify/commit/83a4fe9))
+* refactor: commentsFormatting ([b0be940](https://github.com/posthtml/posthtml-beautify/commit/b0be940))
+* refactor: small changes ([a239b34](https://github.com/posthtml/posthtml-beautify/commit/a239b34))
+* docs: added docs for commentFormat option ([9e6e7a3](https://github.com/posthtml/posthtml-beautify/commit/9e6e7a3))
+* feat: added newline formatting for comments ([9784534](https://github.com/posthtml/posthtml-beautify/commit/9784534))
+
+
+
 ## 0.6.0 (2020-05-28)
 
+* 0.6.0 ([581972b](https://github.com/posthtml/posthtml-beautify/commit/581972b))
+* build: update changelog ([f877707](https://github.com/posthtml/posthtml-beautify/commit/f877707))
 * build: update dep dev ([b0df484](https://github.com/posthtml/posthtml-beautify/commit/b0df484))
 * refactor: using walk method and added some tests ([c5821bc](https://github.com/posthtml/posthtml-beautify/commit/c5821bc))
 * feat: language attribute support ([71aa6c2](https://github.com/posthtml/posthtml-beautify/commit/71aa6c2))

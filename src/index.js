@@ -385,7 +385,7 @@ const commentsFormatting = (tree, {commentFormat}) => {
   tree.walk = walk;
   tree.walk(node => {
     if (typeof node === 'string') {
-      const contentMatch = node.match(COMMENT_CONTENT_REG)
+      const contentMatch = node.match(COMMENT_CONTENT_REG);
 
       if (contentMatch === null) {
         return node;
