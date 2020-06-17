@@ -385,20 +385,18 @@ const commentsFormatting = (tree, {commentFormat}) => {
   tree.walk = walk;
   tree.walk(node => {
     if (typeof node === 'string') {
-      const contentMatch = node.match(COMMENT_CONTENT_REG)
+      let [content] = node.match(COMMENT_CONTENT_REG)
 
-      if (contentMatch === null) {
+      if (content === null) {
         return node;
       }
 
-      const content = contentMatch[1]
-        .trim()
-        .split('\n')
-        .filter(part => part.trim())
-
       return [
         COMMENT_START,
-        ...content,
+        ...content
+          .trim()
+          .split('\n')
+          .filter(part => part.trim()),
         COMMENT_END
       ].join('\n')
     }
