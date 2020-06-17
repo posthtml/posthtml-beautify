@@ -24,7 +24,7 @@ const optionsDefault = {
 
 const COMMENT_START = '<!--';
 const COMMENT_END = '-->';
-const COMMENT_CONTENT_REG = new RegExp(`${COMMENT_START}([\S\s]*?)${COMMENT_END}`, 'g');
+const COMMENT_CONTENT_REG = new RegExp(`${COMMENT_START}([\\S\\s]*?)${COMMENT_END}`, 'g');
 
 const nodeHasContent = (node, callback) => {
   if (
