@@ -78,7 +78,7 @@ Default:
   - **eof** (*end of file*)  
   Type: `String|Boolean`  
   Default: '\n'  
-  Description: *As value is a string symbol which is added to the end of the file and will not adds if you specify a boolean value of `false`*
+  Description: *As value is a string symbol which is added to the end of the file and will not adds if you specify a [boolean](https://www.scaler.com/topics/boolean-in-javascript/) value of `false`*
 
   - **maxlen**  
   Type: `Number`  
